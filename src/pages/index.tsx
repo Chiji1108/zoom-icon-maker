@@ -11,11 +11,18 @@ export default function Home() {
           rel="stylesheet"
         />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap"
+          rel="stylesheet"
+        />
       </Head>
 
       <main>
-        <div className="text-6xl">Zoom</div>
-        <div className="text-2xl">アイコンメーカー</div>
+        <div>
+          <div className="text-5xl">Zoom</div>
+          <div className="text-2xl">アイコンメーカー</div>
+        </div>
       </main>
 
       <footer>footer</footer>
