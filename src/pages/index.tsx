@@ -16,7 +16,6 @@ export default function Home() {
       <main>
         <div className="text-6xl">Zoom</div>
         <div className="text-2xl">アイコンメーカー</div>
-        {/* <MainForm /> */}
       </main>
 
       <footer>footer</footer>

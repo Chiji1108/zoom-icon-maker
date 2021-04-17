@@ -16,7 +16,7 @@ Storybook はこちら
   - Ads
   - Chrome App
 
-## ライブラリ
+## 特記したい使用ライブラリ
 
 - UI
   - [Tailwind UI](https://tailwindui.com/)
@@ -26,7 +26,7 @@ Storybook はこちら
   - [classnames](https://www.npmjs.com/package/classnames)
   - [typescript-plugin-css-modules](https://github.com/mrmckeb/typescript-plugin-css-modules) -->
 
-## 環境構築
+## 環境構築 (Next.js, Tailwind CSS, Storybook)
 
 - Next.js (& prettier, typescript)
   - create project
