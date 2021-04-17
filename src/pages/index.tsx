@@ -10,7 +10,7 @@ export default function Home() {
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet"
         />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css"></link>
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
 
       <main>
