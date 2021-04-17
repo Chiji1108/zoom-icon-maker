@@ -7,7 +7,7 @@ Storybook はこちら
 ## TODO
 
 - 直近
-  - [ ] 考え中
+  - [ ] Firebase Analytics
 - 将来
   - SEO
     - [ ] create `robots.txt`
