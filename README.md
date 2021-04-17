@@ -8,6 +8,8 @@ Storybook はこちら
 
 - 直近
   - [ ] Analytics
+  - [ ] hide Chromatic Token
+  - [ ] Chromatic CI
 - 将来
   - SEO
     - [ ] create `robots.txt`
