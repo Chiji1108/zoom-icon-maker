@@ -1,18 +1,17 @@
 # Zoom アイコンメーカー
 
-http://
+[https://zoom-icon-maker.vercel.app/](https://zoom-icon-maker.vercel.app/)
 
 Storybook はこちら
 
 ## TODO
 
 - 直近
-  - [ ] Firebase Analytics
+  - [ ] Analytics
 - 将来
   - SEO
     - [ ] create `robots.txt`
   - i18n
-    - [ ] firebase localization
   - Ads
   - Chrome App
 
