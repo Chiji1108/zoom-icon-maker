@@ -2,14 +2,12 @@
 
 [https://zoom-icon-maker.vercel.app/](https://zoom-icon-maker.vercel.app/)
 
-Storybook はこちら
+Storybook は[こちら](https://607ad529e019a8002151d3da-qujntomhyw.chromatic.com)
 
 ## TODO
 
 - 直近
   - [ ] Analytics
-  - [ ] hide Chromatic Token
-  - [ ] Chromatic CI
 - 将来
   - SEO
     - [ ] create `robots.txt`
