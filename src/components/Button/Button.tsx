@@ -1,6 +1,6 @@
-import { ButtonHTMLAttributes } from "react";
+import { ComponentPropsWithoutRef } from "react";
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface ButtonProps extends ComponentPropsWithoutRef<"button"> {}
 
 // TODO: loading
 export default function Button({ ...props }: ButtonProps) {
