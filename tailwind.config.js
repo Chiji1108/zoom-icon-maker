@@ -9,9 +9,12 @@ module.exports = {
       fontFamily: {
         sans: ["Inter var", "Noto Sans JP", ...defaultTheme.fontFamily.sans],
       },
-      color: {
+      colors: {
         // TODO
-        action: "",
+        primary: "#1976D2",
+        secondary: "#DD014E",
+        action: "#757575",
+        disabled: "#BDBDBD",
       },
     },
   },

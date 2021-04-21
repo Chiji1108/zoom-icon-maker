@@ -1,8 +1,8 @@
 # Zoom アイコンメーカー
 
-App: [https://zoom-icon-maker.vercel.app/](https://zoom-icon-maker.vercel.app/)
+App: [https://zoom-icon-maker.vercel.app](https://zoom-icon-maker.vercel.app)
 
-UI: [https://607ad529e019a8002151d3da-qujntomhyw.chromatic.com](https://607ad529e019a8002151d3da-qujntomhyw.chromatic.com)
+UI: [https://master--607ad529e019a8002151d3da.chromatic.com](https://master--607ad529e019a8002151d3da.chromatic.com)
 
 ## TODO
 
