@@ -72,7 +72,7 @@ export default function ImageEditor({
             value={rotation}
             min={-180}
             max={180}
-            step={3}
+            step={1}
             aria-labelledby="Rotation"
             onChange={(e) => setRotation(+e.target.value)}
           />
