@@ -33,26 +33,31 @@ export default function ImageSelector({
     }
   };
   return (
-    <div className="rounded-full overflow-hidden h-36 w-36">
-      <label>
-        {currentImage ? (
-          <img className="w-full" src={currentImage} />
-        ) : (
-          <div className="bg-gray-100 flex items-center justify-center">
-            <span className="material-icons text-2xl text-action">
+    <label className="cursor-pointer">
+      {currentImage ? (
+        <div className="rounded-full overflow-hidden relative h-36 w-36 group">
+          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all flex items-center justify-center">
+            <span className="material-icons text-2xl text-gray-200 opacity-0 group-hover:opacity-100 transition-all">
               add_photo_alternate
             </span>
-            {/* TODO */}
-            {/* <AddPhotoAlternateIcon /> */}
           </div>
-        )}
-        <input
-          type="file"
-          className="hidden"
-          accept="image/*"
-          onChange={onFileChange}
-        />
-      </label>
-    </div>
+          <img className="w-full h-full" src={currentImage} />
+        </div>
+      ) : (
+        <div className="rounded-full overflow-hidden h-36 w-36 bg-gray-200 flex items-center justify-center">
+          <span className="material-icons text-2xl text-action">
+            add_photo_alternate
+          </span>
+          {/* TODO */}
+          {/* <AddPhotoAlternateIcon /> */}
+        </div>
+      )}
+      <input
+        type="file"
+        className="hidden"
+        accept="image/*"
+        onChange={onFileChange}
+      />
+    </label>
   );
 }
