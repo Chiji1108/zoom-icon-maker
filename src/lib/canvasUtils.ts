@@ -29,7 +29,7 @@ export async function getCroppedImg(
   const ctx = canvas.getContext("2d");
 
   const maxSize = Math.max(image.width, image.height);
-  const safeArea = 2 * ((maxSize / 2) * Math.sqrt(2));
+  const safeArea = maxSize * Math.sqrt(2);
 
   // set each dimensions to double largest dimension to allow for a safe area for the
   // image to rotate in without being clipped by canvas context
@@ -93,7 +93,7 @@ export async function getRotatedImage(imageSrc: string, rotation = 0) {
   }
 
   ctx.translate(canvas.width / 2, canvas.height / 2);
-  ctx.rotate((rotation * Math.PI) / 180);
+  ctx.rotate(getRadianAngle(rotation));
   ctx.drawImage(image, -image.width / 2, -image.height / 2);
 
   return new Promise<string>((resolve) => {
