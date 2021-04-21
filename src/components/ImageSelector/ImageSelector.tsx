@@ -44,7 +44,7 @@ export default function ImageSelector({
         </div>
       ) : (
         <div className="rounded-full overflow-hidden h-36 w-36 bg-gray-200 flex items-center justify-center group">
-          <span className="material-icons text-2xl group-hover:text-3xl text-action transition-all">
+          <span className="material-icons text-2xl group-hover:text-3xl text-gray-400 group-hover:text-gray-500 transition-all">
             add_photo_alternate
           </span>
         </div>
