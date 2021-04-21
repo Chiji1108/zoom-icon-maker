@@ -1,3 +1,5 @@
+import { Area } from "react-easy-crop/types";
+
 const createImage = (url: string) =>
   new Promise<HTMLImageElement>((resolve, reject) => {
     const image = new Image();
@@ -17,7 +19,11 @@ function getRadianAngle(degreeValue: number) {
  * @param {Object} pixelCrop - pixelCrop Object provided by react-easy-crop
  * @param {number} rotation - optional rotation parameter
  */
-export async function getCroppedImg(imageSrc: string, pixelCrop, rotation = 0) {
+export async function getCroppedImg(
+  imageSrc: string,
+  pixelCrop: Area,
+  rotation = 0
+) {
   const image = await createImage(imageSrc);
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -60,6 +66,9 @@ export async function getCroppedImg(imageSrc: string, pixelCrop, rotation = 0) {
   // As a blob
   return new Promise<string>((resolve) => {
     canvas.toBlob((file) => {
+      // setTimeout(() => {
+      //   throw new Error("時間がかかりすぎています");
+      // }, 1000);
       resolve(URL.createObjectURL(file));
     }, "image/png");
   });
@@ -93,3 +102,21 @@ export async function getRotatedImage(imageSrc: string, rotation = 0) {
     }, "image/png");
   });
 }
+
+export function readFile(file: File) {
+  return new Promise<string>((resolve) => {
+    const reader = new FileReader();
+    reader.addEventListener(
+      "load",
+      () => resolve(reader.result as string),
+      false
+    );
+    reader.readAsDataURL(file);
+  });
+}
+
+export const ORIENTATION_TO_ANGLE = {
+  "3": 180,
+  "6": 90,
+  "8": -90,
+};

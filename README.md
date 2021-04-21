@@ -7,12 +7,22 @@ UI: [https://607ad529e019a8002151d3da-qujntomhyw.chromatic.com](https://607ad529
 ## TODO
 
 - 直近
-  - [ ] Analytics
+  - [ ]
 - 将来
+  - 調べ物
+    - Google Publisher Tag
+    - Google Tag Manager
+    - `robots.txt`
+    - Nextjs Analytics
+    - Google Analytics
+    - Segment
+    - Facebook Pixel
   - SEO
-    - [ ] create `robots.txt`
   - i18n
   - Ads
+    - Microsoft Advertising
+    - Twitter Ads
+    - Google AdSense
   - Chrome App
 
 ## 特記したい使用ライブラリ
@@ -21,9 +31,8 @@ UI: [https://607ad529e019a8002151d3da-qujntomhyw.chromatic.com](https://607ad529
   - [Tailwind UI](https://tailwindui.com/)
 - Cropper
   - [react-easy-crop](https://github.com/ricardo-ch/react-easy-crop)
-  <!-- - 未使用
-  - [classnames](https://www.npmjs.com/package/classnames)
-  - [typescript-plugin-css-modules](https://github.com/mrmckeb/typescript-plugin-css-modules) -->
+
+<!-- classnames, typescript-plugin-css-modules, framer -->
 
 ## 環境構築 (Next.js, Tailwind CSS, Storybook)
 

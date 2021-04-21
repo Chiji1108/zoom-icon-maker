@@ -9,6 +9,10 @@ module.exports = {
       fontFamily: {
         sans: ["Inter var", "Noto Sans JP", ...defaultTheme.fontFamily.sans],
       },
+      color: {
+        // TODO
+        action: "",
+      },
     },
   },
   variants: {
