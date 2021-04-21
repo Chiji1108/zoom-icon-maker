@@ -11,8 +11,6 @@ export interface ImageSelectorProps {
   onSelect: (image: string) => void;
 }
 
-// TODO: hover transition
-
 export default function ImageSelector({
   currentImage,
   onSelect,
@@ -33,23 +31,22 @@ export default function ImageSelector({
     }
   };
   return (
+    // TODO: improve UI
     <label className="cursor-pointer">
       {currentImage ? (
         <div className="rounded-full overflow-hidden relative h-36 w-36 group">
           <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all flex items-center justify-center">
-            <span className="material-icons text-2xl text-gray-200 opacity-0 group-hover:opacity-100 transition-all">
+            <span className="material-icons text-2xl group-hover:text-3xl text-gray-200 opacity-0 group-hover:opacity-100 transition-all">
               add_photo_alternate
             </span>
           </div>
           <img className="w-full h-full" src={currentImage} />
         </div>
       ) : (
-        <div className="rounded-full overflow-hidden h-36 w-36 bg-gray-200 flex items-center justify-center">
-          <span className="material-icons text-2xl text-action">
+        <div className="rounded-full overflow-hidden h-36 w-36 bg-gray-200 flex items-center justify-center group">
+          <span className="material-icons text-2xl group-hover:text-3xl text-action transition-all">
             add_photo_alternate
           </span>
-          {/* TODO */}
-          {/* <AddPhotoAlternateIcon /> */}
         </div>
       )}
       <input
