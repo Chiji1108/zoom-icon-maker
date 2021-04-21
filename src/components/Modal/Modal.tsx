@@ -10,7 +10,8 @@ export interface ModalProps {
 export default function Modal({ open, onClose, children }: ModalProps) {
   const closeButtonRef = useRef();
   return (
-    <Transition.Root show={open} as={Fragment}>
+    //TODO: fix all
+    <Transition show={open} as={Fragment}>
       <Dialog
         as="div"
         static
@@ -19,7 +20,7 @@ export default function Modal({ open, onClose, children }: ModalProps) {
         onClose={onClose}
         initialFocus={closeButtonRef}
       >
-        <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -64,6 +65,6 @@ export default function Modal({ open, onClose, children }: ModalProps) {
           </Transition.Child>
         </div>
       </Dialog>
-    </Transition.Root>
+    </Transition>
   );
 }

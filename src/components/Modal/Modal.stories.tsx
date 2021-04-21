@@ -9,21 +9,14 @@ export default {
 
 const Template: Story<ModalProps> = (args) => <Modal {...args} />;
 
-export const NotOpen = Template.bind({});
-NotOpen.args = {
-  open: false,
-  onClose: () => console.log("Close"),
-  children: <div>HogeHoge</div>,
-};
-
-export const Open = NotOpen.bind({});
+export const Open = Template.bind({});
 Open.args = {
   open: true,
   onClose: () => console.log("Close"),
   children: <div>HogeHoge</div>,
 };
 
-export const withImageEditor = NotOpen.bind({});
+export const withImageEditor = Template.bind({});
 withImageEditor.args = {
   children: (
     <ImageEditor

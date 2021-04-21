@@ -77,6 +77,7 @@ export default function ImageEditor({
             onChange={(e) => setRotation(+e.target.value)}
           />
         </label>
+        {/* TODO: isolate Button */}
         <LoadableButton
           onClick={handleApply}
           loading={loading}
