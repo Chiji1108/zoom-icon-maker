@@ -7,13 +7,13 @@ import { LoadableButton } from "../LoadableButton";
 
 export interface ImageEditorProps {
   originalImage: string;
-  onComplate: (resultImage: string) => void;
+  onComplete: (resultImage: string) => void;
   onError: (error: Error) => void;
 }
 
 export default function ImageEditor({
   originalImage,
-  onComplate,
+  onComplete,
   onError,
 }: ImageEditorProps) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -32,10 +32,8 @@ export default function ImageEditor({
   const handleApply = useCallback(() => {
     setLoading(true);
     getCroppedImg(originalImage, croppedAreaPixels, rotation)
-      .then((croppedImage) => {
-        onComplate(croppedImage);
-      })
-      .catch((e) => onError(e))
+      .then(onComplete)
+      .catch(onError)
       .finally(() => setLoading(false));
   }, [originalImage, croppedAreaPixels, rotation]);
 

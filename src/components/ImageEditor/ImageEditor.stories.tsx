@@ -11,7 +11,7 @@ const Template: Story<ImageEditorProps> = (args) => {
   const [img, setImg] = useState<string>(null);
   return (
     <>
-      <ImageEditor onComplate={(i) => setImg(i)} {...args} />
+      <ImageEditor onComplete={(i) => setImg(i)} {...args} />
       <img src={img} alt="" />
     </>
   );
