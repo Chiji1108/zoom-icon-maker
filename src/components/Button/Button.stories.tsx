@@ -6,15 +6,8 @@ export default {
   component: Button,
 } as Meta;
 
-const Template: Story<ButtonProps> = (args) => <Button {...args} />;
+export const Primary: Story<ButtonProps> = () => <Button>Primary</Button>;
 
-export const Default = Template.bind({});
-Default.args = {
-  children: "HogeHoge",
-};
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-  children: "Disabled",
-  disabled: true,
-};
+export const Disabled: Story<ButtonProps> = () => (
+  <Button disabled>Disabled</Button>
+);

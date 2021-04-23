@@ -1,25 +1,31 @@
 import { Story, Meta } from "@storybook/react";
 import { useState } from "react";
 import ImageEditor, { ImageEditorProps } from "./ImageEditor";
+import { action } from "@storybook/addon-actions";
 
 export default {
   title: ImageEditor.name,
   component: ImageEditor,
+  args: {
+    onComplete: (image) => action("onComplete")(image),
+    onError: (error) => action("onError")(error),
+    src: "https://source.unsplash.com/daily",
+  },
 } as Meta;
 
-const Template: Story<ImageEditorProps> = (args) => {
+export const Usage: Story<ImageEditorProps> = ({ ...args }) => (
+  <ImageEditor {...args} />
+);
+
+export const UsageWithOutput: Story<ImageEditorProps> = ({
+  onComplete,
+  ...args
+}) => {
   const [img, setImg] = useState<string>(null);
   return (
     <>
       <ImageEditor onComplete={(i) => setImg(i)} {...args} />
-      <img src={img} alt="" />
+      <img src={img} alt="result" className="rounded-full overflow-hidden" />
     </>
   );
-};
-
-export const withImgTag = Template.bind({});
-withImgTag.args = {
-  originalImage:
-    "https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000",
-  onError: (e) => console.log(e),
 };

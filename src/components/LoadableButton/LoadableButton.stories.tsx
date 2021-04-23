@@ -4,23 +4,14 @@ import LoadableButton, { LoadableButtonProps } from "./LoadableButton";
 export default {
   title: LoadableButton.name,
   component: LoadableButton,
+  args: {
+    loading: true,
+  },
   argTypes: {
     loadingText: { control: { type: "text" } },
   },
 } as Meta;
 
-const Template: Story<LoadableButtonProps> = (args) => (
-  <LoadableButton {...args} />
+export const Loading: Story<LoadableButtonProps> = (args) => (
+  <LoadableButton {...args}>HogeHoge</LoadableButton>
 );
-
-export const NotLoading = Template.bind({});
-NotLoading.args = {
-  children: "HogeHoge",
-  loading: false,
-};
-
-export const Loading = Template.bind({});
-Loading.args = {
-  children: "HogeHoge",
-  loading: true,
-};

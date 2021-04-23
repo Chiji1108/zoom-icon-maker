@@ -6,7 +6,4 @@ export default {
   component: Slider,
 } as Meta;
 
-const Template: Story<SliderProps> = (args) => <Slider {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {};
+export const Usage: Story<SliderProps> = () => <Slider />;
