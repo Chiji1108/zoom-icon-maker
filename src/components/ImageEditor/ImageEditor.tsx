@@ -6,13 +6,13 @@ import { getCroppedImg } from "../../lib/canvasUtils";
 import { LoadableButton } from "../LoadableButton";
 
 export interface ImageEditorProps {
-  originalImage: string;
-  onComplete: (resultImage: string) => void;
+  src: string;
+  onComplete: (resultSrc: string) => void;
   onError: (error: Error) => void;
 }
 
 export default function ImageEditor({
-  originalImage,
+  src,
   onComplete,
   onError,
 }: ImageEditorProps) {
@@ -31,17 +31,17 @@ export default function ImageEditor({
 
   const handleApply = useCallback(() => {
     setLoading(true);
-    getCroppedImg(originalImage, croppedAreaPixels, rotation)
+    getCroppedImg(src, croppedAreaPixels, rotation)
       .then(onComplete)
       .catch(onError)
       .finally(() => setLoading(false));
-  }, [originalImage, croppedAreaPixels, rotation]);
+  }, [src, croppedAreaPixels, rotation]);
 
   return (
     <>
       <div className="relative w-full h-52 sm:h-96 bg-gray-900">
         <Cropper
-          image={originalImage}
+          image={src}
           crop={crop}
           rotation={rotation}
           zoom={zoom}
