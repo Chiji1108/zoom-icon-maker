@@ -44,3 +44,4 @@ UI: [https://master--607ad529e019a8002151d3da.chromatic.com](https://master--607
 
 1. [https://formidable.com/blog/2021/react-composition/](https://formidable.com/blog/2021/react-composition/)
 2. [https://kentcdodds.com/blog/compound-components-with-react-hooks](https://kentcdodds.com/blog/compound-components-with-react-hooks)
+3. [https://reactjs.org/docs/render-props.html](https://reactjs.org/docs/render-props.html)
