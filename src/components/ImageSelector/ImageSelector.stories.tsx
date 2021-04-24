@@ -3,9 +3,10 @@ import ImageSelector, { ImageSelectorProps } from "./ImageSelector";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  title: ImageSelector.name,
+  title: ImageSelector.displayName,
   component: ImageSelector,
   args: {
+    src: null,
     onSelect: (image) => action("onSelect")(image),
   },
 } as Meta;
@@ -15,8 +16,5 @@ export const Usage: Story<ImageSelectorProps> = (args) => (
 );
 
 export const Selected: Story<ImageSelectorProps> = (args) => (
-  <ImageSelector
-    {...args}
-    currentImage="https://source.unsplash.com/random/512x512"
-  />
+  <ImageSelector {...args} src="https://source.unsplash.com/random/512x512" />
 );

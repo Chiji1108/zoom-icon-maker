@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/react";
 import MaterialIcon, { MaterialIconProps } from "./MaterialIcon";
 
 export default {
-  title: MaterialIcon.name,
+  title: MaterialIcon.displayName,
   component: MaterialIcon,
 } as Meta;
 

@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/react";
 import Slider, { SliderProps } from "./Slider";
 
 export default {
-  title: Slider.name,
+  title: Slider.displayName,
   component: Slider,
 } as Meta;
 

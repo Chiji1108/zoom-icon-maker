@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, memo, useState } from "react";
 import { getOrientation } from "get-orientation/browser";
 import {
   readFile,
@@ -8,14 +8,10 @@ import {
 import { MaterialIcon } from "../MaterialIcon";
 
 export interface ImageSelectorProps {
-  currentImage?: string;
+  src?: string;
   onSelect: (image: string) => void;
 }
-
-export default function ImageSelector({
-  currentImage,
-  onSelect,
-}: ImageSelectorProps) {
+const ImageSelector = memo(({ src, onSelect }: ImageSelectorProps) => {
   const onFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
@@ -29,19 +25,20 @@ export default function ImageSelector({
       }
 
       onSelect(imageDataUrl);
+      e.target.files = null;
     }
   };
   return (
     // TODO: improve UI
     <label className="cursor-pointer">
-      {currentImage ? (
+      {src ? (
         <div className="rounded-full overflow-hidden relative h-36 w-36 group">
           <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all flex items-center justify-center">
             <span className="material-icons text-2xl group-hover:text-3xl text-gray-200 opacity-0 group-hover:opacity-100 transition-all">
               add_photo_alternate
             </span>
           </div>
-          <img className="w-full h-full" src={currentImage} />
+          <img className="w-full h-full" src={src} />
         </div>
       ) : (
         <div className="rounded-full overflow-hidden h-36 w-36 bg-gray-200 flex items-center justify-center group">
@@ -59,4 +56,6 @@ export default function ImageSelector({
       />
     </label>
   );
-}
+});
+ImageSelector.displayName = "ImageSelector";
+export default ImageSelector;

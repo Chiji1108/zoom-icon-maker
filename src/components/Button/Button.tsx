@@ -1,12 +1,12 @@
-import { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithRef, memo } from "react";
 import cn from "classnames";
 
-export interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
+export interface ButtonProps extends ComponentPropsWithRef<"button"> {
   variant?: "primary" | "secondary";
 }
 
 // TODO: improve style
-export default function Button({ variant = "primary", ...props }: ButtonProps) {
+const Button = memo(({ variant = "primary", ...props }: ButtonProps) => {
   return (
     <button
       type="button"
@@ -21,4 +21,6 @@ export default function Button({ variant = "primary", ...props }: ButtonProps) {
       {...props}
     />
   );
-}
+});
+Button.displayName = "Button";
+export default Button;

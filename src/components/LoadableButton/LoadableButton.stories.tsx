@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/react";
 import LoadableButton, { LoadableButtonProps } from "./LoadableButton";
 
 export default {
-  title: LoadableButton.name,
+  title: LoadableButton.displayName,
   component: LoadableButton,
   args: {
     loading: true,
