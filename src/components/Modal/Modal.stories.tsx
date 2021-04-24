@@ -1,30 +1,37 @@
 import { Story, Meta } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
 import Modal, { ModalProps } from "./Modal";
-import { ImageEditor } from "../ImageEditor";
+import ModalContainer from "./ModalContainer";
+import { ModalContextProps } from "./ModalContext";
+import { Button } from "../Button";
+
+// export const ModalMockProps: ModalContextProps = {
+//   open: true,
+//   title: "HogeHoge",
+//   onClose: () => action("onClose")(),
+//   onApply: () => action("onApply")(),
+//   onCancel: () => action("onCancel")(),
+//   renderApplyButton: (onApply) => <Button onClick={onApply}>適用</Button>,
+// };
 
 export default {
   title: Modal.name,
   component: Modal,
+  // args: ModalMockProps,
 } as Meta;
 
-// const Template: Story<ModalProps> = (args) => <Modal {...args} />;
-
-// export const Open = Template.bind({});
-// Open.args = {
-//   open: true,
-//   onClose: () => console.log("Close"),
-//   children: <div>HogeHoge</div>,
-// };
-
-// export const withImageEditor = Template.bind({});
-// withImageEditor.args = {
-//   children: (
-//     <ImageEditor
-//       src="https://source.unsplash.com/random"
-//       onComplete={(i) => console.log(i)}
-//       onError={(e) => console.log(e)}
-//     />
-//   ),
-//   open: true,
-//   onClose: () => console.log("Close"),
-// };
+export const Usage: Story<ModalProps> = (args) => {
+  const props = {
+    open: true,
+    title: "HogeHoge",
+    onClose: () => action("onClose")(),
+    onApply: () => action("onApply")(),
+    onCancel: () => action("onCancel")(),
+    renderApplyButton: (onApply) => <Button onClick={onApply}>適用</Button>,
+  };
+  return (
+    <ModalContainer {...props}>
+      <Modal>HogeHogeContent</Modal>
+    </ModalContainer>
+  );
+};
