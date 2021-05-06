@@ -14,8 +14,10 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <Provider store={store}>
-      <Story />
-    </Provider>
+    <StrictMode>
+      <Provider store={store}>
+        <Story />
+      </Provider>
+    </StrictMode>
   ),
 ];

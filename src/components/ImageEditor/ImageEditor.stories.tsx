@@ -1,13 +1,15 @@
 import { Story, Meta } from "@storybook/react";
-import { useEffect, useRef, useState } from "react";
-import ImageEditor, { ImageEditorProps } from "./ImageEditor";
-import { action } from "@storybook/addon-actions";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { generateStart, selectImageEditor } from "./imageEditorSlice";
+import { useRef } from "react";
+import ImageEditor, {
+  ImageEditorHandler,
+  ImageEditorProps,
+} from "./ImageEditor";
+import { useAppSelector } from "../../app/hooks";
+import { selectImageEditor } from "./imageEditorSlice";
 import { LoadableButton } from "../LoadableButton";
 
 export default {
-  title: ImageEditor.name,
+  title: ImageEditor.displayName,
   component: ImageEditor,
   args: {
     src: "https://source.unsplash.com/daily",
@@ -18,20 +20,17 @@ export const Usage: Story<ImageEditorProps> = ({ ...args }) => (
   <ImageEditor {...args} />
 );
 
-export const UsageWithOutput: Story<ImageEditorProps> = ({ ...args }) => {
-  const dispatch = useAppDispatch();
-  const { croppedSrc, loading } = useAppSelector(selectImageEditor);
+export const UsageWithGeneration: Story<ImageEditorProps> = ({ ...args }) => {
+  const { artifact, loading } = useAppSelector(selectImageEditor);
+  const ref = useRef<ImageEditorHandler>();
   return (
     <>
-      <ImageEditor {...args} />
-      <LoadableButton
-        loading={loading}
-        onClick={() => dispatch(generateStart())}
-      >
+      <ImageEditor ref={ref} {...args} />
+      <LoadableButton loading={loading} onClick={() => ref.current.generate()}>
         Apply
       </LoadableButton>
       <img
-        src={croppedSrc}
+        src={artifact}
         alt="result"
         className="rounded-full overflow-hidden"
       />

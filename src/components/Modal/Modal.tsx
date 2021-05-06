@@ -15,6 +15,7 @@ export interface ModalProps {
   children: ReactNode;
 }
 
+// TODO: ModalにonCancel, onApplyを持つべきではない説ある
 const Modal = memo(
   ({
     open,

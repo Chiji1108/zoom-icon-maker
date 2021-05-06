@@ -1,5 +1,5 @@
 import Head from "next/head";
-import ZoomIconForm from "../components/ZoomIconForm";
+import { ZoomIconForm } from "../components/ZoomIconForm";
 
 export default function Home() {
   return (

@@ -6,12 +6,12 @@ import { getCroppedImg } from "../../lib/canvasUtils";
 interface ImageEditorState {
   loading: boolean;
   error: Error;
-  croppedSrc: string;
+  artifact: string;
 }
 
 const initialState: ImageEditorState = {
   loading: false,
-  croppedSrc: null,
+  artifact: null,
   error: null,
 };
 
@@ -30,7 +30,7 @@ export const imageEditorSlice = createSlice({
     generateSucess: (state, action: PayloadAction<string>) => {
       state.loading = false;
       state.error = null;
-      state.croppedSrc = action.payload;
+      state.artifact = action.payload;
     },
   },
 });
