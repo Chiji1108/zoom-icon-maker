@@ -7,9 +7,9 @@ export default {
   component: ImageSelector,
   args: {
     src: null,
-    onSelect: (image) => action("onSelect")(image),
+    onSelect: action("onSelect"),
   },
-} as Meta;
+} as Meta<ImageSelectorProps>;
 
 export const Usage: Story<ImageSelectorProps> = (args) => (
   <ImageSelector {...args} />
