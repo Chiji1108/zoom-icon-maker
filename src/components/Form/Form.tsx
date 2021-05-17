@@ -1,47 +1,43 @@
-import { forwardRef, memo, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
+import {
+  forwardRef,
+  memo,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { ImageSelector } from "../ImageSelector";
 import { ImageEditor } from "../ImageEditor";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
-  generateStart,
+  generateImage,
   selectImageEditor,
 } from "../ImageEditor/imageEditorSlice";
-import { Modal } from "../Modal";
+import { Modal, ModalFooter } from "../Modal";
 import { LoadableButton } from "../LoadableButton";
+import { Button } from "../Button";
 import { closeModal, openModal, selectModal } from "../Modal/ModalSlice";
-import { ImageEditorHandler } from "../ImageEditor/ImageEditor";
+import { CropInfo } from "../ImageEditor/ImageEditor";
 
-export interface ZoomIconFormHandler {
-  generate(): void
-}
+export interface FormProps {}
 
-export interface ZoomIconFormProps {
-
-}
-
-const ZoomIconForm = memo(forwardRef<ZoomIconFormHandler, ZoomIconFormProps>((_, ref) => {
+const Form = memo(({}: FormProps) => {
   const dispatch = useAppDispatch();
-  const { artifact, loading } = useAppSelector(selectImageEditor);
-  const { open } = useAppSelector(selectModal);
-  const imageEditorRef = useRef<ImageEditorHandler>();
+  const { imageSrc, loading } = useAppSelector(selectImageEditor);
+  // const { open } = useAppSelector(selectModal);
+  const [open, setOpen] = useState(false);
 
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
 
   const [originalImage, setOriginalImage] = useState<string>(null); // before crop image src
+  const [cropInfo, setCropInfo] = useState<CropInfo>();
+  const initialFocusRef = useRef();
 
   const handleSelectImage = useCallback((selectedImage: string) => {
     setOriginalImage(selectedImage);
-    dispatch(openModal("ImageEditor"));
+    setOpen(true);
   }, []);
-
-  useImperativeHandle(
-    ref,
-    () => ({
-      generate() {dispatch()}
-    }),
-    [artifact, name, bio]
-  );
 
   // TODO: これ治す
   // useEffect(() => {
@@ -51,20 +47,40 @@ const ZoomIconForm = memo(forwardRef<ZoomIconFormHandler, ZoomIconFormProps>((_,
   return (
     <>
       <Modal
-        open={open === "ImageEditor"}
+        // open={open == "ImageEditor"}
+        open={open}
         title="メディアを編集"
-        onCancel={() => dispatch(closeModal())}
-        onClose={() => dispatch(closeModal())}
-        onApply={() => imageEditorRef.current.generate()}
-        loading={loading}
-        loadingText="生成中..."
+        onClose={() => setOpen(false)}
+        initialFocusRef={initialFocusRef}
       >
-        <ImageEditor ref={ref} src={originalImage} />
+        <ImageEditor src={originalImage} onComplete={setCropInfo} />
+        <ModalFooter>
+          <Button variant="secondary" onClick={() => setOpen(false)}>
+            キャンセル
+          </Button>
+          <LoadableButton
+            ref={initialFocusRef}
+            loading={loading === "pending"}
+            loadingText="生成中..."
+            onClick={() =>
+              dispatch(
+                generateImage(
+                  originalImage,
+                  cropInfo.area,
+                  cropInfo.rotation,
+                  () => setOpen(false)
+                )
+              )
+            }
+          >
+            適用
+          </LoadableButton>
+        </ModalFooter>
       </Modal>
       <div className="bg-gray-900 flex flex-col items-center p-4 max-w-md">
         {/* if src show modal & avatar crop */}
         <div className="mb-2">
-          <ImageSelector src={artifact} onSelect={handleSelectImage} />
+          <ImageSelector src={imageSrc} onSelect={handleSelectImage} />
         </div>
         <div>
           <input
@@ -88,8 +104,8 @@ const ZoomIconForm = memo(forwardRef<ZoomIconFormHandler, ZoomIconFormProps>((_,
       </div>
     </>
   );
-}));
-ZoomIconForm.displayName = "ZoomIconForm";
-export default ZoomIconForm;
+});
+Form.displayName = "Form";
+export default Form;
 
-const Setting = () => {}
+const Setting = () => {};

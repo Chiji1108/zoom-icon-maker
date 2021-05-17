@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { ZoomIconForm } from "../components/ZoomIconForm";
+import { Form } from "../components/Form";
 
 export default function Home() {
   return (
@@ -25,7 +25,7 @@ export default function Home() {
           <div className="text-2xl">アイコンメーカー</div>
         </div>
         <div>
-          <ZoomIconForm />
+          <Form />
         </div>
       </main>
 
