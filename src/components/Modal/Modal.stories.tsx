@@ -1,6 +1,8 @@
 import { Story, Meta } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import Modal, { ModalProps } from "./Modal";
+import Modal, { ModalFooter, ModalProps } from "./Modal";
+import { useRef } from "react";
+import { Button } from "../Button";
 
 // export const ModalMockProps: ModalContextProps = {
 // open: true,
@@ -17,12 +19,23 @@ export default {
   args: {
     open: true,
     title: "HogeHoge",
-    onClose: () => action("onClose")(),
-    onApply: () => action("onApply")(),
-    onCancel: () => action("onCancel")(),
+    onClose: action("onClose"),
   },
-} as Meta;
+} as Meta<ModalProps>;
 
-export const Usage: Story<ModalProps> = (args) => {
-  return <Modal {...args}>HogeHogeContent</Modal>;
+export const UsageWithButtons: Story<ModalProps> = (args) => {
+  const ref = useRef();
+  return (
+    <Modal {...args} initialFocusRef={ref}>
+      HogeHogeContent
+      <ModalFooter>
+        <Button variant="secondary" onClick={action("onCancel")}>
+          キャンセル
+        </Button>
+        <Button ref={ref} onClick={action("onApply")}>
+          Apply
+        </Button>
+      </ModalFooter>
+    </Modal>
+  );
 };

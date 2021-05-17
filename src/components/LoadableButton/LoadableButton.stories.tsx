@@ -10,7 +10,7 @@ export default {
   argTypes: {
     loadingText: { control: { type: "text" } },
   },
-} as Meta;
+} as Meta<LoadableButtonProps>;
 
 export const Loading: Story<LoadableButtonProps> = (args) => (
   <LoadableButton {...args}>HogeHoge</LoadableButton>

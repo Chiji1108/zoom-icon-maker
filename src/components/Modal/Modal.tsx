@@ -1,39 +1,23 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, memo, ReactNode, useRef } from "react";
+import { Fragment, memo, MutableRefObject, ReactNode } from "react";
 import { MaterialIcon } from "../MaterialIcon";
-import { Button } from "../Button";
-import { LoadableButton } from "../LoadableButton";
 
 export interface ModalProps {
   open: boolean;
   title: string;
   onClose: () => void;
-  onCancel: () => void;
-  onApply: () => void;
-  loading?: boolean;
-  loadingText?: string;
   children: ReactNode;
+  initialFocusRef: MutableRefObject<HTMLElement | null> | undefined;
 }
 
-// TODO: ModalにonCancel, onApplyを持つべきではない説ある
 const Modal = memo(
-  ({
-    open,
-    title,
-    onClose,
-    onCancel,
-    onApply,
-    loading,
-    loadingText,
-    children,
-  }: ModalProps) => {
-    const applyButtonRef = useRef();
+  ({ open, title, onClose, children, initialFocusRef }: ModalProps) => {
     return (
       <Transition show={open} as={Fragment}>
         <Dialog
           as="div"
           className="fixed inset-0 z-10 overflow-y-auto"
-          initialFocus={applyButtonRef}
+          initialFocus={initialFocusRef}
           static
           open={open}
           onClose={onClose}
@@ -76,31 +60,13 @@ const Modal = memo(
                     {title}
                   </Dialog.Title>
                   <div className="cursor-pointer group" onClick={onClose}>
-                    <MaterialIcon
-                      icon="close"
-                      className="text-2xl text-action group-hover:text-gray-700"
-                    />
+                    <MaterialIcon className="text-2xl text-action group-hover:text-gray-700">
+                      close
+                    </MaterialIcon>
                   </div>
                 </div>
 
                 <div className="mt-2">{children}</div>
-
-                <div className="mt-4">
-                  <div className="flex justify-end space-x-2">
-                    <Button variant="secondary" onClick={onCancel}>
-                      キャンセル
-                    </Button>
-                    {/* TODO: fix ButtonRef */}
-                    <LoadableButton
-                      ref={applyButtonRef}
-                      loading={loading}
-                      loadingText={loadingText}
-                      onClick={onApply}
-                    >
-                      適用
-                    </LoadableButton>
-                  </div>
-                </div>
               </div>
             </Transition.Child>
           </div>
@@ -109,5 +75,18 @@ const Modal = memo(
     );
   }
 );
+
 Modal.displayName = "Modal";
 export default Modal;
+
+export interface ModalFooterProps {
+  children: ReactNode;
+}
+
+export const ModalFooter = ({ children }: ModalFooterProps) => {
+  return (
+    <div className="mt-4">
+      <div className="flex justify-end space-x-2">{children}</div>
+    </div>
+  );
+};

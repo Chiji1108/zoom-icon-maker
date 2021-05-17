@@ -4,12 +4,12 @@ import MaterialIcon, { MaterialIconProps } from "./MaterialIcon";
 export default {
   title: MaterialIcon.displayName,
   component: MaterialIcon,
-} as Meta;
+} as Meta<MaterialIconProps>;
 
 export const AddPhotoAlternate: Story<MaterialIconProps> = () => (
-  <MaterialIcon icon={"add_photo_alternate"} />
+  <MaterialIcon>add_photo_alternate</MaterialIcon>
 );
 
 export const Close: Story<MaterialIconProps> = () => (
-  <MaterialIcon icon={"close"} />
+  <MaterialIcon>close</MaterialIcon>
 );
