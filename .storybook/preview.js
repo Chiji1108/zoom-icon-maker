@@ -1,6 +1,7 @@
 import "tailwindcss/tailwind.css";
 import { Provider } from "react-redux";
 import { store } from "../src/app/store";
+import { StrictMode } from "react";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
