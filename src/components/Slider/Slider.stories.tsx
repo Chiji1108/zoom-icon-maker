@@ -4,6 +4,6 @@ import Slider, { SliderProps } from "./Slider";
 export default {
   title: Slider.displayName,
   component: Slider,
-} as Meta;
+} as Meta<SliderProps>;
 
 export const Usage: Story<SliderProps> = () => <Slider />;
