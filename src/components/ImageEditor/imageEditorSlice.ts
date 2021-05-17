@@ -4,14 +4,14 @@ import { RootState } from "../../app/store";
 import { getCroppedImg } from "../../lib/canvasUtils";
 
 interface ImageEditorState {
-  loading: boolean;
+  loading: "idle" | "pending";
+  imageSrc: string;
   error: Error;
-  artifact: string;
 }
 
 const initialState: ImageEditorState = {
-  loading: false,
-  artifact: null,
+  loading: "idle",
+  imageSrc: null,
   error: null,
 };
 
@@ -20,17 +20,17 @@ export const imageEditorSlice = createSlice({
   initialState,
   reducers: {
     generateStart: (state) => {
-      state.loading = true;
+      state.loading = "pending";
       state.error = null;
     },
     generateFailure: (state, action: PayloadAction<Error>) => {
-      state.loading = false;
+      state.loading = "idle";
       state.error = action.payload;
     },
     generateSucess: (state, action: PayloadAction<string>) => {
-      state.loading = false;
+      state.loading = "idle";
       state.error = null;
-      state.artifact = action.payload;
+      state.imageSrc = action.payload;
     },
   },
 });
@@ -41,20 +41,18 @@ export const {
   generateSucess,
 } = imageEditorSlice.actions;
 
-export const generateAsync = ({
-  src,
-  croppedAreaPixels,
-  rotation,
-}: {
-  src: string;
-  croppedAreaPixels: Area;
-  rotation: number;
-}) => async (dispatch, getState) => {
+export const generateImage = (
+  src: string,
+  croppedAreaPixels: Area,
+  rotation: number,
+  onSuccess?: () => void
+) => async (dispatch, getState) => {
   try {
     dispatch(generateStart());
     dispatch(
       generateSucess(await getCroppedImg(src, croppedAreaPixels, rotation))
     );
+    onSuccess();
   } catch (error) {
     dispatch(generateFailure(error));
   }
