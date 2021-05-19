@@ -23,7 +23,9 @@ import {
   Editable,
   EditableInput,
   EditablePreview,
+  Image,
 } from "@chakra-ui/react";
+import { generate } from "../../lib/formUtils";
 
 export interface FormProps {}
 
@@ -32,35 +34,54 @@ const Form = ({}: FormProps) => {
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
 
+  const [result, setResult] = useState<string>();
+
   //TODO: add EditableControls
   return (
-    <Box p="4" bg="gray.900" maxW="sm">
-      <VStack spacing="4">
-        <Box>
-          <AvatarInput value={src} onChange={setSrc} />
-        </Box>
-        <Box>
-          <Editable
-            textColor="white"
-            value={name}
-            onChange={(nextValue) => setName(nextValue)}
-            placeholder="名前を入力"
-          >
-            <EditablePreview />
-            <EditableInput />
-          </Editable>
-          <Editable
-            textColor="white"
-            value={bio}
-            onChange={(nextValue) => setBio(nextValue)}
-            placeholder="BIOを入力"
-          >
-            <EditablePreview />
-            <EditableInput />
-          </Editable>
-        </Box>
-      </VStack>
-    </Box>
+    <>
+      <Box p="4" bg="gray.900" maxW="sm">
+        <VStack spacing="4">
+          <Box>
+            <AvatarInput value={src} onChange={setSrc} />
+          </Box>
+          <Box>
+            <Editable
+              textColor="white"
+              value={name}
+              onChange={(nextValue) => setName(nextValue)}
+              placeholder="名前を入力"
+            >
+              <EditablePreview />
+              <EditableInput />
+            </Editable>
+            <Editable
+              textColor="white"
+              value={bio}
+              onChange={(nextValue) => setBio(nextValue)}
+              placeholder="BIOを入力"
+            >
+              <EditablePreview />
+              <EditableInput />
+            </Editable>
+          </Box>
+        </VStack>
+      </Box>
+      <Button
+        onClick={async () =>
+          setResult(
+            await generate({
+              src,
+              name,
+              bio,
+              setting: { font: "", enabledBio: true, bioIcon: "Twitter" },
+            })
+          )
+        }
+      >
+        生成
+      </Button>
+      <Image src={result} alt="result" />
+    </>
   );
 };
 Form.displayName = "Form";

@@ -17,11 +17,6 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-  Box,
-  VStack,
-  Editable,
-  EditableInput,
-  EditablePreview,
 } from "@chakra-ui/react";
 
 export interface AvatarInputProps {
