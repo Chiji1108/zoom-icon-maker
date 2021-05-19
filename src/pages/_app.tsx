@@ -5,7 +5,7 @@ import { store } from "../app/store";
 import { ChakraProvider } from "@chakra-ui/react";
 
 //TODO: 読み込む
-import "@fontsource/reggae-one.css";
+import "@fontsource/reggae-one";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
