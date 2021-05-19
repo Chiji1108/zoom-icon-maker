@@ -1,16 +1,16 @@
 import type { AppProps } from "next/app";
-import "tailwindcss/tailwind.css";
+// import "tailwindcss/tailwind.css";
 import { Provider } from "react-redux";
 import { store } from "../app/store";
-import { StrictMode } from "react";
+import { ChakraProvider } from "@chakra-ui/react";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <StrictMode>
+    <ChakraProvider>
       <Provider store={store}>
         <Component {...pageProps} />
       </Provider>
-    </StrictMode>
+    </ChakraProvider>
   );
 }
 

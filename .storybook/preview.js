@@ -1,7 +1,7 @@
-import "tailwindcss/tailwind.css";
+// import "tailwindcss/tailwind.css";
 import { Provider } from "react-redux";
 import { store } from "../src/app/store";
-import { StrictMode } from "react";
+import { ChakraProvider } from "@chakra-ui/react";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -15,10 +15,10 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <StrictMode>
+    <ChakraProvider>
       <Provider store={store}>
         <Story />
       </Provider>
-    </StrictMode>
+    </ChakraProvider>
   ),
 ];

@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import imageEditorReducder from "../components/ImageEditor/imageEditorSlice";
-import modalReducer from "../components/Modal/ModalSlice";
+// import modalReducer from "../components/Modal/ModalSlice";
 
 export const store = configureStore({
   reducer: {
     imageEditorReducder,
-    modalReducer,
+    // modalReducer,
   },
 });
 
