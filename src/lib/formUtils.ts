@@ -19,6 +19,7 @@ interface Setting {
 import { fabric } from "fabric";
 
 export const generate = async ({ src, name, bio, setting }: Data) => {
+  //TODO: src がnullだったら
   const canvasEl = document.createElement("canvas");
   canvasEl.width = 1024;
   canvasEl.height = 1024;

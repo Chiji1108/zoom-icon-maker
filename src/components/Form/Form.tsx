@@ -10,23 +10,21 @@ import { CropInfo } from "../ImageEditor/ImageEditor";
 import { AvatarInput } from "../AvatarInput";
 import {
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
+  ButtonGroup,
   Box,
   VStack,
   Editable,
   EditableInput,
   EditablePreview,
   Image,
+  IconButton,
+  useEditableControls,
+  Flex,
+  HStack,
 } from "@chakra-ui/react";
 import { generate } from "../../lib/formUtils";
 import { Setting } from "../SettingInput";
+import { MdCheck, MdClose, MdEdit } from "react-icons/md";
 
 export interface FormProps {}
 
@@ -51,24 +49,37 @@ const Form = ({}: FormProps) => {
           <Box>
             <AvatarInput value={src} onChange={setSrc} />
           </Box>
-          <Box textAlign="center" fontFamily={setting.font}>
+          <Box>
             <Editable
-              textColor="white"
               value={name}
               onChange={(nextValue) => setName(nextValue)}
               placeholder="名前を入力"
             >
-              <EditablePreview />
-              <EditableInput />
+              <Box
+                textColor="white"
+                fontFamily={setting.font}
+                textAlign="center"
+              >
+                <EditablePreview />
+                <EditableInput />
+              </Box>
+              {/* <EditableControls /> */}
             </Editable>
             <Editable
-              textColor="white"
               value={bio}
               onChange={(nextValue) => setBio(nextValue)}
               placeholder="BIOを入力"
             >
-              <EditablePreview />
-              <EditableInput />
+              <Box
+                textColor="white"
+                fontFamily={setting.font}
+                textAlign="center"
+              >
+                <EditablePreview />
+                <EditableInput />
+              </Box>
+
+              {/* <EditableControls /> */}
             </Editable>
           </Box>
         </VStack>
@@ -93,3 +104,36 @@ const Form = ({}: FormProps) => {
 };
 Form.displayName = "Form";
 export default Form;
+
+const EditableControls = () => {
+  const {
+    isEditing,
+    getSubmitButtonProps,
+    getCancelButtonProps,
+    getEditButtonProps,
+  } = useEditableControls();
+
+  return isEditing ? (
+    <ButtonGroup justifyContent="center" size="sm">
+      <IconButton
+        aria-label="submit"
+        icon={<MdCheck />}
+        {...getSubmitButtonProps()}
+      />
+      <IconButton
+        aria-label="cancel"
+        icon={<MdClose />}
+        {...getCancelButtonProps()}
+      />
+    </ButtonGroup>
+  ) : (
+    <Flex justifyContent="center">
+      <IconButton
+        aria-label="edit"
+        size="sm"
+        icon={<MdEdit />}
+        {...getEditButtonProps()}
+      />
+    </Flex>
+  );
+};
