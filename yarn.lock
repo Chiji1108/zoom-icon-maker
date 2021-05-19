@@ -1862,6 +1862,11 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
+"@fontsource/reggae-one@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/reggae-one/-/reggae-one-4.3.0.tgz#e0ad23fe48d8486af85315ddd75ded9bdf421f03"
+  integrity sha512-1cYIOsco1APx9t6eCaPLEL6slgzkVXYAQNA5S4nsDvdnUdTZmvVzqQM1/+PkQSgUEjH/UGdflcH3HUYOfiuejQ==
+
 "@hapi/accept@5.0.1":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@hapi/accept/-/accept-5.0.1.tgz#068553e867f0f63225a506ed74e899441af53e10"

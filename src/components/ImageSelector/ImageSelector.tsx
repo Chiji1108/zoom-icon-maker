@@ -1,4 +1,4 @@
-import { ChangeEvent, memo, useCallback, useRef } from "react";
+import { ChangeEvent, memo, useCallback, useRef, useState } from "react";
 import { getOrientation } from "get-orientation/browser";
 import {
   readFile,
@@ -26,7 +26,8 @@ export interface ImageSelectorProps {
 }
 const ImageSelector = ({ src, onSelect }: ImageSelectorProps) => {
   const inputRef = useRef<HTMLInputElement>();
-  const onFileChange = useCallback(async (e: ChangeEvent<HTMLInputElement>) => {
+  //TODO: 二回目も
+  const onFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       let imageDataUrl = await readFile(file);
@@ -39,8 +40,9 @@ const ImageSelector = ({ src, onSelect }: ImageSelectorProps) => {
 
       onSelect(imageDataUrl);
       e.target.files = null;
+      inputRef.current.files = null;
     }
-  }, []);
+  };
   return (
     <Box pos="relative" boxSize={120}>
       <Circle size="full" overflow="hidden">

@@ -241,5 +241,3 @@ const SettingInput = ({ value, onChange }: SettingInputProps) => {
 
 SettingInput.displayName = "SettingInput";
 export default SettingInput;
-
-const SettingContent = () => {};

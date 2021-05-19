@@ -26,13 +26,20 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { generate } from "../../lib/formUtils";
+import { Setting } from "../SettingInput";
 
 export interface FormProps {}
 
 const Form = ({}: FormProps) => {
+  //TODO: initial value とか ボタンとかちゃんとする
   const [src, setSrc] = useState<string>();
-  const [name, setName] = useState("");
-  const [bio, setBio] = useState("");
+  const [name, setName] = useState("千々岩");
+  const [bio, setBio] = useState("Chijidosu");
+  const [setting, setSetting] = useState<Setting>({
+    font: "Reggae One",
+    enabledBio: true,
+    bioIcon: "Twitter",
+  });
 
   const [result, setResult] = useState<string>();
 
@@ -44,7 +51,7 @@ const Form = ({}: FormProps) => {
           <Box>
             <AvatarInput value={src} onChange={setSrc} />
           </Box>
-          <Box>
+          <Box textAlign="center" fontFamily={setting.font}>
             <Editable
               textColor="white"
               value={name}
@@ -73,14 +80,14 @@ const Form = ({}: FormProps) => {
               src,
               name,
               bio,
-              setting: { font: "", enabledBio: true, bioIcon: "Twitter" },
+              setting,
             })
           )
         }
       >
         生成
       </Button>
-      <Image src={result} alt="result" />
+      <Image src={result} alt="result" boxSize={"512px"} />
     </>
   );
 };
