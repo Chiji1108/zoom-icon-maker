@@ -23,6 +23,8 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { generate } from "../../lib/formUtils";
+import { SiTwitter } from "react-icons/si";
+import simpleIcons from "simple-icons";
 import { Setting } from "../SettingInput";
 import { MdCheck, MdClose, MdEdit } from "react-icons/md";
 
@@ -49,7 +51,7 @@ const Form = ({}: FormProps) => {
           <Box>
             <AvatarInput value={src} onChange={setSrc} />
           </Box>
-          <Box>
+          <Flex direction="column" alignItems="center">
             <Editable
               value={name}
               onChange={(nextValue) => setName(nextValue)}
@@ -59,21 +61,7 @@ const Form = ({}: FormProps) => {
                 textColor="white"
                 fontFamily={setting.font}
                 textAlign="center"
-              >
-                <EditablePreview />
-                <EditableInput />
-              </Box>
-              {/* <EditableControls /> */}
-            </Editable>
-            <Editable
-              value={bio}
-              onChange={(nextValue) => setBio(nextValue)}
-              placeholder="BIOを入力"
-            >
-              <Box
-                textColor="white"
-                fontFamily={setting.font}
-                textAlign="center"
+                fontSize="2xl"
               >
                 <EditablePreview />
                 <EditableInput />
@@ -81,7 +69,28 @@ const Form = ({}: FormProps) => {
 
               {/* <EditableControls /> */}
             </Editable>
-          </Box>
+            <Editable
+              value={bio}
+              onChange={(nextValue) => setBio(nextValue)}
+              placeholder="BIOを入力"
+            >
+              <HStack fontSize="xs">
+                <Box textColor="#1DA1F2">
+                  <SiTwitter />
+                </Box>
+                <Box
+                  textColor="white"
+                  fontFamily={setting.font}
+                  textAlign="center"
+                >
+                  <EditablePreview />
+                  <EditableInput />
+                </Box>
+              </HStack>
+
+              {/* <EditableControls /> */}
+            </Editable>
+          </Flex>
         </VStack>
       </Box>
       <Button

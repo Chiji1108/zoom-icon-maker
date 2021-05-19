@@ -41,7 +41,7 @@ const ImageEditor = ({ src, onComplete }: ImageEditorProps) => {
   );
 
   return (
-    <Box>
+    <Box maxW="md">
       <Box pos="relative" w="full" h={["52", "72"]} bg="gray.900">
         <Cropper
           image={src}
