@@ -1862,10 +1862,20 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
+"@fontsource/dotgothic16@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/dotgothic16/-/dotgothic16-4.3.0.tgz#3a39a3b44ccaa0de3bb71e3b627f30cde75b8a79"
+  integrity sha512-UW2845H7i/c0HnLIrsuP13piOkZmwwIYOhdHDT1qg97bDef3jWK/SoM6s9TMSgniDDRNZCRx6i18bJal1p6c1g==
+
 "@fontsource/reggae-one@^4.3.0":
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/@fontsource/reggae-one/-/reggae-one-4.3.0.tgz#e0ad23fe48d8486af85315ddd75ded9bdf421f03"
   integrity sha512-1cYIOsco1APx9t6eCaPLEL6slgzkVXYAQNA5S4nsDvdnUdTZmvVzqQM1/+PkQSgUEjH/UGdflcH3HUYOfiuejQ==
+
+"@fontsource/shippori-mincho@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/shippori-mincho/-/shippori-mincho-4.3.0.tgz#bd61fd945b68b41e6fe188cade5e6c9165a0e8a7"
+  integrity sha512-U7GnqZfCBSQ3xDE/M7hUZlfAMDDKzj/r0ptZJa7/bAIW6oDh82+a5bjhhx71Zp+PfSTOAxXPyYu53P87pTNcfw==
 
 "@hapi/accept@5.0.1":
   version "5.0.1"

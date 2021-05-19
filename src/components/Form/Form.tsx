@@ -28,6 +28,8 @@ import simpleIcons from "simple-icons";
 import { Setting } from "../SettingInput";
 import { MdCheck, MdClose, MdEdit } from "react-icons/md";
 
+type Font = "Shippori Mincho" | "DotGothic16";
+
 export interface FormProps {}
 
 const Form = ({}: FormProps) => {
@@ -36,7 +38,7 @@ const Form = ({}: FormProps) => {
   const [name, setName] = useState("千々岩");
   const [bio, setBio] = useState("Chijidosu");
   const [setting, setSetting] = useState<Setting>({
-    font: "Reggae One",
+    font: "Shippori Mincho",
     enabledBio: true,
     bioIcon: "Twitter",
   });
@@ -61,7 +63,7 @@ const Form = ({}: FormProps) => {
                 textColor="white"
                 fontFamily={setting.font}
                 textAlign="center"
-                fontSize="2xl"
+                fontSize="3xl"
               >
                 <EditablePreview />
                 <EditableInput />
@@ -74,8 +76,8 @@ const Form = ({}: FormProps) => {
               onChange={(nextValue) => setBio(nextValue)}
               placeholder="BIOを入力"
             >
-              <HStack fontSize="xs">
-                <Box textColor="#1DA1F2">
+              <Flex fontSize="xs" alignItems="center">
+                <Box textColor="#1DA1F2" mr={1}>
                   <SiTwitter />
                 </Box>
                 <Box
@@ -86,7 +88,7 @@ const Form = ({}: FormProps) => {
                   <EditablePreview />
                   <EditableInput />
                 </Box>
-              </HStack>
+              </Flex>
 
               {/* <EditableControls /> */}
             </Editable>

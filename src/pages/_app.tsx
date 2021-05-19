@@ -6,6 +6,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 //TODO: 読み込む
 import "@fontsource/reggae-one";
+import "@fontsource/dotgothic16";
+import "@fontsource/shippori-mincho";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
