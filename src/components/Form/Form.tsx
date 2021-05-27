@@ -48,7 +48,7 @@ const Form = ({}: FormProps) => {
   //TODO: add EditableControls
   return (
     <>
-      <Box p="4" bg="gray.900" maxW="sm">
+      <Box p="4" bg="rgb(36,36,36)" maxW="sm">
         <VStack spacing="4">
           <Box>
             <AvatarInput value={src} onChange={setSrc} />
