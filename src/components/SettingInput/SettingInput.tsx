@@ -24,7 +24,7 @@ import {
   useEditableControls,
   useBoolean,
 } from "@chakra-ui/react";
-import { ReactElement, useEffect, useRef, useState } from "react";
+import { ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import {
   SiTwitter,
   SiInstagram,
@@ -147,13 +147,20 @@ const SettingInput = ({ value, onChange }: SettingInputProps) => {
 
   const initialFocusRef = useRef<HTMLButtonElement>(null);
 
+  const handleOpen = () => {
+    setFont(value.font);
+    value.enabledBio ? setEnabledBio.on() : setEnabledBio.off();
+    setBioIcon(value.bioIcon);
+    onOpen();
+  };
+
   return (
     <>
       <IconButton
         borderRadius="full"
         aria-label="open setting"
         icon={<MdSettings />}
-        onClick={onOpen}
+        onClick={handleOpen}
       />
 
       <Modal
@@ -184,7 +191,7 @@ const SettingInput = ({ value, onChange }: SettingInputProps) => {
                   placeholder="Last name"
                   isChecked={enabledBio}
                   onChange={(e) =>
-                    e.target.checked ? setEnabledBio.on : setEnabledBio.off
+                    e.target.checked ? setEnabledBio.on() : setEnabledBio.off()
                   }
                 />
               </FormControl>

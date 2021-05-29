@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ImageSelector } from "../ImageSelector";
 import { ImageEditor } from "../ImageEditor";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import {
-  generateImage,
-  selectImageEditor,
-} from "../ImageEditor/imageEditorSlice";
+// import { useAppDispatch, useAppSelector } from "../../app/hooks";
+// import {
+//   generateImage,
+//   selectImageEditor,
+// } from "../ImageEditor/imageEditorSlice";
 import { CropInfo } from "../ImageEditor/ImageEditor";
+import { getCroppedImg } from "../../lib/canvasUtils";
 import {
   Button,
   Modal,
@@ -17,35 +18,59 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  useBoolean,
 } from "@chakra-ui/react";
 
 export interface AvatarInputProps {
-  value: string;
+  value?: string;
   onChange: (src: string) => void;
 }
 
 const AvatarInput = ({ value, onChange }: AvatarInputProps) => {
-  const dispatch = useAppDispatch();
-  const { imageSrc, loading } = useAppSelector(selectImageEditor);
+  // const dispatch = useAppDispatch();
+  // const { imageSrc, loading } = useAppSelector(selectImageEditor);
 
-  const [originalImage, setOriginalImage] = useState<string>(value); // before crop image src
+  const [croppedImage, setCroppedImage] = useState<string>();
+  const [originalImage, setOriginalImage] = useState<string | undefined>(value); // before crop image src
+  const [isLoading, setLoading] = useBoolean(false);
   const [cropInfo, setCropInfo] = useState<CropInfo>();
-  const initialFocusRef = useRef();
+  const initialFocusRef = useRef<HTMLButtonElement>(null);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  useEffect(() => {
-    onChange(imageSrc);
-  }, [imageSrc]);
+  // useEffect(() => {
+  //   onChange(imageSrc);
+  // }, [imageSrc]);
 
   const handleSelectImage = useCallback((selectedImage: string) => {
     setOriginalImage(selectedImage);
     onOpen();
   }, []);
 
+  const handleGenerate = async () => {
+    setLoading.on();
+    const result = await getCroppedImg(
+      originalImage!,
+      cropInfo!.area,
+      cropInfo!.rotation
+    );
+    setCroppedImage(result);
+    onChange(result);
+    setLoading.off();
+    onClose();
+  };
+  // dispatch(
+  //   generateImage(
+  //     originalImage!,
+  //     cropInfo!.area,
+  //     cropInfo!.rotation,
+  //     onClose
+  //   )
+  // )
+
   return (
     <>
-      <ImageSelector src={imageSrc} onSelect={handleSelectImage} />
+      <ImageSelector onSelect={handleSelectImage} previewSrc={croppedImage} />
 
       <Modal
         isOpen={isOpen}
@@ -57,26 +82,18 @@ const AvatarInput = ({ value, onChange }: AvatarInputProps) => {
           <ModalHeader>メディアを編集</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <ImageEditor src={originalImage} onComplete={setCropInfo} />
+            <ImageEditor src={originalImage!} onComplete={setCropInfo} />
           </ModalBody>
 
           <ModalFooter>
             <Button
               colorScheme="blue"
               mr={3}
-              onClick={() =>
-                dispatch(
-                  generateImage(
-                    originalImage,
-                    cropInfo.area,
-                    cropInfo.rotation,
-                    onClose
-                  )
-                )
-              }
+              onClick={handleGenerate}
               ref={initialFocusRef}
-              isLoading={loading === "pending"}
+              isLoading={isLoading}
               loadingText="生成中..."
+              isDisabled={!originalImage}
             >
               適用
             </Button>

@@ -1,12 +1,4 @@
-import { useCallback, useRef, useState } from "react";
-import { ImageSelector } from "../ImageSelector";
-import { ImageEditor } from "../ImageEditor";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import {
-  generateImage,
-  selectImageEditor,
-} from "../ImageEditor/imageEditorSlice";
-import { CropInfo } from "../ImageEditor/ImageEditor";
+import { useState } from "react";
 import { AvatarInput } from "../AvatarInput";
 import {
   Button,
@@ -24,7 +16,6 @@ import {
 } from "@chakra-ui/react";
 import { generate } from "../../lib/formUtils";
 import { SiTwitter } from "react-icons/si";
-import simpleIcons from "simple-icons";
 import { Setting } from "../SettingInput";
 import { MdCheck, MdClose, MdEdit } from "react-icons/md";
 

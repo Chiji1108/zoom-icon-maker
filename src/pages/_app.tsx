@@ -1,10 +1,7 @@
 import type { AppProps } from "next/app";
-// import "tailwindcss/tailwind.css";
-import { Provider } from "react-redux";
-import { store } from "../app/store";
 import { ChakraProvider } from "@chakra-ui/react";
 
-//TODO: 読み込む
+//TODO: lazyで読み込む
 import "@fontsource/reggae-one";
 import "@fontsource/dotgothic16";
 import "@fontsource/shippori-mincho";
@@ -12,9 +9,7 @@ import "@fontsource/shippori-mincho";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
-      <Provider store={store}>
-        <Component {...pageProps} />
-      </Provider>
+      <Component {...pageProps} />
     </ChakraProvider>
   );
 }
