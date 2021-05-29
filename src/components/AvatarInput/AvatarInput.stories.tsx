@@ -3,7 +3,7 @@ import { useState } from "react";
 import AvatarInput, { AvatarInputProps } from "./AvatarInput";
 
 export default {
-  title: AvatarInput.displayName,
+  title: "Molecules/" + AvatarInput.displayName,
   component: AvatarInput,
 } as Meta<AvatarInputProps>;
 

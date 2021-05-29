@@ -4,7 +4,7 @@ import { action } from "@storybook/addon-actions";
 import { useState } from "react";
 
 export default {
-  title: "utils/" + ImageSelector.displayName,
+  title: "Atoms/" + ImageSelector.displayName,
   component: ImageSelector,
   args: {
     onSelect: action("onSelect"),

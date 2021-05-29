@@ -3,7 +3,7 @@ import { useState } from "react";
 import SettingInput, { SettingInputProps, Setting } from "./SettingInput";
 
 export default {
-  title: SettingInput.displayName,
+  title: "Molecules/" + SettingInput.displayName,
   component: SettingInput,
 } as Meta<SettingInputProps>;
 

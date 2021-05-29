@@ -8,7 +8,7 @@ import { Button } from "@chakra-ui/button";
 import { Image, Box } from "@chakra-ui/react";
 
 export default {
-  title: "utils/" + ImageEditor.displayName,
+  title: "Atoms/" + ImageEditor.displayName,
   component: ImageEditor,
   args: {
     src: "https://source.unsplash.com/daily",
