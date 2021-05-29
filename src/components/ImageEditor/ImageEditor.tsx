@@ -1,6 +1,6 @@
 import { useState, useCallback, Dispatch, SetStateAction } from "react";
 import Cropper from "react-easy-crop";
-import { Area, Point } from "react-easy-crop/types";
+import type { Area, Point } from "react-easy-crop/types";
 import {
   HStack,
   IconButton,

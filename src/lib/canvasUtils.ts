@@ -1,4 +1,5 @@
 import { Area } from "react-easy-crop/types";
+import type { Orientation } from "get-orientation/browser";
 
 export const createImage = (url: string) =>
   new Promise<HTMLImageElement>((resolve, reject) => {
@@ -26,7 +27,7 @@ export async function getCroppedImg(
 ) {
   const image = await createImage(imageSrc);
   const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext("2d")!;
 
   const maxSize = Math.max(image.width, image.height);
   const safeArea = maxSize * Math.sqrt(2);
@@ -77,7 +78,7 @@ export async function getCroppedImg(
 export async function getRotatedImage(imageSrc: string, rotation = 0) {
   const image = await createImage(imageSrc);
   const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext("2d")!;
 
   const orientationChanged =
     rotation === 90 ||
@@ -115,8 +116,13 @@ export function readFile(file: File) {
   });
 }
 
-export const ORIENTATION_TO_ANGLE = {
-  "3": 180,
-  "6": 90,
-  "8": -90,
+export const getAngle = (orientation: Orientation) => {
+  switch (orientation) {
+    case 3:
+      return 180;
+    case 6:
+      return 90;
+    case 8:
+      return -90;
+  }
 };

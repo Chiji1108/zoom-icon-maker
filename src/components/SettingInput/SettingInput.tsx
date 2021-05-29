@@ -22,6 +22,7 @@ import {
   HStack,
   Text,
   useEditableControls,
+  useBoolean,
 } from "@chakra-ui/react";
 import { ReactElement, useEffect, useRef, useState } from "react";
 import {
@@ -141,10 +142,10 @@ const SettingInput = ({ value, onChange }: SettingInputProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [font, setFont] = useState(value.font);
-  const [enabledBio, setEnabledBio] = useState(value.enabledBio);
-  const [bioIcon, setBioIcon] = useState<string | null>(value.bioIcon);
+  const [enabledBio, setEnabledBio] = useBoolean(value.enabledBio);
+  const [bioIcon, setBioIcon] = useState<string>(value.bioIcon);
 
-  const initialFocusRef = useRef();
+  const initialFocusRef = useRef<HTMLButtonElement>(null);
 
   return (
     <>
@@ -182,7 +183,9 @@ const SettingInput = ({ value, onChange }: SettingInputProps) => {
                 <Switch
                   placeholder="Last name"
                   isChecked={enabledBio}
-                  onChange={(e) => setEnabledBio(e.target.checked)}
+                  onChange={(e) =>
+                    e.target.checked ? setEnabledBio.on : setEnabledBio.off
+                  }
                 />
               </FormControl>
 

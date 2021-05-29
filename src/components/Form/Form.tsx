@@ -96,6 +96,7 @@ const Form = ({}: FormProps) => {
         </VStack>
       </Box>
       <Button
+        isDisabled={!src || !name}
         onClick={async () =>
           setResult(
             await generate({

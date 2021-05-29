@@ -1,10 +1,6 @@
 import { ChangeEvent, memo, useCallback, useRef, useState } from "react";
 import { getOrientation } from "get-orientation/browser";
-import {
-  readFile,
-  ORIENTATION_TO_ANGLE,
-  getRotatedImage,
-} from "../../lib/canvasUtils";
+import { readFile, getAngle, getRotatedImage } from "../../lib/canvasUtils";
 import { MdAddAPhoto, MdFace } from "react-icons/md";
 import {
   Image,
@@ -21,11 +17,11 @@ import {
 import NextImage from "next/image";
 
 export interface ImageSelectorProps {
-  src?: string;
   onSelect: (image: string) => void;
+  previewSrc?: string;
 }
-const ImageSelector = ({ src, onSelect }: ImageSelectorProps) => {
-  const inputRef = useRef<HTMLInputElement>();
+const ImageSelector = ({ onSelect, previewSrc }: ImageSelectorProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   //TODO: 二回目も
   const onFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -33,22 +29,22 @@ const ImageSelector = ({ src, onSelect }: ImageSelectorProps) => {
       let imageDataUrl = await readFile(file);
 
       const orientation = await getOrientation(file);
-      const rotation = ORIENTATION_TO_ANGLE[orientation];
+      const rotation = getAngle(orientation);
       if (rotation) {
         imageDataUrl = await getRotatedImage(imageDataUrl, rotation);
       }
 
       onSelect(imageDataUrl);
       e.target.files = null;
-      inputRef.current.files = null;
+      // inputRef.current.files = null;
     }
   };
   return (
     <Box pos="relative" boxSize={120}>
       <Circle size="full" overflow="hidden">
-        {src ? (
+        {previewSrc ? (
           <Image
-            src={src}
+            src={previewSrc}
             alt="preview"
             boxSize="full"
             fallback={
@@ -59,6 +55,7 @@ const ImageSelector = ({ src, onSelect }: ImageSelectorProps) => {
             fit="cover"
           />
         ) : (
+          //TODO: 選択されていない時の改善
           <Box bg="gray" boxSize="full" />
           // <NextImage
           //   src="/avatar-placeholder.png"

@@ -4,7 +4,7 @@
 import { createImage } from "./canvasUtils";
 
 type Data = {
-  src: string;
+  src?: string;
   name: string;
   bio: string;
   setting: Setting;
@@ -20,6 +20,10 @@ import { fabric } from "fabric";
 
 export const generate = async ({ src, name, bio, setting }: Data) => {
   //TODO: src がnullだったら
+  if (!src) {
+    throw new Error("src is not defined!");
+  }
+
   const canvasEl = document.createElement("canvas");
   canvasEl.width = 1024;
   canvasEl.height = 1024;

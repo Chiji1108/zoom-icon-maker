@@ -8,7 +8,7 @@ import { Button } from "@chakra-ui/button";
 import { Image, Box } from "@chakra-ui/react";
 
 export default {
-  title: ImageEditor.displayName,
+  title: "utils/" + ImageEditor.displayName,
   component: ImageEditor,
   args: {
     src: "https://source.unsplash.com/daily",
@@ -24,7 +24,7 @@ export const UsageWithGeneration: Story<ImageEditorProps> = ({
   onComplete,
   ...args
 }) => {
-  const [cropInfo, setCropInfo] = useState<CropInfo>(null);
+  const [cropInfo, setCropInfo] = useState<CropInfo>();
   const dispatch = useAppDispatch();
   const { imageSrc, loading } = useAppSelector(selectImageEditor);
   return (
@@ -36,8 +36,8 @@ export const UsageWithGeneration: Story<ImageEditorProps> = ({
           dispatch(
             generateImage(
               args.src,
-              cropInfo.area,
-              cropInfo.rotation,
+              cropInfo!.area,
+              cropInfo!.rotation,
               action("generate sucess")
             )
           )
