@@ -1,6 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 
-import "@fontsource/reggae-one";
+import "@fontsource/material-icons";
+import "@fontsource/noto-sans-jp";
 import "@fontsource/dotgothic16";
 import "@fontsource/shippori-mincho";
 

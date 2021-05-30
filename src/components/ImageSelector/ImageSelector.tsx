@@ -1,7 +1,6 @@
 import { ChangeEvent, memo, useCallback, useRef, useState } from "react";
 import { getOrientation } from "get-orientation/browser";
 import { readFile, getAngle, getRotatedImage } from "../../lib/canvasUtils";
-import { MdAddAPhoto, MdFace } from "react-icons/md";
 import {
   Image,
   IconButton,
@@ -71,7 +70,7 @@ const ImageSelector = ({ onSelect, previewSrc }: ImageSelectorProps) => {
         right="0"
         borderRadius="full"
         aria-label="add a photo"
-        icon={<MdAddAPhoto />}
+        icon={<span className="material-icons">add_a_photo</span>}
         onClick={() => inputRef.current!.click()}
       />
       <input

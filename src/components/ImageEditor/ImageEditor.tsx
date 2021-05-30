@@ -11,12 +11,6 @@ import {
   SliderFilledTrack,
   SliderThumb,
 } from "@chakra-ui/react";
-import {
-  MdRotateLeft,
-  MdRotateRight,
-  MdZoomIn,
-  MdZoomOut,
-} from "react-icons/md";
 
 export interface CropInfo {
   area: Area;
@@ -70,14 +64,14 @@ const ImageEditor = ({ src, onComplete }: ImageEditorProps) => {
               <IconButton
                 onClick={onClick}
                 aria-label="zoom out"
-                icon={<MdZoomOut />}
+                icon={<span className="material-icons">zoom_out</span>}
               />
             )}
             renderRightIcon={(onClick) => (
               <IconButton
                 onClick={onClick}
                 aria-label="zoom in"
-                icon={<MdZoomIn />}
+                icon={<span className="material-icons">zoom_in</span>}
               />
             )}
           />
@@ -92,14 +86,14 @@ const ImageEditor = ({ src, onComplete }: ImageEditorProps) => {
               <IconButton
                 onClick={onClick}
                 aria-label="rotate left"
-                icon={<MdRotateLeft />}
+                icon={<span className="material-icons">rotate_left</span>}
               />
             )}
             renderRightIcon={(onClick) => (
               <IconButton
                 onClick={onClick}
                 aria-label="rotate right"
-                icon={<MdRotateRight />}
+                icon={<span className="material-icons">rotate_right</span>}
               />
             )}
           />

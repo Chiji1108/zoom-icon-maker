@@ -15,11 +15,7 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { generate } from "../../lib/formUtils";
-import { SiTwitter } from "react-icons/si";
 import { Setting } from "../SettingInput";
-import { MdCheck, MdClose, MdEdit } from "react-icons/md";
-
-type Font = "Shippori Mincho" | "DotGothic16";
 
 export interface FormProps {}
 
@@ -65,11 +61,11 @@ const Form = ({}: FormProps) => {
             <Editable
               value={bio}
               onChange={(nextValue) => setBio(nextValue)}
-              placeholder="BIOを入力"
+              placeholder="所属/役職/連絡先"
             >
               <Flex fontSize="xs" alignItems="center">
                 <Box textColor="#1DA1F2" mr={1}>
-                  <SiTwitter />
+                  {/* <SiTwitter /> */}
                 </Box>
                 <Box
                   textColor="white"
@@ -120,12 +116,12 @@ const EditableControls = () => {
     <ButtonGroup justifyContent="center" size="sm">
       <IconButton
         aria-label="submit"
-        icon={<MdCheck />}
+        icon={<span className="material-icons">done</span>}
         {...getSubmitButtonProps()}
       />
       <IconButton
         aria-label="cancel"
-        icon={<MdClose />}
+        icon={<span className="material-icons">close</span>}
         {...getCancelButtonProps()}
       />
     </ButtonGroup>
@@ -134,7 +130,7 @@ const EditableControls = () => {
       <IconButton
         aria-label="edit"
         size="sm"
-        icon={<MdEdit />}
+        icon={<span className="material-icons">edit</span>}
         {...getEditButtonProps()}
       />
     </Flex>
