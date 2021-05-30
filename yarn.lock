@@ -1867,10 +1867,15 @@
   resolved "https://registry.yarnpkg.com/@fontsource/dotgothic16/-/dotgothic16-4.3.0.tgz#3a39a3b44ccaa0de3bb71e3b627f30cde75b8a79"
   integrity sha512-UW2845H7i/c0HnLIrsuP13piOkZmwwIYOhdHDT1qg97bDef3jWK/SoM6s9TMSgniDDRNZCRx6i18bJal1p6c1g==
 
-"@fontsource/reggae-one@^4.3.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/reggae-one/-/reggae-one-4.3.0.tgz#e0ad23fe48d8486af85315ddd75ded9bdf421f03"
-  integrity sha512-1cYIOsco1APx9t6eCaPLEL6slgzkVXYAQNA5S4nsDvdnUdTZmvVzqQM1/+PkQSgUEjH/UGdflcH3HUYOfiuejQ==
+"@fontsource/material-icons@^4.4.0":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/material-icons/-/material-icons-4.4.0.tgz#d64ded0f2aeccb34c3654ae9d320c76551b093a5"
+  integrity sha512-/HoSq2bwbT182m75YymmJRvHOyuDqeJ58CaFTw1+rHvMAa5XdXw2ijZj5QNPDMsjfoRmY8WsLVMi6W2bGs3Fgw==
+
+"@fontsource/noto-sans-jp@^4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@fontsource/noto-sans-jp/-/noto-sans-jp-4.4.1.tgz#69851fb04034d7704f584b387ab588abd089f5d6"
+  integrity sha512-/slIup55OYVOBA1zeWj0ZCA3zbr1T+ndaU5eJl7+xcnDmCdB5N8KhTPhc8ffoh9dzCAch9v91AH5pkhOy9mfqw==
 
 "@fontsource/shippori-mincho@^4.3.0":
   version "4.3.0"
@@ -9737,11 +9742,6 @@ react-helmet-async@^1.0.7:
     prop-types "^15.7.2"
     react-fast-compare "^3.2.0"
     shallowequal "^1.1.0"
-
-react-icons@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.2.0.tgz#6dda80c8a8f338ff96a1851424d63083282630d0"
-  integrity sha512-rmzEDFt+AVXRzD7zDE21gcxyBizD/3NqjbX6cmViAgdqfJ2UiLer8927/QhhrXQV7dEj/1EGuOTPp7JnLYVJKQ==
 
 react-inspector@^5.1.0:
   version "5.1.1"
