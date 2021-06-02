@@ -1863,25 +1863,25 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
-"@fontsource/dotgothic16@^4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/dotgothic16/-/dotgothic16-4.4.0.tgz#95924ea4bb2a837c403ae612f52fefcca54cdeab"
-  integrity sha512-C8pgsX9Xnu9v+8He1Hfy4D1MM4xkEdYA6/gvicv/TsXwKhE5SpezLmlNamY7i2KTI8C2mlnWy4LAeMFzw7XE+A==
+"@fontsource/dotgothic16@^4.4.2":
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/@fontsource/dotgothic16/-/dotgothic16-4.4.2.tgz#40a2276daaf179e0c359062bc4967f3c105fe061"
+  integrity sha512-+TEQ0oOx5pWfGnHe7qq0ZSwjI49YgJMocF3ZQOSK/U9G2i4yMoptm4h8VDlzDnc7B2MAj33p8nr8X2JPLrnsnQ==
 
-"@fontsource/material-icons@^4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/material-icons/-/material-icons-4.4.0.tgz#d64ded0f2aeccb34c3654ae9d320c76551b093a5"
-  integrity sha512-/HoSq2bwbT182m75YymmJRvHOyuDqeJ58CaFTw1+rHvMAa5XdXw2ijZj5QNPDMsjfoRmY8WsLVMi6W2bGs3Fgw==
+"@fontsource/material-icons@^4.4.2":
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/@fontsource/material-icons/-/material-icons-4.4.2.tgz#94f94dd4944052420a7f802e561dc5082907c1e9"
+  integrity sha512-DgIbX1pmS6UjydY921NWpXAJxbD9FXLfpoH7RJ5EkSVBZpT4CALp2aTmqwg8GA459B3RAdhfvlQ35/4YU+QUkg==
 
-"@fontsource/noto-sans-jp@^4.4.1":
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/@fontsource/noto-sans-jp/-/noto-sans-jp-4.4.1.tgz#69851fb04034d7704f584b387ab588abd089f5d6"
-  integrity sha512-/slIup55OYVOBA1zeWj0ZCA3zbr1T+ndaU5eJl7+xcnDmCdB5N8KhTPhc8ffoh9dzCAch9v91AH5pkhOy9mfqw==
+"@fontsource/noto-sans-jp@^4.4.2":
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/@fontsource/noto-sans-jp/-/noto-sans-jp-4.4.2.tgz#94bd919a7b0cf02b3046e0adb242ecd6b159817c"
+  integrity sha512-H/abeZe+nAk3XJ2XgARUUYUy+IwPzCSMkVIWuFpfVou5qoUljppy+c9eqZ4+m9orz6bA2VPYSUyykLN8zDwjNA==
 
-"@fontsource/shippori-mincho@^4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/shippori-mincho/-/shippori-mincho-4.4.0.tgz#8c0155f5edf52570f0ad7b5b19b0a3ed661d5d0a"
-  integrity sha512-ftT1k/rDUTroJ36oRP9sGXUwe99vj5z+O49EszVp8FLDQFlub1x//LBVf76HZsbq1IRV/Yuixqvj6SDuPUvWjQ==
+"@fontsource/shippori-mincho@^4.4.2":
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/@fontsource/shippori-mincho/-/shippori-mincho-4.4.2.tgz#525285b29e0134f93447c59e80619e57a1555e5c"
+  integrity sha512-08Kaq4cr9fwORK23W+Rq5NgwJOj/aUD3qo3F5z1QKq0IceUFV2wptOyj9kJnVhA4X/MBKTNzskyDHG5NNRyQCw==
 
 "@hapi/accept@5.0.2":
   version "5.0.2"
@@ -3127,10 +3127,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@^17.0.8":
-  version "17.0.8"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.8.tgz#fe76e3ba0fbb5602704110fd1e3035cf394778e3"
-  integrity sha512-3sx4c0PbXujrYAKwXxNONXUtRp9C+hE2di0IuxFyf5BELD+B+AXL8G7QrmSKhVwKZDbv0igiAjQAMhXj8Yg3aw==
+"@types/react@^17.0.9":
+  version "17.0.9"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.9.tgz#1147fb520024a62c9b3841f5cb4db89b73ddb87f"
+  integrity sha512-2Cw7FvevpJxQrCb+k5t6GH1KIvmadj5uBbjPaLlJB/nZWUj56e1ZqcD6zsoMFB47MsJUTFl9RJ132A7hb3QFJA==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -3141,10 +3141,10 @@
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.1.tgz#18845205e86ff0038517aab7a18a62a6b9f71275"
   integrity sha512-EaCxbanVeyxDRTQBkdLb3Bvl/HK7PBK6UJjsSixB0iHKoWxE5uu2Q/DgtpOhPIojN0Zl1whvOd7PoHs2P0s5eA==
 
-"@types/simple-icons@^4.17.0":
-  version "4.17.0"
-  resolved "https://registry.yarnpkg.com/@types/simple-icons/-/simple-icons-4.17.0.tgz#3818b4fc6856050391ebc0baa00e67acb91287e7"
-  integrity sha512-O5lzofiRRDWfUWnTkAk9N4MDaHxqe+TfrKFlEaz8rgRlav5UWAtLF8TnyeTsuTU3mjjDRm5UpMv4uydkF7ZBQQ==
+"@types/simple-icons@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@types/simple-icons/-/simple-icons-5.0.0.tgz#9316cd2fba6b2b49feae2740abf938ea6f95749b"
+  integrity sha512-IYUA5DPdIs+LoptVS1NNGXnBTtqctYR9t4MHQ9Xb38WCC4lJtsmYkFnOYSidKBrg+2C/Ll1NW1TmLX1sMPQuCA==
 
 "@types/source-list-map@*":
   version "0.1.2"
@@ -9703,10 +9703,10 @@ react-draggable@^4.4.3:
     classnames "^2.2.5"
     prop-types "^15.6.0"
 
-react-easy-crop@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/react-easy-crop/-/react-easy-crop-3.4.0.tgz#961b9b0413d659ae5bb8a5a254550dcfcc32f1b6"
-  integrity sha512-UMjm3O78Mry3a9d8h4GYqdtnrFX9GupYGTXyHs1VfsgywqbUCT10fEiw6Uz5f3ZIKJ+AgG+t/+njopZsKd4DYA==
+react-easy-crop@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/react-easy-crop/-/react-easy-crop-3.5.0.tgz#b6988abbcca1492937d3a0fa2b92c3114a8d6e47"
+  integrity sha512-9M6yLi5z34HALEASVtuuKWb1hOWbKEXBj5F4r3f9J8G1ax0o6sTKH9QIoyc8dt1q3prY3VDnpgYwaHUr+3/FiQ==
   dependencies:
     normalize-wheel "^1.0.1"
     tslib "2.0.1"
