@@ -1,12 +1,23 @@
 import { action } from "@storybook/addon-actions";
 import { Story, Meta } from "@storybook/react";
 import { useState } from "react";
-import SettingInput, { SettingInputProps, Setting } from "./SettingInput";
+import SettingInput, { SettingInputProps } from "./SettingInput";
 
 export default {
   title: "Molecules/" + SettingInput.displayName,
   component: SettingInput,
   args: {
+    value: {
+      text: "Chijidosu",
+      setting: {
+        font: {
+          family: "Noto Sans JP",
+          weight: "400",
+        },
+        icon: "twitter",
+        isHidden: false,
+      },
+    },
     onChange: action("onChange"),
   },
 } as Meta<SettingInputProps>;

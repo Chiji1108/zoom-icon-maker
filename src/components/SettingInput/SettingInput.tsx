@@ -40,6 +40,7 @@ import {
   Circle,
   Wrap,
   WrapItem,
+  Center,
 } from "@chakra-ui/react";
 import {
   ChangeEvent,
@@ -50,138 +51,8 @@ import {
   useRef,
   useState,
 } from "react";
-import icons, { Icon as BrandIcon } from "../../lib/icons";
 
-// type SVGIconProps = {
-//   title: string;
-//   path: string;
-//   hex: string;
-// };
-
-// const SVGIcon = ({ title, path, hex }: SVGIconProps) => (
-//   <svg
-//     role="img"
-//     viewBox="0 0 24 24"
-//     xmlns="http://www.w3.org/2000/svg"
-//     fill={`#${hex}`}
-//   >
-//     <title>{title}</title>
-//     <path d={path} />
-//   </svg>
-// );
-
-export interface Setting {
-  font: string;
-  enabledBio: boolean;
-  bioIcon: string;
-}
-
-// const icons: Icon[] = [
-//   {
-//     name: "Twitter",
-//     color: "#1DA1F2",
-//     fa: "fa-twitter",
-//     unicode: "f099",
-//   },
-//   {
-//     name: "Instagram",
-//     fa: "fa-instagram",
-//     color: "#E4405F",
-//   },
-//   {
-//     name: "Facebook",
-//     color: "#1877F2",
-//     fa: "fa-facebook",
-//   },
-//   // {
-//   //   name: "Snapchat",
-//   //   color: "#FFFC00",
-//   // },
-//   {
-//     name: "TikTok",
-//     color: "#000000",
-//     fa: "fa-tiktok",
-//     // Icon: SiTiktok,
-//   },
-//   {
-//     name: "Youtube",
-//     color: "#FF0000",
-//     fa: "fa-youtube",
-//     // Icon: SiYoutube,
-//   },
-//   {
-//     name: "GitHub",
-//     fa: "fa-github",
-//     color: "#181717",
-//   },
-//   // {
-//   //   name: "Zoom",
-//   //   color: "#2D8CFF",
-//   // },
-//   // {
-//   //   name: "Slack",
-//   //   color: "#4A154B",
-//   // },
-//   {
-//     name: "LINE",
-//     color: "#00C300",
-//     fa: "fa-line",
-//     // Icon: SiLine,
-//   },
-//   {
-//     name: "Twitch",
-//     color: "#9146FF",
-//     fa: "fa-twitch",
-//   },
-//   // {
-//   //   name: "Tinder",
-//   //   color: "#FF6B6B",
-//   // },
-//   // {
-//   //   name: "EA",
-//   //   color: "#000000",
-//   //   Icon: SiEa,
-//   // },
-//   // {
-//   //   name: "Undertail",
-//   //   color: "#E71D29",
-//   //   Icon: SiEa,
-//   // },
-//   // {
-//   //   name: "Riot Games",
-//   //   color: "#D32936",
-//   //   Icon: SiEa,
-//   // },
-//   // {
-//   //   name: "Epic Games",
-//   //   color: "#313131",
-//   // },
-//   // {
-//   //   name: "PlayStation 5",
-//   //   color: "#003791",
-//   // },
-//   // {
-//   //   name: "Nintendo Switch",
-//   //   color: "#E60012",
-//   // },
-//   // {
-//   //   name: "Xbox",
-//   //   color: "#107C10",
-//   // },
-// ];
-
-type IconName =
-  | "Twitter"
-  | "Instagram"
-  | "Facebook"
-  // | "LINE"
-  | "GitHub"
-  // | "Youtube"
-  // | "TikTok"
-  | "Twitch"
-  | "Discord";
-
-type Family = "san-serif" | "serif";
+import icons from "../../lib/icons";
 
 type Weight =
   | "normal"
@@ -197,79 +68,89 @@ type Weight =
   | "900";
 
 type Font = {
-  family: string;
-  weights: Weight[];
-  defaultWeight: Weight;
+  [key: string]: {
+    weights: Weight[];
+    defaultWeight: Weight;
+  };
 };
 
-const fonts: Array<Font> = [
-  {
-    family: "san-serif",
+const fonts: Font = {
+  "san-serif": {
     weights: ["normal", "bold"],
     defaultWeight: "normal",
   },
-  {
-    family: "serif",
+  serif: {
     weights: ["normal", "bold"],
     defaultWeight: "normal",
   },
-  {
-    family: "Noto Sans JP",
+  "Noto Sans JP": {
     weights: ["100", "300", "400", "500", "700", "900"],
     defaultWeight: "400",
   },
-  {
-    family: "Shippori Mincho",
+  "Shippori Mincho": {
     weights: ["400", "500", "600", "700", "800"],
     defaultWeight: "400",
   },
-  {
-    family: "DotGothic16",
+  DotGothic16: {
     weights: ["normal", "bold"],
     defaultWeight: "normal",
   },
-];
-
-const getFont = (family: string) =>
-  fonts.find((font) => font.family === family);
+};
 
 export type SettingInputProps = {
-  value: any;
-  onChange: (nextValue: any) => void;
+  value: SettingInputValue;
+  onChange: (nextValue: SettingInputValue) => void;
   advanced: boolean;
 };
 
+type SettingInputValue = {
+  text: string;
+  setting: {
+    font: {
+      family: string;
+      weight: Weight;
+    };
+    icon: "none" | keyof typeof icons;
+    isHidden: boolean;
+  };
+};
+
 const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
-  const [text, setText] = useState<string>();
-  const [fontFamily, setFontFamily] = useState<string>("Noto Sans JP");
-  const [fontWeight, setFontWeight] = useState<Weight>("400");
-  const [isHidden, setHidden] = useBoolean();
-  const { getRootProps, getRadioProps } = useRadioGroup({
+  const [text, setText] = useState<string>(value.text);
+  const [fontFamily, setFontFamily] = useState<string>(
+    value.setting.font.family
+  );
+  const [fontWeight, setFontWeight] = useState<Weight>(
+    value.setting.font.weight
+  );
+  const { getRootProps, getRadioProps, value: icon } = useRadioGroup({
     name: "icon",
-    defaultValue: "none",
-    onChange: console.log,
+    defaultValue: value.setting.icon,
   });
+  const [isHidden, setHidden] = useBoolean(value.setting.isHidden);
 
   const group = getRootProps();
+
+  const isTouched = !(
+    value.text === text &&
+    value.setting.font.family === fontFamily &&
+    value.setting.font.weight === fontWeight &&
+    value.setting.icon === icon &&
+    value.setting.isHidden === isHidden
+  );
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialFocusRef = useRef<HTMLButtonElement>(null);
 
   const handleSelectFontFamily = (nextValue: string) => {
     setFontFamily(nextValue);
-    const nextFont = getFont(nextValue);
 
-    if (!(fontWeight && nextFont?.weights.includes(fontWeight as Weight))) {
-      setFontWeight(nextFont?.defaultWeight!);
+    if (
+      !(fontWeight && fonts[nextValue].weights.includes(fontWeight as Weight))
+    ) {
+      setFontWeight(fonts[nextValue].defaultWeight!);
     }
   };
-
-  // const handleOpen = () => {
-  //   setFont(value.font);
-  //   value.enabledBio ? setEnabledBio.on() : setEnabledBio.off();
-  //   setBioIcon(value.bioIcon);
-  //   onOpen();
-  // };
 
   return (
     <>
@@ -288,26 +169,34 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>設定</ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton ref={initialFocusRef} />
           <ModalBody pb={6}>
             <Stack>
-              <Box
-                p={4}
-                bg="rgb(36,36,36)"
-                color="white"
-                fontFamily={fontFamily}
-                fontWeight={fontWeight}
-                fontSize="2xl"
-              >
-                <Editable
-                  placeholder="プレビューテキスト"
-                  value={text}
-                  onChange={setText}
-                >
-                  <EditablePreview />
-                  <EditableInput />
-                </Editable>
+              <Box p={4} bg="rgb(36,36,36)">
+                <HStack>
+                  {icon !== "none" && (
+                    <Center width="24px" height="24px" m="1">
+                      {icons[icon as keyof typeof icons].component}
+                    </Center>
+                  )}
+
+                  <Editable
+                    color="white"
+                    fontFamily={fontFamily}
+                    fontWeight={fontWeight}
+                    fontSize="2xl"
+                    verticalAlign="text-bottom"
+                    placeholder="プレビューテキスト"
+                    value={text}
+                    onChange={setText}
+                    isDisabled={isHidden}
+                  >
+                    <EditablePreview />
+                    <EditableInput />
+                  </Editable>
+                </HStack>
               </Box>
+
               <Tabs>
                 <TabList>
                   <Tab isDisabled={isHidden}>テキスト</Tab>
@@ -329,7 +218,7 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                           onChange={handleSelectFontFamily}
                         >
                           <Stack>
-                            {fonts.map(({ family }) => (
+                            {Object.entries(fonts).map(([family]) => (
                               <Radio key={family} value={family}>
                                 <Text fontFamily={family}>{family}</Text>
                               </Radio>
@@ -346,7 +235,7 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                             onChange={(v) => setFontWeight(v as Weight)}
                           >
                             <Stack>
-                              {getFont(fontFamily)?.weights.map((weight) => (
+                              {fonts[fontFamily]?.weights.map((weight) => (
                                 <Radio key={weight} value={weight}>
                                   <Text
                                     fontFamily={fontFamily}
@@ -369,15 +258,15 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                       </Radio>
 
                       <Wrap>
-                        {icons.map((icon) => {
-                          const radio = getRadioProps({ value: icon.title });
+                        {Object.entries(icons).map(([k, v]) => {
+                          const radio = getRadioProps({ value: k });
                           return (
-                            <WrapItem>
-                              <RadioIcon
-                                key={icon.title}
-                                {...radio}
-                                icon={icon}
-                              />
+                            <WrapItem key={k}>
+                              <RadioCircle {...radio}>
+                                <Center width="20px" height="20px">
+                                  {v.component}
+                                </Center>
+                              </RadioCircle>
                             </WrapItem>
                           );
                         })}
@@ -385,7 +274,17 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                     </Stack>
                   </TabPanel>
                   <TabPanel>
-                    <p>three!</p>
+                    <FormControl>
+                      <HStack>
+                        <FormLabel mb="0">非表示にする</FormLabel>
+                        <Switch
+                          isChecked={isHidden}
+                          onChange={(e) =>
+                            e.target.checked ? setHidden.on() : setHidden.off()
+                          }
+                        />
+                      </HStack>
+                    </FormControl>
                   </TabPanel>
                 </TabPanels>
               </Tabs>
@@ -397,11 +296,17 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
               colorScheme="blue"
               mr={3}
               onClick={() => {
-                // onChange({ font, enabledBio, bioIcon });
+                onChange({
+                  text,
+                  setting: {
+                    font: { family: fontFamily, weight: fontWeight },
+                    icon: icon as keyof typeof icons,
+                    isHidden: isHidden,
+                  },
+                });
                 onClose();
               }}
-              ref={initialFocusRef}
-              isDisabled
+              isDisabled={!isTouched}
             >
               適用
             </Button>
@@ -416,11 +321,11 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
 SettingInput.displayName = "SettingInput";
 export default SettingInput;
 
-type RadioIconProps = {
-  icon: BrandIcon;
+type RadioCircleProps = {
+  children: ReactNode;
 };
 
-const RadioIcon = ({ icon, ...props }: RadioIconProps) => {
+const RadioCircle = ({ children, ...props }: RadioCircleProps) => {
   const { getInputProps, getCheckboxProps } = useRadio(props);
 
   const input = getInputProps();
@@ -433,7 +338,6 @@ const RadioIcon = ({ icon, ...props }: RadioIconProps) => {
         {...checkbox}
         cursor="pointer"
         boxShadow="md"
-        color={`#${icon.hex}`}
         bg="rgb(36,36,36)"
         transition="all 0.2s ease"
         // boxSizing="content-box"
@@ -451,9 +355,7 @@ const RadioIcon = ({ icon, ...props }: RadioIconProps) => {
         w="40px"
         h="40px"
       >
-        <Icon>
-          <path fill="currentColor" d={icon.path} />
-        </Icon>
+        {children}
       </Circle>
     </Box>
   );

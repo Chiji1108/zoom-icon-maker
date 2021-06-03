@@ -15,7 +15,6 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { generate } from "../../lib/formUtils";
-import { Setting } from "../SettingInput";
 
 export interface FormProps {}
 
@@ -24,7 +23,7 @@ const Form = ({}: FormProps) => {
   const [src, setSrc] = useState<string>();
   const [name, setName] = useState("千々岩");
   const [bio, setBio] = useState("Chijidosu");
-  const [setting, setSetting] = useState<Setting>({
+  const [setting, setSetting] = useState({
     font: "Shippori Mincho",
     enabledBio: true,
     bioIcon: "Twitter",
