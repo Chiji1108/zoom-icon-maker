@@ -16,10 +16,15 @@ import {
 import NextImage from "next/image";
 
 export interface ImageSelectorProps {
+  boxSize?: number;
   onSelect: (image: string) => void;
   previewSrc?: string;
 }
-const ImageSelector = ({ onSelect, previewSrc }: ImageSelectorProps) => {
+const ImageSelector = ({
+  boxSize = 120,
+  onSelect,
+  previewSrc,
+}: ImageSelectorProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   //TODO: 二回目も
   const onFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +44,7 @@ const ImageSelector = ({ onSelect, previewSrc }: ImageSelectorProps) => {
     }
   };
   return (
-    <Box pos="relative" boxSize={120}>
+    <Box pos="relative" boxSize={boxSize} transition="all">
       <Circle size="full" overflow="hidden">
         {previewSrc ? (
           <Image

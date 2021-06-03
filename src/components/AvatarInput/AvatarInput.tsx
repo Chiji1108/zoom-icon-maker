@@ -22,11 +22,12 @@ import {
 } from "@chakra-ui/react";
 
 export interface AvatarInputProps {
+  boxSize?: number;
   value?: string;
   onChange: (src: string) => void;
 }
 
-const AvatarInput = ({ value, onChange }: AvatarInputProps) => {
+const AvatarInput = ({ boxSize = 120, value, onChange }: AvatarInputProps) => {
   // const dispatch = useAppDispatch();
   // const { imageSrc, loading } = useAppSelector(selectImageEditor);
 
@@ -70,7 +71,11 @@ const AvatarInput = ({ value, onChange }: AvatarInputProps) => {
 
   return (
     <>
-      <ImageSelector onSelect={handleSelectImage} previewSrc={croppedImage} />
+      <ImageSelector
+        boxSize={boxSize}
+        onSelect={handleSelectImage}
+        previewSrc={croppedImage}
+      />
 
       <Modal
         isOpen={isOpen}
