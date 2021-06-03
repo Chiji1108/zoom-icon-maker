@@ -1,14 +1,6 @@
 import Image from "next/image";
 
-type Icon = {
-  [key: string]: {
-    component: JSX.Element;
-    type: "svg" | "png";
-    url: string;
-  };
-};
-
-const icons: Icon = {
+const icons = {
   email: {
     component: (
       <Image
