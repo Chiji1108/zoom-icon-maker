@@ -2,23 +2,17 @@
 // import simpleIcons from "simple-icons";
 
 import { createImage } from "./canvasUtils";
+import type { Setting } from "../components/SettingInput";
 
 type Data = {
   src?: string;
-  name: string;
-  bio: string;
-  setting: Setting;
+  name: Setting;
+  bio: Setting;
 };
-
-interface Setting {
-  font: string;
-  enabledBio: boolean;
-  bioIcon: string;
-}
 
 import { fabric } from "fabric";
 
-export const generate = async ({ src, name, bio, setting }: Data) => {
+export const generate = async ({ src, name, bio }: Data) => {
   //TODO: src がnullだったら
   if (!src) {
     throw new Error("src is not defined!");
@@ -54,10 +48,11 @@ export const generate = async ({ src, name, bio, setting }: Data) => {
   image.scaleToHeight(600);
   canvas.add(image);
 
-  const textName = new fabric.Text(name, {
+  const textName = new fabric.Text(name.text, {
     fill: "#ffffff",
     fontSize: 120,
-    fontFamily: setting.font,
+    fontFamily: name.setting.font.family,
+    fontWeight: name.setting.font.weight,
     originX: "center",
     originY: "center",
     left: canvas.getWidth() / 2,
@@ -65,10 +60,11 @@ export const generate = async ({ src, name, bio, setting }: Data) => {
   });
   canvas.add(textName);
 
-  const textBio = new fabric.Text(bio, {
+  const textBio = new fabric.Text(bio.text, {
     fill: "#ffffff",
     fontSize: 40,
-    fontFamily: setting.font,
+    fontFamily: bio.setting.font.family,
+    fontWeight: bio.setting.font.weight,
     originX: "center",
     originY: "center",
     left: canvas.getWidth() / 2,
