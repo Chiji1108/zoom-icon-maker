@@ -14,6 +14,18 @@ import "@fontsource/shippori-mincho/600.css";
 import "@fontsource/shippori-mincho/700.css";
 import "@fontsource/shippori-mincho/800.css";
 
+import * as nextImage from "next/image";
+
+Object.defineProperty(nextImage, "default", {
+  configurable: true,
+  value: ({ layout, objectFit, ...props }) => (
+    <img
+      {...props}
+      style={{ width: "100%", height: "100%", objectFit: "contain" }}
+    />
+  ),
+});
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
