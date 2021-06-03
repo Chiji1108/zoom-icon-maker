@@ -41,6 +41,7 @@ import {
   Wrap,
   WrapItem,
   Center,
+  Collapse,
 } from "@chakra-ui/react";
 import {
   ChangeEvent,
@@ -67,14 +68,7 @@ type Weight =
   | "800"
   | "900";
 
-type Font = {
-  [key: string]: {
-    weights: Weight[];
-    defaultWeight: Weight;
-  };
-};
-
-const fonts: Font = {
+const fonts = {
   "san-serif": {
     weights: ["normal", "bold"],
     defaultWeight: "normal",
@@ -98,16 +92,16 @@ const fonts: Font = {
 };
 
 export type SettingInputProps = {
-  value: SettingInputValue;
-  onChange: (nextValue: SettingInputValue) => void;
+  value: Setting;
+  onChange: (nextValue: Setting) => void;
   advanced: boolean;
 };
 
-type SettingInputValue = {
+export type Setting = {
   text: string;
   setting: {
     font: {
-      family: string;
+      family: keyof typeof fonts;
       weight: Weight;
     };
     icon: "none" | keyof typeof icons;
@@ -117,19 +111,32 @@ type SettingInputValue = {
 
 const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
   const [text, setText] = useState<string>(value.text);
-  const [fontFamily, setFontFamily] = useState<string>(
-    value.setting.font.family
-  );
-  const [fontWeight, setFontWeight] = useState<Weight>(
-    value.setting.font.weight
-  );
-  const { getRootProps, getRadioProps, value: icon } = useRadioGroup({
+  const [fontFamily, setFontFamily] = useState(value.setting.font.family);
+  const [fontWeight, setFontWeight] = useState(value.setting.font.weight);
+  const {
+    getRootProps,
+    getRadioProps,
+    value: icon,
+    setValue: setIcon,
+  } = useRadioGroup({
     name: "icon",
     defaultValue: value.setting.icon,
   });
   const [isHidden, setHidden] = useBoolean(value.setting.isHidden);
 
   const group = getRootProps();
+
+  useEffect(() => setText(value.text), [value.text]);
+  useEffect(() => setFontFamily(value.setting.font.family), [
+    value.setting.font.family,
+  ]);
+  useEffect(() => setFontWeight(value.setting.font.weight), [
+    value.setting.font.weight,
+  ]);
+  useEffect(() => setIcon(value.setting.icon), [value.setting.icon]);
+  useEffect(() => (value.setting.isHidden ? setHidden.on() : setHidden.off()), [
+    value.setting.isHidden,
+  ]);
 
   const isTouched = !(
     value.text === text &&
@@ -142,13 +149,13 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialFocusRef = useRef<HTMLButtonElement>(null);
 
-  const handleSelectFontFamily = (nextValue: string) => {
+  const handleSelectFontFamily = (nextValue: keyof typeof fonts) => {
     setFontFamily(nextValue);
 
     if (
       !(fontWeight && fonts[nextValue].weights.includes(fontWeight as Weight))
     ) {
-      setFontWeight(fonts[nextValue].defaultWeight!);
+      setFontWeight(fonts[nextValue].defaultWeight as Weight);
     }
   };
 
@@ -159,6 +166,8 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
         aria-label="open setting"
         icon={<span className="material-icons">settings</span>}
         onClick={onOpen}
+        variant="ghost"
+        colorScheme="whiteAlpha"
       />
 
       <Modal
@@ -172,30 +181,32 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
           <ModalCloseButton ref={initialFocusRef} />
           <ModalBody pb={6}>
             <Stack>
-              <Box p={4} bg="rgb(36,36,36)">
-                <HStack>
-                  {icon !== "none" && (
-                    <Center width="24px" height="24px" m="1">
-                      {icons[icon as keyof typeof icons].component}
-                    </Center>
-                  )}
+              <Collapse in={!isHidden} animateOpacity>
+                <Box p={4} bg="rgb(36,36,36)">
+                  <HStack>
+                    {icon !== "none" && (
+                      <Center width="24px" height="24px" m="1">
+                        {icons[icon as keyof typeof icons].component}
+                      </Center>
+                    )}
 
-                  <Editable
-                    color="white"
-                    fontFamily={fontFamily}
-                    fontWeight={fontWeight}
-                    fontSize="2xl"
-                    verticalAlign="text-bottom"
-                    placeholder="プレビューテキスト"
-                    value={text}
-                    onChange={setText}
-                    isDisabled={isHidden}
-                  >
-                    <EditablePreview />
-                    <EditableInput />
-                  </Editable>
-                </HStack>
-              </Box>
+                    <Editable
+                      color="white"
+                      fontFamily={fontFamily as string}
+                      fontWeight={fontWeight}
+                      fontSize="2xl"
+                      verticalAlign="text-bottom"
+                      placeholder="プレビューテキスト"
+                      value={text}
+                      onChange={setText}
+                      isDisabled={isHidden}
+                    >
+                      <EditablePreview />
+                      <EditableInput />
+                    </Editable>
+                  </HStack>
+                </Box>
+              </Collapse>
 
               <Tabs>
                 <TabList>
@@ -238,7 +249,7 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                               {fonts[fontFamily]?.weights.map((weight) => (
                                 <Radio key={weight} value={weight}>
                                   <Text
-                                    fontFamily={fontFamily}
+                                    fontFamily={fontFamily as string}
                                     fontWeight={weight}
                                   >
                                     {weight}
