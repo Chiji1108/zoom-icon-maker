@@ -11,6 +11,7 @@ import "@fontsource/noto-serif-jp/500.css";
 import "@fontsource/noto-serif-jp/600.css";
 import "@fontsource/noto-serif-jp/700.css";
 import "@fontsource/noto-serif-jp/900.css";
+//TODO: Doesn't work
 import "@fontsource/m-plus-1p";
 import "@fontsource/m-plus-1p/100.css";
 import "@fontsource/m-plus-1p/300.css";
