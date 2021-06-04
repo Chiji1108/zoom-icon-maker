@@ -177,7 +177,7 @@ const Form = ({}: FormProps) => {
           </Flex>
         </VStack>
       </Box>
-      <Button
+      {/* <Button
         isDisabled={!src || !name}
         onClick={async () =>
           setResult(
@@ -191,7 +191,7 @@ const Form = ({}: FormProps) => {
       >
         生成
       </Button>
-      <Image src={result} alt="result" boxSize={"512px"} />
+      <Image src={result} alt="result" boxSize={"512px"} /> */}
     </>
   );
 };
