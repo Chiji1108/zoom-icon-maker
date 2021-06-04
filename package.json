@@ -29,7 +29,7 @@
     "next": "10.2.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-easy-crop": "^3.5.0",
+    "react-easy-crop": "^3.5.1",
     "swr": "^0.5.6",
     "use-immer": "^0.5.2",
     "yup": "^0.32.9"
@@ -44,7 +44,7 @@
     "@types/jest": "^26.0.23",
     "@types/react": "^17.0.9",
     "babel-loader": "^8.2.2",
-    "chromatic": "^5.8.3",
+    "chromatic": "^5.9.0",
     "dotenv": "^10.0.0",
     "isomorphic-fetch": "^3.0.0",
     "jest": "^27.0.4",
