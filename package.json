@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "storybook": "start-storybook -p 6006 -s ./public",
+    "storybook": "start-storybook -s public -p 6006",
     "build-storybook": "build-storybook -s public",
     "test": "jest"
   },
@@ -22,7 +22,6 @@
     "@fontsource/noto-serif-jp": "^4.4.2",
     "@fontsource/shippori-mincho": "^4.4.2",
     "core-js": "^3.13.1",
-    "fabric": "^4.5.0",
     "formik": "^2.2.9",
     "framer-motion": "^4",
     "immer": "^9.0.2",
@@ -40,7 +39,6 @@
     "@storybook/addon-essentials": "^6.2.9",
     "@storybook/addon-links": "^6.2.9",
     "@storybook/react": "^6.2.9",
-    "@types/fabric": "^4.2.6",
     "@types/jest": "^26.0.23",
     "@types/react": "^17.0.9",
     "babel-loader": "^8.2.2",
@@ -48,8 +46,13 @@
     "dotenv": "^10.0.0",
     "isomorphic-fetch": "^3.0.0",
     "jest": "^27.0.4",
+    "msw": "^0.29.0",
+    "msw-storybook-addon": "^1.1.0",
     "node-mocks-http": "^1.10.1",
     "ts-jest": "^27.0.2",
     "typescript": "^4.3.2"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
