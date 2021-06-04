@@ -6,7 +6,8 @@ const icons = {
       <Image
         src="/icons/email.svg"
         alt="email"
-        layout="fill"
+        width="100%"
+        height="100%"
         objectFit="contain"
       />
     ),
@@ -18,7 +19,8 @@ const icons = {
       <Image
         src="/icons/twitter.svg"
         alt="twitter"
-        layout="fill"
+        width="100%"
+        height="100%"
         objectFit="contain"
       />
     ),
@@ -30,7 +32,8 @@ const icons = {
       <Image
         src="/icons/instagram.png"
         alt="instagram"
-        layout="fill"
+        width="100%"
+        height="100%"
         objectFit="contain"
       />
     ),
@@ -42,7 +45,8 @@ const icons = {
       <Image
         src="/icons/facebook.png"
         alt="facebook"
-        layout="fill"
+        width="100%"
+        height="100%"
         objectFit="contain"
       />
     ),
@@ -54,7 +58,8 @@ const icons = {
       <Image
         src="/icons/github.png"
         alt="github"
-        layout="fill"
+        width="100%"
+        height="100%"
         objectFit="contain"
       />
     ),
@@ -66,7 +71,8 @@ const icons = {
       <Image
         src="/icons/discord.svg"
         alt="discord"
-        layout="fill"
+        width="100%"
+        height="100%"
         objectFit="contain"
       />
     ),
@@ -78,7 +84,8 @@ const icons = {
       <Image
         src="/icons/youtube.png"
         alt="youtube"
-        layout="fill"
+        width="100%"
+        height="100%"
         objectFit="contain"
       />
     ),
@@ -90,7 +97,8 @@ const icons = {
       <Image
         src="/icons/twitch.svg"
         alt="twitch"
-        layout="fill"
+        width="100%"
+        height="100%"
         objectFit="contain"
       />
     ),
