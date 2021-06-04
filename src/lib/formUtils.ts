@@ -10,7 +10,7 @@ type Data = {
   bio: Setting;
 };
 
-import { fabric } from "fabric";
+// import { fabric } from "fabric";
 
 export const generate = async ({ src, name, bio }: Data) => {
   //TODO: src がnullだったら
