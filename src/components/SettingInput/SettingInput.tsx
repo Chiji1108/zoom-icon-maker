@@ -172,7 +172,7 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                       fontWeight={fontWeight}
                       fontSize="2xl"
                       verticalAlign="text-bottom"
-                      placeholder="プレビューテキスト"
+                      placeholder="Zoomあいこんメーカー"
                       value={text}
                       onChange={setText}
                       isDisabled={isHidden}
