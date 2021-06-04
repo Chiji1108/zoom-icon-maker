@@ -33,6 +33,11 @@ const AvatarInput = ({ boxSize = 120, value, onChange }: AvatarInputProps) => {
 
   const [croppedImage, setCroppedImage] = useState<string>();
   const [originalImage, setOriginalImage] = useState<string | undefined>(value); // before crop image src
+
+  useEffect(() => {
+    setOriginalImage(value);
+    setCroppedImage(value);
+  }, [value]);
   const [isLoading, setLoading] = useBoolean(false);
   const [cropInfo, setCropInfo] = useState<CropInfo>();
   const initialFocusRef = useRef<HTMLButtonElement>(null);
@@ -43,10 +48,10 @@ const AvatarInput = ({ boxSize = 120, value, onChange }: AvatarInputProps) => {
   //   onChange(imageSrc);
   // }, [imageSrc]);
 
-  const handleSelectImage = useCallback((selectedImage: string) => {
+  const handleSelectImage = (selectedImage: string) => {
     setOriginalImage(selectedImage);
     onOpen();
-  }, []);
+  };
 
   const handleGenerate = async () => {
     setLoading.on();
