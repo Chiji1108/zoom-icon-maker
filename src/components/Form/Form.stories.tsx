@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/react";
 import Form from "./Form";
 
 export default {
-  title: "Organisms/" + Form.displayName,
+  title: Form.displayName,
   component: Form,
 } as Meta;
 

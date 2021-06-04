@@ -3,7 +3,7 @@ import { action } from "@storybook/addon-actions";
 import ImageEditor, { ImageEditorProps } from "./ImageEditor";
 
 export default {
-  title: "Atoms/" + ImageEditor.displayName,
+  title: "Utils/" + ImageEditor.displayName,
   component: ImageEditor,
   args: {
     src: "https://source.unsplash.com/daily",
