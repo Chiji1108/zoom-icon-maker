@@ -16,7 +16,7 @@ export default function Home() {
           <div>アイコンメーカー</div>
         </div>
         <div>
-          {/* <Form /> */}
+          <Form />
           {/* <ImageSelector src={""} onSelect={() => {}} /> */}
         </div>
       </main>

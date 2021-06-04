@@ -22,16 +22,18 @@ import immer from "immer";
 import { useImmer } from "use-immer";
 import { Setting, SettingInput } from "../SettingInput";
 import icons from "../../lib/icons";
+import { TwitterInput } from "../TwitterInput";
+import { Data } from "../../pages/api/twitter/[id]";
 
 export interface FormProps {}
 
 const Form = ({}: FormProps) => {
   const [src, setSrc] = useState<string>();
   const [bio, updateBio] = useImmer<Setting>({
-    text: "Chijidosu",
+    text: "",
     setting: {
       font: {
-        family: "Noto Sans JP",
+        family: "Noto Serif JP",
         weight: "400",
       },
       icon: "none",
@@ -39,10 +41,10 @@ const Form = ({}: FormProps) => {
     },
   });
   const [name, updateName] = useImmer<Setting>({
-    text: "千々岩",
+    text: "",
     setting: {
       font: {
-        family: "Noto Sans JP",
+        family: "Noto Serif JP",
         weight: "400",
       },
       icon: "none",
@@ -52,25 +54,39 @@ const Form = ({}: FormProps) => {
 
   const [result, setResult] = useState<string>();
 
+  const handleTwitterInput = (data: Data) => {
+    setSrc(data.profile_image_url);
+    updateName((draft) => {
+      draft.text = data.name;
+    });
+    updateBio((draft) => {
+      draft.setting.icon = "twitter";
+      draft.text = data.username;
+    });
+  };
+
   //TODO: add EditableControls
   return (
     <>
       <Box p="4" bg="rgb(36,36,36)" maxW="sm" pos="relative">
         <Box pos="absolute" top="0" right="0">
-          <Fade in={bio.setting.isHidden} unmountOnExit>
-            <IconButton
-              borderRadius="full"
-              aria-label="add bio"
-              icon={<span className="material-icons">add</span>}
-              onClick={() =>
-                updateBio((draft) => {
-                  draft.setting.isHidden = false;
-                })
-              }
-              variant="ghost"
-              colorScheme="whiteAlpha"
-            />
-          </Fade>
+          <Stack p={2}>
+            <TwitterInput onChange={handleTwitterInput} />
+            <Fade in={bio.setting.isHidden} unmountOnExit>
+              <IconButton
+                // borderRadius="full"
+                aria-label="add bio"
+                icon={<span className="material-icons">add</span>}
+                onClick={() =>
+                  updateBio((draft) => {
+                    draft.setting.isHidden = false;
+                  })
+                }
+                variant="ghost"
+                colorScheme="whiteAlpha"
+              />
+            </Fade>
+          </Stack>
         </Box>
 
         <VStack spacing="4">
