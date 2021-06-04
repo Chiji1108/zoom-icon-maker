@@ -54,42 +54,20 @@ import {
 } from "react";
 
 import icons from "../../lib/icons";
+import fonts from "../../lib/fonts";
 
-type Weight =
-  | "normal"
-  | "bold"
-  | "100"
-  | "200"
-  | "300"
-  | "400"
-  | "500"
-  | "600"
-  | "700"
-  | "800"
-  | "900";
-
-const fonts = {
-  "san-serif": {
-    weights: ["normal", "bold"],
-    defaultWeight: "normal",
-  },
-  serif: {
-    weights: ["normal", "bold"],
-    defaultWeight: "normal",
-  },
-  "Noto Sans JP": {
-    weights: ["100", "300", "400", "500", "700", "900"],
-    defaultWeight: "400",
-  },
-  "Shippori Mincho": {
-    weights: ["400", "500", "600", "700", "800"],
-    defaultWeight: "400",
-  },
-  DotGothic16: {
-    weights: ["normal", "bold"],
-    defaultWeight: "normal",
-  },
-};
+// type Weight =
+//   | "normal"
+//   | "bold"
+//   | "100"
+//   | "200"
+//   | "300"
+//   | "400"
+//   | "500"
+//   | "600"
+//   | "700"
+//   | "800"
+//   | "900";
 
 export type SettingInputProps = {
   value: Setting;
@@ -102,7 +80,7 @@ export type Setting = {
   setting: {
     font: {
       family: keyof typeof fonts;
-      weight: Weight;
+      weight: string;
     };
     icon: "none" | keyof typeof icons;
     isHidden: boolean;
@@ -152,17 +130,15 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
   const handleSelectFontFamily = (nextValue: keyof typeof fonts) => {
     setFontFamily(nextValue);
 
-    if (
-      !(fontWeight && fonts[nextValue].weights.includes(fontWeight as Weight))
-    ) {
-      setFontWeight(fonts[nextValue].defaultWeight as Weight);
+    if (!(fontWeight && fonts[nextValue].weights.includes(fontWeight))) {
+      setFontWeight(fonts[nextValue].defaultWeight);
     }
   };
 
   return (
     <>
       <IconButton
-        borderRadius="full"
+        // borderRadius="full"
         aria-label="open setting"
         icon={<span className="material-icons">settings</span>}
         onClick={onOpen}
@@ -243,7 +219,7 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                           <FormLabel>太さ</FormLabel>
                           <RadioGroup
                             value={fontWeight}
-                            onChange={(v) => setFontWeight(v as Weight)}
+                            onChange={setFontWeight}
                           >
                             <Stack>
                               {fonts[fontFamily]?.weights.map((weight) => (
