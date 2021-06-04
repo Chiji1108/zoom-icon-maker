@@ -70,7 +70,7 @@ const Form = ({}: FormProps) => {
     <>
       <Box p="4" bg="rgb(36,36,36)" maxW="sm" pos="relative">
         <Box pos="absolute" top="0" right="0">
-          <Stack p={2}>
+          <Stack p={2} spacing={0}>
             <TwitterInput onChange={handleTwitterInput} />
             <Fade in={bio.setting.isHidden} unmountOnExit>
               <IconButton
