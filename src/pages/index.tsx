@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { AvatarInput } from "../components/AvatarInput";
 import { Form } from "../components/Form";
 // import { ImageSelector } from "../components/ImageSelector";
 
@@ -17,6 +18,7 @@ export default function Home() {
         </div>
         <div>
           {/* <Form /> */}
+          <AvatarInput boxSize={120} value="" onChange={console.log} />
           {/* <ImageSelector src={""} onSelect={() => {}} /> */}
         </div>
       </main>
