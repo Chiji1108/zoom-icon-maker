@@ -17,12 +17,12 @@ import {
   Stack,
   Fade,
 } from "@chakra-ui/react";
-import { generate } from "../../lib/formUtils";
+// import { generate } from "../../lib/formUtils";
 import immer from "immer";
 import { useImmer } from "use-immer";
 import { Setting, SettingInput } from "../SettingInput";
 import icons from "../../lib/icons";
-import { TwitterInput } from "../TwitterInput";
+import { DataInput } from "../DataInput";
 import { Data } from "../../pages/api/twitter/[id]";
 
 export interface FormProps {}
@@ -54,7 +54,7 @@ const Form = ({}: FormProps) => {
 
   const [result, setResult] = useState<string>();
 
-  const handleTwitterInput = (data: Data) => {
+  const handleDataInput = (data: Data) => {
     setSrc(data.profile_image_url);
     updateName((draft) => {
       draft.text = data.name;
@@ -71,7 +71,7 @@ const Form = ({}: FormProps) => {
       <Box p="4" bg="rgb(36,36,36)" maxW="sm" pos="relative">
         <Box pos="absolute" top="0" right="0">
           <Stack p={2} spacing={0}>
-            <TwitterInput onChange={handleTwitterInput} />
+            <DataInput onChange={handleDataInput} />
             <Fade in={bio.setting.isHidden} unmountOnExit>
               <IconButton
                 // borderRadius="full"
@@ -89,10 +89,10 @@ const Form = ({}: FormProps) => {
           </Stack>
         </Box>
 
-        <VStack spacing="4">
+        <VStack spacing="3">
           <Box>
             <AvatarInput
-              boxSize={bio.setting.isHidden ? 140 : 120}
+              boxSize={bio.setting.isHidden ? 160 : 140}
               value={src}
               onChange={setSrc}
             />

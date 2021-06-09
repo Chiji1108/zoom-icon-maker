@@ -17,8 +17,8 @@ export default function Home() {
           <div>アイコンメーカー</div>
         </div>
         <div>
-          {/* <Form /> */}
-          <AvatarInput boxSize={120} value="" onChange={console.log} />
+          <Form />
+          {/* <AvatarInput boxSize={120} value="" onChange={console.log} /> */}
           {/* <ImageSelector src={""} onSelect={() => {}} /> */}
         </div>
       </main>
