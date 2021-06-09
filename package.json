@@ -8,20 +8,20 @@
     "start": "next start",
     "storybook": "start-storybook -s public -p 6006",
     "build-storybook": "build-storybook -s public",
-    "test": "jest"
+    "test": "jest --silent=false"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.6.3",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@fontsource/dotgothic16": "^4.4.2",
-    "@fontsource/kosugi-maru": "^4.4.2",
-    "@fontsource/m-plus-1p": "^4.4.2",
-    "@fontsource/material-icons": "^4.4.2",
-    "@fontsource/noto-sans-jp": "^4.4.2",
-    "@fontsource/noto-serif-jp": "^4.4.2",
-    "@fontsource/shippori-mincho": "^4.4.2",
-    "core-js": "^3.13.1",
+    "@fontsource/dotgothic16": "^4.4.5",
+    "@fontsource/kosugi-maru": "^4.4.5",
+    "@fontsource/m-plus-1p": "^4.4.5",
+    "@fontsource/material-icons": "^4.4.5",
+    "@fontsource/noto-sans-jp": "^4.4.5",
+    "@fontsource/noto-serif-jp": "^4.4.5",
+    "@fontsource/shippori-mincho": "^4.4.5",
+    "core-js": "^3.14.0",
     "formik": "^2.2.9",
     "framer-motion": "^4",
     "immer": "^9.0.2",
@@ -29,6 +29,8 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-easy-crop": "^3.5.1",
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-photo-gallery": "^8.0.0",
     "swr": "^0.5.6",
     "use-immer": "^0.5.2",
     "yup": "^0.32.9"
@@ -49,7 +51,7 @@
     "msw": "^0.29.0",
     "msw-storybook-addon": "^1.1.0",
     "node-mocks-http": "^1.10.1",
-    "ts-jest": "^27.0.2",
+    "ts-jest": "^27.0.3",
     "typescript": "^4.3.2"
   },
   "msw": {
