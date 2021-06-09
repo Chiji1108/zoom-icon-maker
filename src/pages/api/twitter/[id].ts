@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 export type Data = {
   name: string;
-  profile_image_url: string;
+  profile_image_url?: string;
   id: string | number;
   username: string;
 };
@@ -10,6 +10,8 @@ export type Data = {
 export type ErrorData = {
   message: string;
 };
+
+// TODO: profile_image_urlない時
 
 export default async (
   req: NextApiRequest,
@@ -24,7 +26,7 @@ export default async (
       })}`,
       {
         headers: {
-          Authorization: `Bearer ${process.env.API_TOKEN}`,
+          Authorization: `Bearer ${process.env.TWITTER_BEARER_TOKEN}`,
         },
       }
     );
@@ -40,6 +42,8 @@ export default async (
       } else if (json.errors) {
         const errors = json.errors;
         res.status(400).json(errors);
+      } else {
+        res.status(500).end();
       }
     }
   } catch (error) {
