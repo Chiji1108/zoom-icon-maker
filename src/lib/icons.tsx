@@ -14,6 +14,19 @@ const icons = {
     type: "svg",
     url: "/icons/email.svg",
   },
+  website: {
+    component: (
+      <Image
+        src="/icons/website.svg"
+        alt="website"
+        width="100%"
+        height="100%"
+        objectFit="contain"
+      />
+    ),
+    type: "svg",
+    url: "/icons/website.svg",
+  },
   twitter: {
     component: (
       <Image
