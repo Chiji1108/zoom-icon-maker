@@ -2,6 +2,8 @@ import { createMocks } from "node-mocks-http";
 import handleFetchTwitter from "../pages/api/twitter/[id]";
 import handleFetchUnsplash from "../pages/api/unsplash/search";
 
+//replace to msw or react-hooks
+
 describe("/api/twitter/[id]", () => {
   test("returns a data from Twitter", async () => {
     const { req, res } = createMocks({
