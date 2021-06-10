@@ -1,29 +1,18 @@
 import { NextApiHandler } from "next";
 
-type Response = {
-  url?: string;
-  errors?: string[];
-};
+import axios from "axios";
 
-const handler: NextApiHandler<Response> = async (req, res) => {
+const handler: NextApiHandler = async (req, res) => {
   const { url } = req.query;
 
-  const response = await fetch(url as string, {
-    headers: {
-      Authorization: `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}`,
-    },
-  });
-  const data: Response = await response.json();
-
-  if (response.ok) {
-    if (data.errors) {
-      res.status(400).json(data);
-    } else {
-      res.status(200).json(data);
-    }
-  } else {
-    res.status(500).json({ errors: [response.statusText] });
-  }
+  await axios
+    .get(`${url}`, {
+      headers: {
+        Authorization: `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}`,
+      },
+    })
+    .then(({ status }) => res.status(status).end())
+    .catch(() => res.status(500).end());
 };
 
 export default handler;
