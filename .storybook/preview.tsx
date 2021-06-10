@@ -2,7 +2,11 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 import "@fontsource/material-icons";
 
+import { QueryClient, QueryClientProvider } from "react-query";
+
 import * as nextImage from "next/image";
+
+const queryClient = new QueryClient();
 
 Object.defineProperty(nextImage, "default", {
   configurable: true,
@@ -34,8 +38,10 @@ export const parameters = {
 };
 export const decorators = [
   (Story) => (
-    <ChakraProvider>
-      <Story />
-    </ChakraProvider>
+    <QueryClientProvider client={queryClient}>
+      <ChakraProvider>
+        <Story />
+      </ChakraProvider>
+    </QueryClientProvider>
   ),
 ];
