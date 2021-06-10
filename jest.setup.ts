@@ -6,7 +6,7 @@ import path from "path";
 // import "whatwg-fetch";
 // import "unfetch/polyfill";
 
-import "isomorphic-fetch";
+// import "isomorphic-fetch";
 
 dotenv.config({
   path: path.resolve(process.cwd(), ".env.local"),
