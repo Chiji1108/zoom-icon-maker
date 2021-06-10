@@ -1,6 +1,4 @@
-import { useFormik } from "formik";
 import { ReactNode, useEffect, useState } from "react";
-import { useSWRInfinite } from "swr";
 import * as Yup from "yup";
 import "core-js/features/promise";
 import "core-js/features/set";
@@ -30,16 +28,19 @@ import image from "next/image";
 import Gallery, { RenderImageProps } from "react-photo-gallery";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const fetcher = (url: string) =>
-  fetch(url)
-    .then((r) => r.json())
-    .then((r) => {
-      if (r == 1) {
-        throw new Error("エラーが発生しました");
-      } else {
-        return r;
-      }
-    });
+import axios from "axios";
+import { useInfiniteQuery } from "react-query";
+
+// const fetcher = (url: string) =>
+//   fetch(url)
+//     .then((r) => r.json())
+//     .then((r) => {
+//       if (r == 1) {
+//         throw new Error("エラーが発生しました");
+//       } else {
+//         return r;
+//       }
+//     });
 // .then((r: Response) => {
 //   if (r.errors) {
 //     throw new Error(r.errors.join("\n"));
@@ -52,50 +53,47 @@ const fetcher = (url: string) =>
 // });
 
 function useUnsplash(query: string) {
-  const { data, error, size, setSize } = useSWRInfinite<Response, Error>(
-    (pageIndex, previousPageData) => {
-      if (!query || query == "") return null;
-      if (
-        previousPageData &&
-        previousPageData.total_pages &&
-        previousPageData.total_pages < pageIndex
-      )
-        return null; // 最後に到達した
-      //   console.log(`/api/unsplash/search?query=${query}&page=${pageIndex}`);
-      return `/api/unsplash/search?query=${query}&page=${pageIndex}`;
-    },
-    fetcher
-  );
-
+  // const { data, error, size, setSize } = useSWRInfinite<Response, Error>(
+  //   (pageIndex, previousPageData) => {
+  //     if (!query || query == "") return null;
+  //     if (
+  //       previousPageData &&
+  //       previousPageData.total_pages &&
+  //       previousPageData.total_pages < pageIndex
+  //     )
+  //       return null; // 最後に到達した
+  //     //   console.log(`/api/unsplash/search?query=${query}&page=${pageIndex}`);
+  //     return `/api/unsplash/search?query=${query}&page=${pageIndex}`;
+  //   },
+  //   fetcher
+  // );
   // dataがresults持ってる
   // results
-
   // TODO: data.flatMap is not a function
-  console.log("data: ", data, "error: ", error, "size: ", size);
-  const images: ImageType[] = data ? data.flatMap((d) => d.results!) : [];
-  const isLoadingInitialData = !data && !error;
-  const isLoadingMore =
-    isLoadingInitialData ||
-    (size > 0 && data && typeof data[size - 1] === "undefined");
-  const isEmpty = images.length === 0;
-  const isReachingEnd =
-    isEmpty ||
-    (data &&
-      data[0] &&
-      data[0].total_pages &&
-      data[0].total_pages < data.length);
-  //   const isRefreshing = isValidating && data && data.length === size;
-
-  return {
-    images,
-    error,
-    isLoadingInitialData,
-    isLoadingMore,
-    isEmpty,
-    isReachingEnd,
-    size,
-    setSize,
-  };
+  // console.log("data: ", data, "error: ", error, "size: ", size);
+  // const images: ImageType[] = data ? data.flatMap((d) => d.results!) : [];
+  // const isLoadingInitialData = !data && !error;
+  // const isLoadingMore =
+  //   isLoadingInitialData ||
+  //   (size > 0 && data && typeof data[size - 1] === "undefined");
+  // const isEmpty = images.length === 0;
+  // const isReachingEnd =
+  //   isEmpty ||
+  //   (data &&
+  //     data[0] &&
+  //     data[0].total_pages &&
+  //     data[0].total_pages < data.length);
+  // //   const isRefreshing = isValidating && data && data.length === size;
+  // return {
+  //   images,
+  //   error,
+  //   isLoadingInitialData,
+  //   isLoadingMore,
+  //   isEmpty,
+  //   isReachingEnd,
+  //   size,
+  //   setSize,
+  // };
 }
 
 export type UnsplashProps = {
@@ -108,25 +106,36 @@ export type UnsplashProps = {
   }) => ReactNode;
 };
 
+const fetchImages = (params: {query: string, page: number}) =>
+  axios.get("/api/unsplash/search", { params });
+
+  const schema = Yup.
 export const Unsplash = () => {
   //   const [shouldFetch, setFetch] = useBoolean(false);
-  const [value, setValue] = useState<string>("cat");
-  useEffect(() => {
-    const timeOutId = setTimeout(() => setQuery(value), 500);
-    return () => clearTimeout(timeOutId);
-  }, [value]);
+  // const [value, setValue] = useState<string>("cat");
+  // useEffect(() => {
+  //   const timeOutId = setTimeout(() => setQuery(value), 500);
+  //   return () => clearTimeout(timeOutId);
+  // }, [value]);
   const [query, setQuery] = useState<string>("cat");
-  const {
-    images,
-    error,
-    isLoadingInitialData,
-    isLoadingMore,
-    isReachingEnd,
-    size,
-    setSize,
-  } = useUnsplash(query);
 
-  const loadMore = () => setSize(size + 1);
+  const {     data,
+  error,
+     isFetching,
+     isFetchingNextPage,
+     fetchNextPage,
+     hasNextPage,} = useInfiniteQuery("images", ({pageParam}) => fetchImages({query, page: pageParam}), {retry: false});
+  // const {
+  //   images,
+  //   error,
+  //   isLoadingInitialData,
+  //   isLoadingMore,
+  //   isReachingEnd,
+  //   size,
+  //   setSize,
+  // } = useUnsplash(query);
+
+  // const loadMore = () => setSize(size + 1);
   return (
     <Stack>
       <FormControl isInvalid={!!error}>
