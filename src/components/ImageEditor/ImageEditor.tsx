@@ -22,6 +22,8 @@ export interface ImageEditorProps {
   onComplete: ({ area, rotation }: CropInfo) => void;
 }
 
+//TODO: children: {editor, button}
+
 const ImageEditor = ({ src, onComplete }: ImageEditorProps) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
