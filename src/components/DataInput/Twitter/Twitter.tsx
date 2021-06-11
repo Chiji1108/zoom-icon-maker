@@ -9,12 +9,21 @@ import {
   FormLabel,
   Button,
 } from "@chakra-ui/react";
-import { ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 import axios from "axios";
 import { useQuery } from "react-query";
 
-import type { NormalizedResponse } from "../../../pages/api/twitter/[id]";
+import type {
+  NormalizedResponse,
+  SuccessResponse,
+} from "../../../pages/api/twitter/[id]";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -23,8 +32,14 @@ import "core-js/features/promise";
 import "core-js/features/set";
 import "core-js/features/map";
 
+// const TwitterContext = createContext();
+
+// const useTwitterContext = () => {
+//   return useContext(TwitterContext);
+// }
+
 export type TwitterProps = {
-  onChange: (data: NormalizedResponse) => void;
+  onChange: (data: SuccessResponse) => void;
   children: ({
     form,
     button,
@@ -35,10 +50,12 @@ export type TwitterProps = {
 };
 
 const fetchProfileById = (twitterId: string) =>
-  axios.get<NormalizedResponse>(`/api/twitter/${twitterId}`).then((res) => {
-    if ("errors" in res.data) throw new Error(res.data.errors.join("\n"));
-    return res.data;
-  });
+  axios
+    .get<NormalizedResponse>(`/api/twitter/${twitterId}`)
+    .then(({ data }) => {
+      if ("errors" in data) throw new Error(data.errors.join("\n"));
+      return data;
+    });
 
 const schema = Yup.object().shape({
   twitterId: Yup.string()
@@ -51,24 +68,23 @@ const schema = Yup.object().shape({
 export const Twitter = ({ onChange, children }: TwitterProps) => {
   const [query, setQuery] = useState<string>("");
 
-  const { isLoading, data, error, refetch } = useQuery<
-    NormalizedResponse,
-    Error
-  >(["profile", query], () => fetchProfileById(query), {
-    enabled: false,
-    retry: false,
-  });
+  const { isLoading, data, error, refetch } = useQuery<SuccessResponse, Error>(
+    ["profile", query],
+    () => fetchProfileById(query),
+    {
+      enabled: false,
+      retry: false,
+    }
+  );
 
   useEffect(() => {
-    if (query) {
-      refetch();
-    }
+    if (!query) return;
+    refetch();
   }, [query]);
 
   useEffect(() => {
-    if (data) {
-      onChange(data);
-    }
+    if (!data) return;
+    onChange(data);
   }, [data]);
 
   const {
@@ -81,13 +97,28 @@ export const Twitter = ({ onChange, children }: TwitterProps) => {
 
   return (
     <>
+      {/* <TwitterContext.Provider
+        value={{
+          isInvalid: !!errors.twitterId || !!error,
+          register: register("twitterId"),
+          errorMessage: errors.twitterId?.message || error?.message,
+          handleFetch: handleSubmit((data) => {
+            setQuery(data.twitterId);
+          }),
+          isLoading: isLoading,
+          isDisabled: !!errors.twitterId,
+        }}
+      ></TwitterContext.Provider> */}
       {children({
         form: (
           <FormControl isInvalid={!!errors.twitterId || !!error}>
             <FormLabel>Twitter ID</FormLabel>
             <InputGroup>
               <InputLeftAddon>@</InputLeftAddon>
-              <Input placeholder="Twitter ID" {...register("twitterId")} />
+              <Input
+                placeholder="Twitter IDを入力"
+                {...register("twitterId")}
+              />
             </InputGroup>
             <FormErrorMessage>
               {errors.twitterId?.message || error?.message}
@@ -116,3 +147,7 @@ export const Twitter = ({ onChange, children }: TwitterProps) => {
     </>
   );
 };
+
+// const TwitterForm = () => {
+//   const {} = useTwitterContext()
+// }

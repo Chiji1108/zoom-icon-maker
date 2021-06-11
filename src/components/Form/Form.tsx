@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { AvatarInput } from "../AvatarInput";
 import {
   Button,
@@ -22,8 +22,8 @@ import immer from "immer";
 import { useImmer } from "use-immer";
 import { Setting, SettingInput } from "../SettingInput";
 import icons from "../../lib/icons";
-import { DataInput } from "../DataInput";
-import { Data } from "../../pages/api/twitter/[id]";
+import { DataInput, Data } from "../DataInput";
+// import { Data } from "../../pages/api/twitter/[id]"
 
 export interface FormProps {}
 
@@ -54,16 +54,24 @@ const Form = ({}: FormProps) => {
 
   const [result, setResult] = useState<string>();
 
-  const handleDataInput = (data: Data) => {
-    setSrc(data.profile_image_url);
-    updateName((draft) => {
-      draft.text = data.name;
-    });
-    updateBio((draft) => {
-      draft.setting.icon = "twitter";
-      draft.text = data.username;
-    });
-  };
+  const handleDataInput = useCallback((data: Data) => {
+    if (data.src) {
+      setSrc(data.src);
+    }
+
+    if (data.name) {
+      updateName((draft) => {
+        draft.text = data.name!;
+      });
+    }
+
+    if (data.bio) {
+      updateBio((draft) => {
+        draft.setting.icon = "twitter";
+        draft.text = data.bio!;
+      });
+    }
+  }, []);
 
   //TODO: add EditableControls
   return (

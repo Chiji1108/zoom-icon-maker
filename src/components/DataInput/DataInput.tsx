@@ -23,28 +23,43 @@ import {
   Tab,
   TabPanel,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import useSWR from "swr";
-
-import { useFormik } from "formik";
+import { useCallback, useEffect, useState } from "react";
 
 import { Twitter } from "./Twitter/Twitter";
-import type { Data as ResponseDataType } from "../../pages/api/twitter/[id]";
+// import type { Data as ResponseDataType } from "../../pages/api/twitter/[id]";
+
+import type { SuccessResponse } from "../../pages/api/twitter/[id]";
 import { Unsplash } from "./Unsplash";
 
+export type Data = {
+  src?: string;
+  name?: string;
+  bio?: string;
+};
+
 export type DataInputProps = {
-  onChange: (data: ResponseDataType) => void;
+  onChange: (data: Data) => void;
 };
 
 const DataInput = ({ onChange }: DataInputProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const handleChangeTwitter = (data: ResponseDataType) => {
-    onChange(data);
-    onClose();
-  };
-
   const [tabIndex, setTabIndex] = useState(0);
+
+  const handleChangeTwitter = useCallback((data: SuccessResponse) => {
+    onChange({
+      src: data.profile_image_url,
+      name: data.name,
+      bio: data.username,
+    });
+    setTabIndex(0);
+    onClose();
+  }, []);
+
+  const handleChangeUnsplash = useCallback((src: string) => {
+    onChange({ src });
+    setTabIndex(0);
+    onClose();
+  }, []);
 
   return (
     <>
@@ -69,20 +84,20 @@ const DataInput = ({ onChange }: DataInputProps) => {
                   <Tabs isLazy onChange={setTabIndex}>
                     <TabList>
                       <Tab>Twitter</Tab>
-                      {/* <Tab>Unsplash</Tab> */}
+                      <Tab>Unsplash</Tab>
                     </TabList>
 
                     <TabPanels>
                       <TabPanel>{twitter.form}</TabPanel>
-                      {/* <TabPanel>
-                        <Unsplash />
-                      </TabPanel> */}
+                      <TabPanel>
+                        <Unsplash onChange={handleChangeUnsplash} />
+                      </TabPanel>
                     </TabPanels>
                   </Tabs>
                 </ModalBody>
 
                 <ModalFooter>
-                  {tabIndex === 0 && twitter.button}
+                  {tabIndex === 0 ? twitter.button : null}
                   <Button variant="ghost" onClick={onClose}>
                     キャンセル
                   </Button>
