@@ -50,7 +50,7 @@ describe("/api/unsplash/search", () => {
     });
 
     await handleFetchUnsplash(req, res);
-    console.log(JSON.parse(res._getData()));
+    // console.log(JSON.parse(res._getData()));
     expect(res._getStatusCode()).toBe(400);
   });
 });
