@@ -7,6 +7,8 @@ const UTM = new URLSearchParams({
   utm_medium: "referral",
 });
 
+export const UNSPLASH_WITH_UTM = `https://unsplash.com/?${UTM}`;
+
 type APIResponse =
   | {
       total: number;
@@ -35,38 +37,44 @@ type APIResponse =
       errors: string[];
     };
 
-export type NormalizedResponse =
-  | {
-      src: {
-        regular: string;
-        thumb: string;
-      };
-      alt: string;
-      width: number;
-      height: number;
-      author: {
-        name: string;
-        link: string;
-      };
-      download_url: string;
-    }[]
-  | { errors: string[] };
+export type NormalizedResponse = SuccessResponse | { errors: string[] };
+
+export type SuccessResponse = {
+  total_pages: number;
+  images: {
+    src: {
+      regular: string;
+      thumb: string;
+    };
+    alt: string;
+    width: number;
+    height: number;
+    author: {
+      name: string;
+      link: string;
+    };
+    download_url: string;
+  }[];
+};
 
 const transformData: (data: APIResponse) => NormalizedResponse = (data) => {
   if ("errors" in data) {
     return data;
   } else {
-    return data.results.map((d) => ({
-      src: { regular: d.urls.regular, thumb: d.urls.thumb },
-      alt: d.alt_description,
-      width: d.width,
-      height: d.height,
-      author: {
-        name: d.user.name,
-        link: d.user.links.html + UTM,
-      },
-      download_url: d.links.download_location + UTM,
-    }));
+    return {
+      total_pages: data.total_pages,
+      images: data.results.map((d) => ({
+        src: { regular: d.urls.regular, thumb: d.urls.thumb },
+        alt: d.alt_description,
+        width: d.width,
+        height: d.height,
+        author: {
+          name: d.user.name,
+          link: d.user.links.html + "?" + UTM,
+        },
+        download_url: d.links.download_location + "?" + UTM,
+      })),
+    };
   }
 };
 
