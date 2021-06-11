@@ -23,13 +23,13 @@ type APIResponse =
       }[];
     };
 
-export type NormalizedResponse =
-  | {
-      name: string;
-      username: string;
-      profile_image_url: string;
-    }
-  | { errors: string[] };
+export type NormalizedResponse = SuccessResponse | { errors: string[] };
+
+export type SuccessResponse = {
+  name: string;
+  username: string;
+  profile_image_url: string;
+};
 
 const transformData: (data: APIResponse) => NormalizedResponse = (data) => {
   if ("errors" in data) {
