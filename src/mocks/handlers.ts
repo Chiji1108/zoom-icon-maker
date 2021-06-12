@@ -54,4 +54,7 @@ export const handlers = [
       })
     );
   }),
+  rest.get("/api/unsplash/download", (req, res, ctx) => {
+    return res(ctx.status(200));
+  }),
 ];
