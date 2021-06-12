@@ -15,4 +15,27 @@ export const handlers = [
       })
     );
   }),
+  rest.get("/api/unsplash/search", (req, res, ctx) => {
+    const {query, page} = req.params
+    return res(
+      ctx.status(200),
+      ctx.json([{
+        total_pages: 10,
+        images: {
+          src: {
+            regular: "https://source.unsplash.com/random/1600x900",
+            thumb: "https://source.unsplash.com/random/1600x900",
+          },
+          alt: "unsplash",
+          width: 1600,
+          height: 900,
+          author: {
+            name: "mock",
+            link: "https://source.unsplash.com/random/1600x900",
+          },
+          download_url: "https://source.unsplash.com/random/1600x900",
+         }
+      }])
+    )
+  })
 ];
