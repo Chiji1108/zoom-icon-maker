@@ -11,16 +11,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+
+      
+
+      {/* Zoomアイコンメーカー */}
       <main>
-        <div>
-          {/* Zoomアイコンメーカー */}
-        </div>
-        <div>
-          <Form />
-          {/* <AvatarInput boxSize={120} value="" onChange={console.log} /> */}
-          {/* <ImageSelector src={""} onSelect={() => {}} /> */}
-        </div>
+      <Form />
       </main>
+      
 
       {/* <footer>footer</footer> */}
     </div>
