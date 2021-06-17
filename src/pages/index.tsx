@@ -13,8 +13,7 @@ export default function Home() {
 
       <main>
         <div>
-          <div>Zoom</div>
-          <div>アイコンメーカー</div>
+          {/* Zoomアイコンメーカー */}
         </div>
         <div>
           <Form />
@@ -23,7 +22,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer>footer</footer>
+      {/* <footer>footer</footer> */}
     </div>
   );
 }
