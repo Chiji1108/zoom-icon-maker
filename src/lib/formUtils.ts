@@ -1,4 +1,87 @@
-export {}
+import type { Setting } from "../components/SettingInput";
+
+import { createImage } from "./canvasUtils";
+
+import icons from "./icons";
+
+export const generate = async (
+  src: string | undefined,
+  name: Setting,
+  bio: Setting
+) => {
+  if (!src) throw new Error("画像が選択されていません");
+
+  //TODO: windows
+  const type = "macOS";
+
+  const CANVAS_SIZE = 1024;
+  const BG_COLOR = type === "macOS" ? "rgb(36,36,36)" : "rgb(24,24,24)";
+  const IMAGE_SIZE = bio.setting.isHidden ? 630 : 600;
+  const IMAGE_Y = bio.setting.isHidden ? 78 : 72;
+  const NAME_SIZE = bio.setting.isHidden ? 144 : 140;
+  const NAME_Y = bio.setting.isHidden ? 780 : 725;
+  const BIO_SIZE = 66;
+  const BIO_Y = 900;
+  const ICON_SIZE = 70;
+  const ICON_MARGIN = 15;
+
+  const canvas = document.createElement("canvas");
+  canvas.width = CANVAS_SIZE;
+  canvas.height = CANVAS_SIZE;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("ブラウザが対応していません");
+
+  // bg
+  ctx.fillStyle = BG_COLOR;
+  ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+
+  // src
+  ctx.save();
+  ctx.translate((CANVAS_SIZE - IMAGE_SIZE) / 2, IMAGE_Y);
+  ctx.beginPath();
+  ctx.arc(IMAGE_SIZE / 2, IMAGE_SIZE / 2, IMAGE_SIZE / 2, 0, 2 * Math.PI);
+  ctx.clip();
+  const img = await createImage(src);
+  ctx.drawImage(img, 0, 0, IMAGE_SIZE, IMAGE_SIZE);
+  ctx.restore();
+
+  // text
+  ctx.textBaseline = "top";
+  ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+
+  // name
+  ctx.font = `${name.setting.font.weight} ${NAME_SIZE}px ${name.setting.font.family}`;
+  ctx.fillText(name.text, CANVAS_SIZE / 2, NAME_Y);
+
+  // bio
+  if (!bio.setting.isHidden) {
+    ctx.font = `${bio.setting.font.weight} ${BIO_SIZE}px ${bio.setting.font.family}`;
+    if (bio.setting.icon != "none") {
+      ctx.save();
+      ctx.translate(
+        (CANVAS_SIZE -
+          (ctx.measureText(bio.text).width + ICON_MARGIN + ICON_SIZE)) /
+          2,
+        BIO_Y
+      );
+      ctx.textAlign = "start";
+      ctx.fillText(bio.text, ICON_MARGIN + ICON_SIZE, 0);
+      const icon = await createImage(icons[bio.setting.icon].url);
+      ctx.drawImage(icon, 0, 0, ICON_SIZE, ICON_SIZE);
+      ctx.restore();
+    } else {
+      ctx.fillText(bio.text, CANVAS_SIZE / 2, BIO_Y);
+    }
+  }
+
+  return new Promise<string>((resolve) => {
+    canvas.toBlob((file) => {
+      resolve(URL.createObjectURL(file));
+    }, "image/png");
+  });
+};
 // //TODO: サイズ削除
 
 // // import simpleIcons from "simple-icons";

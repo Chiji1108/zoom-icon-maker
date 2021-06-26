@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, ReactNode } from "react";
 import { AvatarInput } from "../AvatarInput";
 import {
   Button,
@@ -24,22 +24,23 @@ import { Setting, SettingInput } from "../SettingInput";
 import icons from "../../lib/icons";
 import { DataInput, Data } from "../DataInput";
 // import { Data } from "../../pages/api/twitter/[id]"
+import { generate } from "../../lib/formUtils";
 
-export interface FormProps {}
+export interface FormProps {
+  children: ({
+    handleGenerate,
+    isLoading,
+    error,
+  }: {
+    handleGenerate: () => Promise<string>;
+    isLoading: boolean;
+    error?: Error;
+  }) => ReactNode;
+}
 
-const Form = ({}: FormProps) => {
+const Form = ({ children }: FormProps) => {
   const [src, setSrc] = useState<string>();
-  const [bio, updateBio] = useImmer<Setting>({
-    text: "",
-    setting: {
-      font: {
-        family: "Noto Serif JP",
-        weight: "400",
-      },
-      icon: "none",
-      isHidden: false,
-    },
-  });
+
   const [name, updateName] = useImmer<Setting>({
     text: "",
     setting: {
@@ -51,9 +52,17 @@ const Form = ({}: FormProps) => {
       isHidden: false,
     },
   });
-
-  const [result, setResult] = useState<string>();
-
+  const [bio, updateBio] = useImmer<Setting>({
+    text: "",
+    setting: {
+      font: {
+        family: "Noto Serif JP",
+        weight: "400",
+      },
+      icon: "none",
+      isHidden: false,
+    },
+  });
   const handleDataInput = useCallback((data: Data) => {
     if (data.src) {
       setSrc(data.src);
@@ -72,6 +81,9 @@ const Form = ({}: FormProps) => {
       });
     }
   }, []);
+
+  const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState<Error>();
 
   //TODO: add EditableControls
   return (
@@ -131,8 +143,6 @@ const Form = ({}: FormProps) => {
                   <EditablePreview />
                   <EditableInput />
                 </Box>
-
-                {/* <EditableControls /> */}
               </Editable>
               <Center pos="absolute" right="-44px" top={0} bottom={0}>
                 <SettingInput
@@ -170,8 +180,6 @@ const Form = ({}: FormProps) => {
                       <EditableInput />
                     </Box>
                   </Flex>
-
-                  {/* <EditableControls /> */}
                 </Editable>
                 <Center pos="absolute" right="-44px" top={0} bottom={0}>
                   <SettingInput
@@ -185,21 +193,22 @@ const Form = ({}: FormProps) => {
           </Flex>
         </VStack>
       </Box>
-      {/* <Button
-        isDisabled={!src || !name}
-        onClick={async () =>
-          setResult(
-            await generate({
-              src,
-              name,
-              bio,
-            })
-          )
-        }
-      >
-        生成
-      </Button>
-      <Image src={result} alt="result" boxSize={"512px"} /> */}
+
+      {children({
+        handleGenerate: async () => {
+          setLoading(true);
+          let r = "";
+          try {
+            r = await generate(src, name, bio);
+          } catch (error) {
+            setError(error);
+          }
+          setLoading(false);
+          return r;
+        },
+        isLoading,
+        error,
+      })}
     </>
   );
 };
