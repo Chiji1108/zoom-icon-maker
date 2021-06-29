@@ -194,22 +194,23 @@ const Form = ({ children }: FormProps) => {
         </VStack>
       </Box>
 
-      {children({
-        handleGenerate: async () => {
-          setLoading(true);
-          setError(undefined);
-          let r = "";
-          try {
-            r = await generate(src, name, bio);
-          } catch (error) {
-            setError(error);
-          }
-          setLoading(false);
-          return r;
-        },
-        isLoading,
-        error,
-      })}
+      {children &&
+        children({
+          handleGenerate: async () => {
+            setLoading(true);
+            setError(undefined);
+            let r = "";
+            try {
+              r = await generate(src, name, bio);
+            } catch (error) {
+              setError(error);
+            }
+            setLoading(false);
+            return r;
+          },
+          isLoading,
+          error,
+        })}
     </>
   );
 };
