@@ -27,7 +27,7 @@ import { DataInput, Data } from "../DataInput";
 import { generate } from "../../lib/formUtils";
 
 export interface FormProps {
-  children: ({
+  children?: ({
     handleGenerate,
     isLoading,
     error,
