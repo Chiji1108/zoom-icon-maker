@@ -88,7 +88,7 @@ const Form = ({ children }: FormProps) => {
   //TODO: add EditableControls
   return (
     <>
-      <Box p="4" bg="rgb(36,36,36)" maxW="sm" pos="relative">
+      <Box p="4" bg="rgb(36,36,36)" maxW="sm" pos="relative" minW="sm">
         <Box pos="absolute" top="0" right="0">
           <Stack p={2} spacing={0}>
             <DataInput onChange={handleDataInput} />
@@ -197,6 +197,7 @@ const Form = ({ children }: FormProps) => {
       {children({
         handleGenerate: async () => {
           setLoading(true);
+          setError(undefined);
           let r = "";
           try {
             r = await generate(src, name, bio);

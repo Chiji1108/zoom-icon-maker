@@ -51,13 +51,11 @@ const DataInput = ({ onChange }: DataInputProps) => {
       name: data.name,
       bio: data.username,
     });
-    setTabIndex(0);
     onClose();
   }, []);
 
   const handleChangeUnsplash = useCallback((src: string) => {
     onChange({ src });
-    setTabIndex(0);
     onClose();
   }, []);
 
@@ -66,7 +64,10 @@ const DataInput = ({ onChange }: DataInputProps) => {
       <IconButton
         icon={<span className="material-icons">input</span>}
         aria-label="open data input modal"
-        onClick={onOpen}
+        onClick={() => {
+          setTabIndex(0);
+          onOpen();
+        }}
         // borderRadius="full"
         variant="ghost"
         colorScheme="whiteAlpha"
@@ -81,7 +82,7 @@ const DataInput = ({ onChange }: DataInputProps) => {
             {(twitter) => (
               <>
                 <ModalBody>
-                  <Tabs isLazy onChange={setTabIndex}>
+                  <Tabs isLazy onChange={setTabIndex} tabIndex={tabIndex}>
                     <TabList>
                       <Tab>Twitter</Tab>
                       <Tab>Unsplash</Tab>
