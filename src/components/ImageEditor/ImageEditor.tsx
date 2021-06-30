@@ -127,7 +127,11 @@ const ImageEditor = ({ src, onComplete }: ImageEditorProps) => {
             )}
           />
           <Button
-            isDisabled={zoom === 1 && rotation === 0}
+            isDisabled={
+              zoom === 1 &&
+              rotation === 0 &&
+              JSON.stringify(crop) === JSON.stringify({ x: 0, y: 0 })
+            }
             onClick={() => {
               setCrop({ x: 0, y: 0 });
               setZoom(1);
