@@ -266,7 +266,7 @@ export const Unsplash = ({ onChange }: UnsplashProps) => {
 
           <ModalFooter>
             <Button
-              colorScheme="blue"
+              colorScheme="brand"
               mr={3}
               onClick={handleGenerate}
               isLoading={isLoading}
@@ -396,7 +396,7 @@ const CustomImage = ({
         pos="relative"
         cursor="pointer"
         _active={{
-          boxShadow: "0 0 0 2px var(--chakra-colors-blue-500)",
+          boxShadow: "0 0 0 2px var(--chakra-colors-brand-500)",
         }}
         _hover={{ filter: "brightness(1.15)" }}
         onClick={() =>

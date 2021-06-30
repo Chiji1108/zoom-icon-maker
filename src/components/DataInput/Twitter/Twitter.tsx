@@ -131,7 +131,7 @@ export const Twitter = ({ onChange, children }: TwitterProps) => {
         ),
         button: (
           <Button
-            colorScheme="blue"
+            colorScheme="brand"
             mr={3}
             onClick={handleSubmit((data) => {
               setQuery(data.twitterId);

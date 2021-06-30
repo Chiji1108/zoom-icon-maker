@@ -203,6 +203,7 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                         <RadioGroup
                           value={fontFamily}
                           onChange={handleSelectFontFamily}
+                          colorScheme="brand"
                         >
                           <Stack>
                             {Object.entries(fonts).map(([family]) => (
@@ -220,6 +221,7 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                           <RadioGroup
                             value={fontWeight}
                             onChange={setFontWeight}
+                            colorScheme="brand"
                           >
                             <Stack>
                               {fonts[fontFamily]?.weights.map((weight) => (
@@ -240,7 +242,10 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                   </TabPanel>
                   <TabPanel>
                     <Stack {...group}>
-                      <Radio {...getRadioProps({ value: "none" })}>
+                      <Radio
+                        {...getRadioProps({ value: "none" })}
+                        colorScheme="brand"
+                      >
                         使用しない
                       </Radio>
 
@@ -269,6 +274,7 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                           onChange={(e) =>
                             e.target.checked ? setHidden.on() : setHidden.off()
                           }
+                          colorScheme="brand"
                         />
                       </HStack>
                     </FormControl>
@@ -280,7 +286,7 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
 
           <ModalFooter>
             <Button
-              colorScheme="blue"
+              colorScheme="brand"
               mr={3}
               onClick={() => {
                 onChange({
@@ -329,7 +335,7 @@ const RadioCircle = ({ children, ...props }: RadioCircleProps) => {
         transition="all 0.2s ease"
         // boxSizing="content-box"
         _checked={{
-          borderColor: "blue.400",
+          borderColor: "brand.500",
           borderWidth: "3px",
         }}
         _hover={{
