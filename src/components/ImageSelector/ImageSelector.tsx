@@ -26,7 +26,7 @@ const ImageSelector = ({
   previewSrc,
 }: ImageSelectorProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  //TODO: 二回目も
+
   const onFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
@@ -40,7 +40,6 @@ const ImageSelector = ({
 
       onSelect(imageDataUrl);
       e.target.value = "";
-      // inputRef.current.files = null;
     }
   };
   return (
@@ -59,13 +58,7 @@ const ImageSelector = ({
             fit="cover"
           />
         ) : (
-          //TODO: 選択されていない時の改善
           <Box bg="gray" boxSize="full" />
-          // <NextImage
-          //   src="/avatar-placeholder.png"
-          //   alt="avatar placeholder"
-          //   layout="fill"
-          // />
         )}
       </Circle>
 
