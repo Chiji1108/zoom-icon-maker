@@ -4,22 +4,8 @@ UI: [https://master--607ad529e019a8002151d3da.chromatic.com](https://master--607
 
 ## TODO
 
-- 直近
-  - [ ]
-- 将来
-  - 調べ物
-    - Google Publisher Tag
-    - Google Tag Manager
-    - `robots.txt`
-    - Nextjs Analytics
-    - Google Analytics
-    - Segment
-    - Facebook Pixel
-  - SEO
-  - i18n
-  - Ads
-    - Microsoft Advertising
-    - Twitter Ads
-    - Google AdSense
-  - Chrome App
-  - PWA
+- 間違って回転をしてしまった時のリセット方法
+- Youtubeライセンス申請
+- TwitterIDから直で生成できるように
+- サークルやゼミ、研究会向け　を書く
+- コードに書かれているTODO
