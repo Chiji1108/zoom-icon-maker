@@ -75,7 +75,13 @@ const ImageSelector = ({
         right="0"
         borderRadius="full"
         aria-label="add a photo"
-        icon={<span className="material-icons">add_a_photo</span>}
+        icon={
+          <NextImage
+            src="/icons/material/add_photo.svg"
+            width={24}
+            height={24}
+          />
+        }
         onClick={() => inputRef.current!.click()}
       />
       <input

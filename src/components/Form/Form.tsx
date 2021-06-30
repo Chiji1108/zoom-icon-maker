@@ -17,6 +17,7 @@ import {
   Stack,
   Fade,
 } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
 // import { generate } from "../../lib/formUtils";
 import immer from "immer";
 import { useImmer } from "use-immer";
@@ -96,7 +97,7 @@ const Form = ({ children }: FormProps) => {
               <IconButton
                 // borderRadius="full"
                 aria-label="add bio"
-                icon={<span className="material-icons">add</span>}
+                icon={<AddIcon />}
                 onClick={() =>
                   updateBio((draft) => {
                     draft.setting.isHidden = false;
@@ -218,35 +219,35 @@ const Form = ({ children }: FormProps) => {
 Form.displayName = "Form";
 export default Form;
 
-const EditableControls = () => {
-  const {
-    isEditing,
-    getSubmitButtonProps,
-    getCancelButtonProps,
-    getEditButtonProps,
-  } = useEditableControls();
+// const EditableControls = () => {
+//   const {
+//     isEditing,
+//     getSubmitButtonProps,
+//     getCancelButtonProps,
+//     getEditButtonProps,
+//   } = useEditableControls();
 
-  return isEditing ? (
-    <ButtonGroup justifyContent="center" size="sm">
-      <IconButton
-        aria-label="submit"
-        icon={<span className="material-icons">done</span>}
-        {...getSubmitButtonProps()}
-      />
-      <IconButton
-        aria-label="cancel"
-        icon={<span className="material-icons">close</span>}
-        {...getCancelButtonProps()}
-      />
-    </ButtonGroup>
-  ) : (
-    <Flex justifyContent="center">
-      <IconButton
-        aria-label="edit"
-        size="sm"
-        icon={<span className="material-icons">edit</span>}
-        {...getEditButtonProps()}
-      />
-    </Flex>
-  );
-};
+//   return isEditing ? (
+//     <ButtonGroup justifyContent="center" size="sm">
+//       <IconButton
+//         aria-label="submit"
+//         icon={<span className="material-icons">done</span>}
+//         {...getSubmitButtonProps()}
+//       />
+//       <IconButton
+//         aria-label="cancel"
+//         icon={<span className="material-icons">close</span>}
+//         {...getCancelButtonProps()}
+//       />
+//     </ButtonGroup>
+//   ) : (
+//     <Flex justifyContent="center">
+//       <IconButton
+//         aria-label="edit"
+//         size="sm"
+//         icon={<span className="material-icons">edit</span>}
+//         {...getEditButtonProps()}
+//       />
+//     </Flex>
+//   );
+// };

@@ -12,6 +12,8 @@ import {
   SliderThumb,
 } from "@chakra-ui/react";
 
+import NextImage from "next/image";
+
 export interface CropInfo {
   area: Area;
   rotation: number;
@@ -66,14 +68,26 @@ const ImageEditor = ({ src, onComplete }: ImageEditorProps) => {
               <IconButton
                 onClick={onClick}
                 aria-label="zoom out"
-                icon={<span className="material-icons">zoom_out</span>}
+                icon={
+                  <NextImage
+                    src="/icons/material/zoom_out.svg"
+                    width={24}
+                    height={24}
+                  />
+                }
               />
             )}
             renderRightIcon={(onClick) => (
               <IconButton
                 onClick={onClick}
                 aria-label="zoom in"
-                icon={<span className="material-icons">zoom_in</span>}
+                icon={
+                  <NextImage
+                    src="/icons/material/zoom_in.svg"
+                    width={24}
+                    height={24}
+                  />
+                }
               />
             )}
           />
@@ -88,14 +102,26 @@ const ImageEditor = ({ src, onComplete }: ImageEditorProps) => {
               <IconButton
                 onClick={onClick}
                 aria-label="rotate left"
-                icon={<span className="material-icons">rotate_left</span>}
+                icon={
+                  <NextImage
+                    src="/icons/material/rotate_left.svg"
+                    width={24}
+                    height={24}
+                  />
+                }
               />
             )}
             renderRightIcon={(onClick) => (
               <IconButton
                 onClick={onClick}
                 aria-label="rotate right"
-                icon={<span className="material-icons">rotate_right</span>}
+                icon={
+                  <NextImage
+                    src="/icons/material/rotate_right.svg"
+                    width={24}
+                    height={24}
+                  />
+                }
               />
             )}
           />

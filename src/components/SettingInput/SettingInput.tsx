@@ -43,6 +43,7 @@ import {
   Center,
   Collapse,
 } from "@chakra-ui/react";
+import { SettingsIcon } from "@chakra-ui/icons";
 import {
   ChangeEvent,
   ReactElement,
@@ -140,7 +141,7 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
       <IconButton
         // borderRadius="full"
         aria-label="open setting"
-        icon={<span className="material-icons">settings</span>}
+        icon={<SettingsIcon />}
         onClick={onOpen}
         variant="ghost"
         colorScheme="whiteAlpha"

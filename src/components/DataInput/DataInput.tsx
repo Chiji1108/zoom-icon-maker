@@ -23,6 +23,7 @@ import {
   Tab,
   TabPanel,
 } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
 import { useCallback, useEffect, useState } from "react";
 
 import { Twitter } from "./Twitter/Twitter";
@@ -62,7 +63,7 @@ const DataInput = ({ onChange }: DataInputProps) => {
   return (
     <>
       <IconButton
-        icon={<span className="material-icons">input</span>}
+        icon={<SearchIcon />}
         aria-label="open data input modal"
         onClick={() => {
           setTabIndex(0);

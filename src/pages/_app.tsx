@@ -6,8 +6,6 @@ import { darken, lighten } from "polished";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
-import "@fontsource/material-icons";
-
 const BRAND_COLOR = "#0b93f6";
 
 const theme = extendTheme({

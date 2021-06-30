@@ -1,7 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
 
-import "@fontsource/material-icons";
-
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import * as nextImage from "next/image";

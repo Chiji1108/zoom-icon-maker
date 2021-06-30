@@ -1920,11 +1920,6 @@
   resolved "https://registry.yarnpkg.com/@fontsource/m-plus-1p/-/m-plus-1p-4.4.5.tgz#b41fd9703e859c0e8eeda186cf39b97b9d3ab73e"
   integrity sha512-W19HNs97UVXucLr0f+TcX5Sh7S4QQzOYLn4BANtn4eqKbtvlMfRdttXMruaIQopkYWYxOVen/pJ3u5ysmglrQA==
 
-"@fontsource/material-icons@^4.4.5":
-  version "4.4.5"
-  resolved "https://registry.yarnpkg.com/@fontsource/material-icons/-/material-icons-4.4.5.tgz#12afd469186382b4f08684927c7b75e47559ae6c"
-  integrity sha512-/J1UhmwLkcHjXvRAH63/pghttPJQwq6hZ11fCNv7syS5Ym5saTV3fm6J5SyoPJ/+s0HcNyiddGmcAOOVrBkIGA==
-
 "@fontsource/noto-sans-jp@^4.4.5":
   version "4.4.5"
   resolved "https://registry.yarnpkg.com/@fontsource/noto-sans-jp/-/noto-sans-jp-4.4.5.tgz#5ffab503a66e1c935d25083dded1addb75c1fc34"
