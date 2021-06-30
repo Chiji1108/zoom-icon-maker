@@ -6,6 +6,8 @@ import { darken, lighten } from "polished";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
+import Head from "next/head";
+
 const BRAND_COLOR = "#0b93f6";
 
 const theme = extendTheme({
@@ -23,12 +25,20 @@ const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ChakraProvider theme={theme}>
-        <Component {...pageProps} />
-        <ReactQueryDevtools />
-      </ChakraProvider>
-    </QueryClientProvider>
+    <>
+      <Head>
+        <title>Zoomアイコンメーカー</title>
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="theme-color" content={BRAND_COLOR} />
+        <link rel="manifest" href="/manifest.webmanifest" />
+      </Head>
+      <QueryClientProvider client={queryClient}>
+        <ChakraProvider theme={theme}>
+          <Component {...pageProps} />
+          <ReactQueryDevtools />
+        </ChakraProvider>
+      </QueryClientProvider>
+    </>
   );
 }
 
