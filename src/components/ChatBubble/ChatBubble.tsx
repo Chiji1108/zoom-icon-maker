@@ -3,7 +3,7 @@ import NextImage from "next/image";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
-import styles from "./Chatbubble.module.css";
+import styles from "./ChatBubble.module.css";
 
 type BubbleProps = {
   readonly side: "right" | "left";
