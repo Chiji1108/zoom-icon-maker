@@ -10,7 +10,6 @@ type BubbleProps = {
 };
 
 const Bubble = styled.p<BubbleProps>`
-  max-width: 255px;
   word-wrap: break-word;
   margin-bottom: 12px;
   line-height: 24px;
@@ -85,10 +84,10 @@ export const ChatBubble = ({
   switch (side) {
     case "right":
       return (
-        <Flex alignItems="center">
-          <Spacer />
+        <Flex alignItems="flex-end">
+          <Spacer minW="50px" mr={3} />
           <Bubble side={side}>{children}</Bubble>
-          <Box ml={3} zIndex={1} overflow="hidden">
+          <Box ml={3} zIndex={1} overflow="hidden" flexShrink={0}>
             <NextImage
               src={icon}
               width={50}
@@ -100,8 +99,8 @@ export const ChatBubble = ({
       );
     case "left":
       return (
-        <Flex alignItems="center">
-          <Box mr={3} zIndex={1} overflow="hidden">
+        <Flex alignItems="flex-end">
+          <Box mr={3} zIndex={1} overflow="hidden" flexShrink={0}>
             <NextImage
               src={icon}
               width={50}
@@ -110,7 +109,7 @@ export const ChatBubble = ({
             />
           </Box>
           <Bubble side={side}>{children}</Bubble>
-          <Spacer />
+          <Spacer minW="50px" ml={3} />
         </Flex>
       );
   }
