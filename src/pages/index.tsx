@@ -43,6 +43,9 @@ import { Form } from "../components/Form";
 import NextImage from "next/image";
 // import { ImageSelector } from "../components/ImageSelector";
 
+// import anime from "animejs/lib/anime.es.js";
+import anime from "animejs";
+
 import { ChatBubble } from "../components/ChatBubble";
 
 const SHARE_URL = "https://zoom-icon-maker.vercel.app";
@@ -221,5 +224,23 @@ const About = () => (
       </ChatBubble>
     </Stack>
     <Text>さあ作ってみましょう！</Text>
+    <Button
+      alignSelf="center"
+      colorScheme="brand"
+      onClick={() => {
+        const scrollElement =
+          window.document.scrollingElement ||
+          window.document.body ||
+          window.document.documentElement;
+        anime({
+          targets: scrollElement,
+          scrollTop: 0,
+          duration: 500,
+          easing: "easeInOutQuad",
+        });
+      }}
+    >
+      トップに戻る
+    </Button>
   </Stack>
 );
