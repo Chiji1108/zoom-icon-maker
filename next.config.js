@@ -8,6 +8,7 @@ const config = {
     dest: "public",
     runtimeCaching,
   },
+  webpack5: true,
 };
 
 module.exports = withPWA(config);
