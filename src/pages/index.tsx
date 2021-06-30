@@ -37,7 +37,6 @@ import {
   FacebookIcon,
 } from "react-share";
 import { DownloadIcon } from "@chakra-ui/icons";
-import Head from "next/head";
 import { useState } from "react";
 import { AvatarInput } from "../components/AvatarInput";
 import { Form } from "../components/Form";
@@ -54,11 +53,6 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Zoomアイコンメーカー</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <Container maxW="xl" centerContent>
         <Heading as="h1" mt={12} mb={6} textAlign="center" lineHeight="none">
           <Text
@@ -72,7 +66,7 @@ export default function Home() {
           <br />
           アイコンメーカー
         </Heading>
-        <VStack as="main" mt="6">
+        <VStack as="main" mt={6}>
           <Form>
             {({ handleGenerate, isLoading, error }) => (
               <VStack>
@@ -168,6 +162,7 @@ const About = () => (
       何ができるの？
     </Heading>
     <Text textAlign="center">🎉 Zoomのサムネイルを改善します！ 🎉</Text>
+    <Box h={1} />
     <Grid
       templateColumns="repeat(2, 1fr)"
       gap={6}
