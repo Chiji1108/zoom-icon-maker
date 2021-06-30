@@ -145,8 +145,17 @@ const About = () => (
     <Heading textAlign="center" fontSize="2xl">
       何ができるの？
     </Heading>
-    <Text textAlign="center">🎉 Zoomのサムネイルを改善します！ 🎉</Text>
+    <Text textAlign="center">🎉 Zoom用のアイコンが作れます！ 🎉</Text>
     <Box h={1} />
+    <Stack>
+      <ChatBubble icon="/about/nuko.png" side="right">
+        あー、Zoomのアイコンが見辛いにゃ...
+      </ChatBubble>
+      <ChatBubble icon="/about/chiji.png" side="left">
+        わかる
+      </ChatBubble>
+    </Stack>
+
     <Grid
       templateColumns="repeat(2, 1fr)"
       gap={6}
@@ -171,7 +180,7 @@ const About = () => (
     </Grid>
     <Stack>
       <ChatBubble icon="/about/nuko.png" side="right">
-        ダサいにゃん！
+        誰が誰だかわからんにゃ！！
       </ChatBubble>
       <ChatBubble icon="/about/chiji.png" side="left">
         わかる
@@ -198,7 +207,7 @@ const About = () => (
     <Text>こんなサムネイルにできちゃいます！</Text>
     <Stack>
       <ChatBubble icon="/about/nuko.png" side="right">
-        見やすいにゃん！
+        新歓zoomで大活躍にゃん！
       </ChatBubble>
       <ChatBubble icon="/about/chiji.png" side="left">
         わかる
@@ -231,7 +240,7 @@ const Share = () => (
   <Center mt={6}>
     <VStack>
       <Text fontSize="xs" color="gray">
-        ↓ あなたのZoom会議で流行らしちゃう!? ↓
+        ↓ あなたのZoom会議で流行らせちゃう!? ↓
       </Text>
 
       <HStack>
