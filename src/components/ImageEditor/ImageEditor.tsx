@@ -10,6 +10,7 @@ import {
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
+  Button,
 } from "@chakra-ui/react";
 
 import NextImage from "next/image";
@@ -125,6 +126,16 @@ const ImageEditor = ({ src, onComplete }: ImageEditorProps) => {
               />
             )}
           />
+          <Button
+            isDisabled={zoom === 1 && rotation === 0}
+            onClick={() => {
+              setCrop({ x: 0, y: 0 });
+              setZoom(1);
+              setRotation(0);
+            }}
+          >
+            リセット
+          </Button>
         </VStack>
       </Box>
     </Box>
