@@ -39,7 +39,7 @@ export interface FormProps {
 }
 
 const Form = ({ children }: FormProps) => {
-  const [src, setSrc] = useState<string>();
+  const [src, setSrc] = useState<string>("/avatar-placeholder.png");
 
   const [name, updateName] = useImmer<Setting>({
     text: "",
