@@ -197,6 +197,7 @@ const Form = ({ children }: FormProps) => {
       {children &&
         children({
           handleGenerate: async () => {
+            // TODO: ここカスタムフックにする
             setLoading(true);
             setError(undefined);
             let r = "";
