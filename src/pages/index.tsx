@@ -150,15 +150,8 @@ export default function Home() {
         <Box h="16" />
         <About />
 
-        <Box
-          as="footer"
-          color="gray"
-          fontSize="sm"
-          textAlign="center"
-          mt={10}
-          mb={2}
-        >
-          <Text>
+        <Box as="footer" color="gray" fontSize="sm" mt={10} mb={2}>
+          <Text textAlign="center">
             created by{" "}
             <Link href="https://twitter.com/Chijidosu">@Chijidosu</Link>
           </Text>
@@ -179,7 +172,8 @@ const About = () => (
       templateColumns="repeat(2, 1fr)"
       gap={6}
       alignItems="center"
-      maxW="sm"
+      // maxW="sm"
+      alignSelf="center"
     >
       <Text>何も設定しないと...</Text>
       <NextImage
@@ -204,18 +198,25 @@ const About = () => (
         わかる
       </ChatBubble>
     </Stack>
-    <Text>これで生成した画像をプロフィール画像に設定すると...</Text>
-    <Stack justify="center" wrap="wrap-reverse" direction="row">
-      <Box maxW="40">
+    <Stack>
+      <Text>そこで！</Text>
+      <Text>
+        このZoomアイコンメーカーで生成した画像をプロフィール画像に設定すると...
+      </Text>
+    </Stack>
+
+    <Flex justify="center" wrap={"wrap-reverse"}>
+      <Box maxW={["unset", "2xs"]} mx={1}>
         <NextImage src="/about/good_demo.png" width={320} height={180} />
       </Box>
-      <Box maxW="40">
+      <Box maxW={["unset", "2xs"]} mx={1}>
         <NextImage src="/about/good_demo_role.png" width={320} height={180} />
       </Box>
-      <Box maxW="40">
+      <Box maxW={["unset", "2xs"]} mx={1}>
         <NextImage src="/about/good_demo_sns.png" width={320} height={180} />
       </Box>
-    </Stack>
+    </Flex>
+    <Text>こんなサムネイルにできちゃいます！</Text>
     <Stack>
       <ChatBubble icon="/about/nuko.png" side="right">
         見やすいにゃん！
