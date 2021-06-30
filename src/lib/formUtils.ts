@@ -14,12 +14,27 @@ export const generate = async (
   //TODO: windows
   const type = "macOS";
 
+  const hideBio = bio.setting.isHidden || bio.text === "";
+
+  /* 
+  name.text === "" ? 660 :
+
+  name.text === ""
+      ? (CANVAS_SIZE - IMAGE_SIZE) / 2
+      : 
+  */
+
   const CANVAS_SIZE = 1024;
   const BG_COLOR = type === "macOS" ? "rgb(36,36,36)" : "rgb(24,24,24)";
-  const IMAGE_SIZE = bio.setting.isHidden ? 630 : 600;
-  const IMAGE_Y = bio.setting.isHidden ? 78 : 72;
-  const NAME_SIZE = bio.setting.isHidden ? 144 : 140;
-  const NAME_Y = bio.setting.isHidden ? 780 : 725;
+  const IMAGE_SIZE = name.text === "" && hideBio ? 800 : hideBio ? 630 : 600;
+  const IMAGE_Y =
+    name.text === "" && hideBio
+      ? (CANVAS_SIZE - IMAGE_SIZE) / 2
+      : hideBio
+      ? 78
+      : 72;
+  const NAME_SIZE = hideBio ? 144 : 140;
+  const NAME_Y = hideBio ? 780 : 725;
   const BIO_SIZE = 66;
   const BIO_Y = 900;
   const ICON_SIZE = 70;
@@ -56,7 +71,7 @@ export const generate = async (
   ctx.fillText(name.text, CANVAS_SIZE / 2, NAME_Y);
 
   // bio
-  if (!bio.setting.isHidden) {
+  if (!hideBio) {
     ctx.font = `${bio.setting.font.weight} ${BIO_SIZE}px ${bio.setting.font.family}`;
     if (bio.setting.icon != "none") {
       ctx.save();
