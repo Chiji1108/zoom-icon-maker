@@ -180,7 +180,7 @@ const About = () => (
     </Grid>
     <Stack>
       <ChatBubble icon="/about/nuko.png" side="right">
-        誰が誰だかわからんにゃ！！
+        誰が誰だか分からんにゃ！！
       </ChatBubble>
       <ChatBubble icon="/about/chiji.png" side="left">
         わかる
