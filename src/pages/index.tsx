@@ -38,7 +38,6 @@ import {
 } from "react-share";
 import { DownloadIcon } from "@chakra-ui/icons";
 import { useState } from "react";
-import { AvatarInput } from "../components/AvatarInput";
 import { Form } from "../components/Form";
 import NextImage from "next/image";
 // import { ImageSelector } from "../components/ImageSelector";
@@ -120,25 +119,7 @@ export default function Home() {
                 </Center>
               </Stack>
 
-              <Center mt={6}>
-                <VStack>
-                  <Text fontSize="xs" color="gray">
-                    ↓ あなたのZoom会議で流行らしちゃう!? ↓
-                  </Text>
-
-                  <HStack>
-                    <TwitterShareButton url={SHARE_URL}>
-                      <TwitterIcon size={40} round />
-                    </TwitterShareButton>
-                    <LineShareButton url={SHARE_URL}>
-                      <LineIcon size={40} round />
-                    </LineShareButton>
-                    <FacebookShareButton url={SHARE_URL}>
-                      <FacebookIcon size={40} round />
-                    </FacebookShareButton>
-                  </HStack>
-                </VStack>
-              </Center>
+              <Share />
             </ModalBody>
             <ModalFooter />
           </ModalContent>
@@ -242,5 +223,28 @@ const About = () => (
     >
       トップに戻る
     </Button>
+    <Share />
   </Stack>
+);
+
+const Share = () => (
+  <Center mt={6}>
+    <VStack>
+      <Text fontSize="xs" color="gray">
+        ↓ あなたのZoom会議で流行らしちゃう!? ↓
+      </Text>
+
+      <HStack>
+        <TwitterShareButton url={SHARE_URL}>
+          <TwitterIcon size={40} round />
+        </TwitterShareButton>
+        <LineShareButton url={SHARE_URL}>
+          <LineIcon size={40} round />
+        </LineShareButton>
+        <FacebookShareButton url={SHARE_URL}>
+          <FacebookIcon size={40} round />
+        </FacebookShareButton>
+      </HStack>
+    </VStack>
+  </Center>
 );
