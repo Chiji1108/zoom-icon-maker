@@ -23,6 +23,10 @@ import {
   Text,
   Link,
   HStack,
+  Grid,
+  Flex,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
 import {
   LineShareButton,
@@ -37,7 +41,10 @@ import Head from "next/head";
 import { useState } from "react";
 import { AvatarInput } from "../components/AvatarInput";
 import { Form } from "../components/Form";
+import NextImage from "next/image";
 // import { ImageSelector } from "../components/ImageSelector";
+
+import { ChatBubble } from "../components/ChatBubble";
 
 const SHARE_URL = "https://zoom-icon-maker.vercel.app";
 
@@ -54,7 +61,12 @@ export default function Home() {
 
       <Container maxW="xl" centerContent>
         <Heading as="h1" mt={12} mb={6} textAlign="center" lineHeight="none">
-          <Text as="span" color="blue" fontSize="7xl" fontWeight="extrabold">
+          <Text
+            as="span"
+            color="brand.500"
+            fontSize="7xl"
+            fontWeight="extrabold"
+          >
             Zoom
           </Text>
           <br />
@@ -65,7 +77,7 @@ export default function Home() {
             {({ handleGenerate, isLoading, error }) => (
               <VStack>
                 <Button
-                  colorScheme="blue"
+                  colorScheme="brand"
                   onClick={async () => {
                     const r = await handleGenerate();
                     if (!error && r) {
@@ -100,11 +112,11 @@ export default function Home() {
 
               <Stack mt={6}>
                 <Center>
-                  <Link href={result} download="zoom_icon.png">
-                    <Button colorScheme="blue">
+                  <a href={result} download="zoom_icon.png">
+                    <Button colorScheme="brand">
                       ダウンロード <DownloadIcon />
                     </Button>
-                  </Link>
+                  </a>
                 </Center>
                 <Center>
                   <Text>または画像長押しで保存</Text>
@@ -135,24 +147,83 @@ export default function Home() {
           </ModalContent>
         </Modal>
 
-        {/* <About /> */}
+        <Box h="16" />
+        <About />
 
-        <Center as="footer" color="gray" fontSize="sm" textAlign="center">
-          <Stack>
-            <Text>
-              created by{" "}
-              <Link href="https://twitter.com/Chijidosu">@Chijidosu</Link>
-            </Text>
-            <Text>※Zoomは、Zoomビデオコミュニケーションズの商標です。</Text>
-          </Stack>
-        </Center>
+        <Box
+          as="footer"
+          color="gray"
+          fontSize="sm"
+          textAlign="center"
+          mt={10}
+          mb={2}
+        >
+          <Text>
+            created by{" "}
+            <Link href="https://twitter.com/Chijidosu">@Chijidosu</Link>
+          </Text>
+          <Text>※Zoomは、Zoomビデオコミュニケーションズの商標です。</Text>
+        </Box>
       </Container>
     </>
   );
 }
 
 const About = () => (
-  <Box textAlign="center" m="6">
-    <Heading fontSize="2xl">何ができるの？</Heading>
-  </Box>
+  <Stack mt="6" spacing={6}>
+    <Heading textAlign="center" fontSize="2xl">
+      何ができるの？
+    </Heading>
+    <Text textAlign="center">🎉 Zoomのサムネイルを改善します！ 🎉</Text>
+    <Grid
+      templateColumns="repeat(2, 1fr)"
+      gap={6}
+      alignItems="center"
+      maxW="sm"
+    >
+      <Text>何も設定しないと...</Text>
+      <NextImage
+        src="/about/bad_demo.png"
+        width={320}
+        height={180}
+        alt="bad demo"
+      />
+      <Text>画像を設定しても...</Text>
+      <NextImage
+        src="/about/bad_demo_image.png"
+        width={320}
+        height={180}
+        alt="bad demo with image"
+      />
+    </Grid>
+    <Stack>
+      <ChatBubble icon="/about/nuko.png" side="right">
+        ダサいにゃん！
+      </ChatBubble>
+      <ChatBubble icon="/about/chiji.png" side="left">
+        わかる
+      </ChatBubble>
+    </Stack>
+    <Text>これで生成した画像をプロフィール画像に設定すると...</Text>
+    <Stack justify="center" wrap="wrap-reverse" direction="row">
+      <Box maxW="40">
+        <NextImage src="/about/good_demo.png" width={320} height={180} />
+      </Box>
+      <Box maxW="40">
+        <NextImage src="/about/good_demo_role.png" width={320} height={180} />
+      </Box>
+      <Box maxW="40">
+        <NextImage src="/about/good_demo_sns.png" width={320} height={180} />
+      </Box>
+    </Stack>
+    <Stack>
+      <ChatBubble icon="/about/nuko.png" side="right">
+        見やすいにゃん！
+      </ChatBubble>
+      <ChatBubble icon="/about/chiji.png" side="left">
+        わかる
+      </ChatBubble>
+    </Stack>
+    <Text>さあ作ってみましょう！</Text>
+  </Stack>
 );
