@@ -39,7 +39,7 @@ const ImageSelector = ({
       }
 
       onSelect(imageDataUrl);
-      e.target.files = null;
+      e.target.value = "";
       // inputRef.current.files = null;
     }
   };
