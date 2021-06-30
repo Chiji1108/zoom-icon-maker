@@ -4,6 +4,7 @@ UI: [https://master--607ad529e019a8002151d3da.chromatic.com](https://master--607
 
 ## TODO
 
+- PR画像とリリース
 - コードに書かれているTODO
 - あーzoomのアイコン見づらいにゃ、、、
 - 間違って回転をしてしまった時のリセット方法
