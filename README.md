@@ -10,3 +10,4 @@ UI: [https://master--607ad529e019a8002151d3da.chromatic.com](https://master--607
 - コードに書かれているTODO
 - TwitterIDから直で生成できるように
 - フォントを追加
+- PWAアイコン
