@@ -28,6 +28,17 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Zoomアイコンメーカー</title>
+        <meta charSet="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta
+          name="description"
+          content="Zoom用のプロフィール画像を生成します"
+        />
+        <meta name="keywords" content="Zoom,profile,generator" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="theme-color" content={BRAND_COLOR} />
         <link rel="manifest" href="/manifest.webmanifest" />
@@ -35,6 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="apple-touch-icon" href="/pwa/apple-icon-180.png" />
 
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
 
         <link
           rel="apple-touch-startup-image"
