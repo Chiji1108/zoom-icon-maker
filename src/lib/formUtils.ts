@@ -35,7 +35,7 @@ export const generate = async (
       : 72;
   const NAME_SIZE = hideBio ? 144 : 140;
   const NAME_Y = hideBio ? 780 : 725;
-  const BIO_SIZE = 66;
+  const BIO_SIZE = 50;
   const BIO_Y = 900;
   const ICON_SIZE = 70;
   const ICON_MARGIN = 15;
