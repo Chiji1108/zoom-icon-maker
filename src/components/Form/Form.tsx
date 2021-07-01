@@ -17,7 +17,7 @@ import {
   Stack,
   Fade,
 } from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
+import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 // import { generate } from "../../lib/formUtils";
 import immer from "immer";
 import { useImmer } from "use-immer";
@@ -95,7 +95,7 @@ const Form = ({ children }: FormProps) => {
             <DataInput onChange={handleDataInput} />
             <Fade in={bio.setting.isHidden} unmountOnExit>
               <IconButton
-                // borderRadius="full"
+                borderRadius="full"
                 aria-label="add bio"
                 icon={<AddIcon />}
                 onClick={() =>
@@ -134,7 +134,7 @@ const Form = ({ children }: FormProps) => {
                 placeholder="名前を入力"
               >
                 <Box
-                  verticalAlign={bio.setting.isHidden ? "super" : "text-bottom"}
+                  // verticalAlign={bio.setting.isHidden ? "super" : "super"}
                   fontFamily={name.setting.font.family}
                   fontWeight={name.setting.font.weight}
                   textColor="white"
@@ -172,7 +172,7 @@ const Form = ({ children }: FormProps) => {
                     )}
                     <Box
                       textColor="white"
-                      verticalAlign="text-bottom"
+                      // verticalAlign="text-bottom"
                       fontFamily={bio.setting.font.family}
                       fontWeight={bio.setting.font.weight}
                       textAlign="center"
@@ -187,6 +187,20 @@ const Form = ({ children }: FormProps) => {
                     value={bio}
                     onChange={updateBio}
                     advanced={true}
+                  />
+                </Center>
+                <Center pos="absolute" right="-80px" top={0} bottom={0}>
+                  <IconButton
+                    borderRadius="full"
+                    aria-label="remove bio"
+                    icon={<DeleteIcon />}
+                    onClick={() =>
+                      updateBio((draft) => {
+                        draft.setting.isHidden = true;
+                      })
+                    }
+                    variant="ghost"
+                    colorScheme="whiteAlpha"
                   />
                 </Center>
               </Box>

@@ -69,7 +69,7 @@ const DataInput = ({ onChange }: DataInputProps) => {
           setTabIndex(0);
           onOpen();
         }}
-        // borderRadius="full"
+        borderRadius="full"
         variant="ghost"
         colorScheme="whiteAlpha"
       />

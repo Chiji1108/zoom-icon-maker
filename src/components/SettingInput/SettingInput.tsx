@@ -126,7 +126,7 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
   return (
     <>
       <IconButton
-        // borderRadius="full"
+        borderRadius="full"
         aria-label="open setting"
         icon={<SettingsIcon />}
         onClick={onOpen}
@@ -178,7 +178,6 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                   {advanced && (
                     <>
                       <Tab isDisabled={isHidden}>アイコン</Tab>
-                      <Tab>その他</Tab>
                     </>
                   )}
                 </TabList>
@@ -267,20 +266,6 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                         })}
                       </Wrap>
                     </Stack>
-                  </TabPanel>
-                  <TabPanel>
-                    <FormControl>
-                      <HStack>
-                        <FormLabel mb="0">非表示にする</FormLabel>
-                        <Switch
-                          isChecked={isHidden}
-                          onChange={(e) =>
-                            e.target.checked ? setHidden.on() : setHidden.off()
-                          }
-                          colorScheme="brand"
-                        />
-                      </HStack>
-                    </FormControl>
                   </TabPanel>
                 </TabPanels>
               </Tabs>
