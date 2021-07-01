@@ -37,7 +37,7 @@ export const generate = async (
   const NAME_Y = hideBio ? 780 : 725;
   const BIO_SIZE = 50;
   const BIO_Y = 900;
-  const ICON_SIZE = 70;
+  const ICON_SIZE = BIO_SIZE + 4;
   const ICON_MARGIN = 15;
 
   const canvas = document.createElement("canvas");
