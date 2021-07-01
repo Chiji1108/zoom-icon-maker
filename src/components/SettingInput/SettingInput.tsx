@@ -42,6 +42,7 @@ import {
   WrapItem,
   Center,
   Collapse,
+  Fade,
 } from "@chakra-ui/react";
 import { SettingsIcon } from "@chakra-ui/icons";
 import {
@@ -55,20 +56,8 @@ import {
 } from "react";
 
 import icons from "../../lib/icons";
-import fonts from "../../lib/fonts";
-
-// type Weight =
-//   | "normal"
-//   | "bold"
-//   | "100"
-//   | "200"
-//   | "300"
-//   | "400"
-//   | "500"
-//   | "600"
-//   | "700"
-//   | "800"
-//   | "900";
+import { useContext } from "react";
+import { FontContext } from "../../pages";
 
 export type SettingInputProps = {
   value: Setting;
@@ -80,7 +69,7 @@ export type Setting = {
   text: string;
   setting: {
     font: {
-      family: keyof typeof fonts;
+      family: string;
       weight: string;
     };
     icon: "none" | keyof typeof icons;
@@ -89,6 +78,7 @@ export type Setting = {
 };
 
 const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
+  const fonts = useContext(FontContext);
   const [text, setText] = useState<string>(value.text);
   const [fontFamily, setFontFamily] = useState(value.setting.font.family);
   const [fontWeight, setFontWeight] = useState(value.setting.font.weight);
@@ -128,12 +118,9 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialFocusRef = useRef<HTMLButtonElement>(null);
 
-  const handleSelectFontFamily = (nextValue: keyof typeof fonts) => {
+  const handleSelectFontFamily = (nextValue: string) => {
     setFontFamily(nextValue);
-
-    if (!(fontWeight && fonts[nextValue].weights.includes(fontWeight))) {
-      setFontWeight(fonts[nextValue].defaultWeight);
-    }
+    setFontWeight("normal");
   };
 
   return (
@@ -169,7 +156,7 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
 
                     <Editable
                       color="white"
-                      fontFamily={fontFamily as string}
+                      fontFamily={fontFamily}
                       fontWeight={fontWeight}
                       fontSize="2xl"
                       verticalAlign="text-bottom"
@@ -198,16 +185,22 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
 
                 <TabPanels>
                   <TabPanel>
-                    <Stack direction="row">
-                      <FormControl>
+                    <Stack direction="row" spacing="4">
+                      <FormControl flex="5">
                         <FormLabel>フォント</FormLabel>
                         <RadioGroup
                           value={fontFamily}
                           onChange={handleSelectFontFamily}
                           colorScheme="brand"
                         >
-                          <Stack>
-                            {Object.entries(fonts).map(([family]) => (
+                          <Stack
+                            h="3xs"
+                            overflow="scroll"
+                            border="1px solid #eeeeee"
+                            rounded="md"
+                            p="3"
+                          >
+                            {fonts.map(({ family }) => (
                               <Radio key={family} value={family}>
                                 <Text fontFamily={family}>{family}</Text>
                               </Radio>
@@ -217,18 +210,27 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                       </FormControl>
 
                       {fontFamily && (
-                        <FormControl>
+                        <FormControl flex="3">
                           <FormLabel>太さ</FormLabel>
                           <RadioGroup
                             value={fontWeight}
                             onChange={setFontWeight}
                             colorScheme="brand"
                           >
-                            <Stack>
-                              {fonts[fontFamily]?.weights.map((weight) => (
+                            <Stack
+                              h="3xs"
+                              overflow="scroll"
+                              border="1px solid #eeeeee"
+                              rounded="md"
+                              p="3"
+                            >
+                              {Object.keys(
+                                fonts.filter((f) => f.family === fontFamily)[0]
+                                  .files
+                              ).map((weight) => (
                                 <Radio key={weight} value={weight}>
                                   <Text
-                                    fontFamily={fontFamily as string}
+                                    fontFamily={fontFamily}
                                     fontWeight={weight}
                                   >
                                     {weight}

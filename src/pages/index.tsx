@@ -37,7 +37,7 @@ import {
   FacebookIcon,
 } from "react-share";
 import { DownloadIcon } from "@chakra-ui/icons";
-import { useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import { Form } from "../components/Form";
 import NextImage from "next/image";
 // import { ImageSelector } from "../components/ImageSelector";
@@ -46,15 +46,99 @@ import NextImage from "next/image";
 import anime from "animejs";
 
 import { ChatBubble } from "../components/ChatBubble";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
+
+import axios from "axios";
+import {
+  TransformedResponse,
+  OriginalResponse,
+  transform,
+  GOOGLE_FONTS_URL,
+} from "./api/fonts";
+import { useEffect } from "react";
 
 const SHARE_URL = "https://zoom-icon-maker.vercel.app";
 
-export default function Home() {
+const addFonts = (fonts: TransformedResponse) => {
+  fonts.forEach(({ family, files }) => {
+    Object.entries(files).forEach(async ([key, value]) => {
+      let font: FontFace;
+      if (key === "normal") {
+        font = new FontFace(family, `url(${value})`);
+      } else {
+        font = new FontFace(family, `url(${value})`, { weight: key });
+      }
+
+      await font.load();
+      document.fonts.add(font);
+    });
+  });
+};
+
+export const FontContext = createContext<TransformedResponse>([
+  {
+    family: "Noto Sans JP",
+    files: {
+      "100":
+        "http://fonts.gstatic.com/s/notosansjp/v28/-F6ofjtqLzI2JPCgQBnw7HFQoggM-FNthvIU.otf",
+      "300":
+        "http://fonts.gstatic.com/s/notosansjp/v28/-F6pfjtqLzI2JPCgQBnw7HFQaioq1H1hj-sNFQ.otf",
+      regular:
+        "http://fonts.gstatic.com/s/notosansjp/v28/-F62fjtqLzI2JPCgQBnw7HFowAIO2lZ9hg.otf",
+      "500":
+        "http://fonts.gstatic.com/s/notosansjp/v28/-F6pfjtqLzI2JPCgQBnw7HFQMisq1H1hj-sNFQ.otf",
+      "700":
+        "http://fonts.gstatic.com/s/notosansjp/v28/-F6pfjtqLzI2JPCgQBnw7HFQei0q1H1hj-sNFQ.otf",
+      "900":
+        "http://fonts.gstatic.com/s/notosansjp/v28/-F6pfjtqLzI2JPCgQBnw7HFQQi8q1H1hj-sNFQ.otf",
+    },
+  },
+  {
+    family: "Noto Serif JP",
+    files: {
+      "200":
+        "http://fonts.gstatic.com/s/notoserifjp/v8/xn77YHs72GKoTvER4Gn3b5eMZBaPRkgfU8fEwb0.otf",
+      "300":
+        "http://fonts.gstatic.com/s/notoserifjp/v8/xn77YHs72GKoTvER4Gn3b5eMZHKMRkgfU8fEwb0.otf",
+      regular:
+        "http://fonts.gstatic.com/s/notoserifjp/v8/xn7mYHs72GKoTvER4Gn3b5eMXNikYkY0T84.otf",
+      "500":
+        "http://fonts.gstatic.com/s/notoserifjp/v8/xn77YHs72GKoTvER4Gn3b5eMZCqNRkgfU8fEwb0.otf",
+      "600":
+        "http://fonts.gstatic.com/s/notoserifjp/v8/xn77YHs72GKoTvER4Gn3b5eMZAaKRkgfU8fEwb0.otf",
+      "700":
+        "http://fonts.gstatic.com/s/notoserifjp/v8/xn77YHs72GKoTvER4Gn3b5eMZGKLRkgfU8fEwb0.otf",
+      "900":
+        "http://fonts.gstatic.com/s/notoserifjp/v8/xn77YHs72GKoTvER4Gn3b5eMZFqJRkgfU8fEwb0.otf",
+    },
+  },
+]);
+
+export const getStaticProps = async () => {
+  const { data } = await axios.get<OriginalResponse>(GOOGLE_FONTS_URL, {
+    params: {
+      key: process.env.GOOGLE_FONTS_API_KEY,
+      sort: "popularity",
+    },
+  });
+  const fonts = transform(data);
+  return {
+    props: { fonts },
+  };
+};
+
+export default function Home({
+  fonts,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const [result, setResult] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  useEffect(() => {
+    addFonts(fonts);
+  }, []);
+
   return (
-    <>
+    <FontContext.Provider value={fonts}>
       <Container maxW="xl" centerContent>
         <Heading as="h1" mt={12} mb={6} textAlign="center" lineHeight="none">
           <Text
@@ -136,7 +220,7 @@ export default function Home() {
           <Text>※Zoomは、Zoomビデオコミュニケーションズの商標です。</Text>
         </Box>
       </Container>
-    </>
+    </FontContext.Provider>
   );
 }
 

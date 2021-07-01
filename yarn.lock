@@ -2676,36 +2676,6 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
-"@fontsource/dotgothic16@^4.4.5":
-  version "4.4.5"
-  resolved "https://registry.yarnpkg.com/@fontsource/dotgothic16/-/dotgothic16-4.4.5.tgz#9f41154b6ca318693b352b02fbfe940c466b3943"
-  integrity sha512-3mMVkGAG/b765tXmREsPwge+jG45FV7SdLwyndHK6mLJ+BfNXFOUO1GFoANNfSZxF61eSLYQNjXv7hRIjCD4LA==
-
-"@fontsource/kosugi-maru@^4.4.5":
-  version "4.4.5"
-  resolved "https://registry.yarnpkg.com/@fontsource/kosugi-maru/-/kosugi-maru-4.4.5.tgz#8ef2c39b13234cc580a38611005f9328c6e97663"
-  integrity sha512-W1uKJWey10koassT2NVtjg82rE6F55xqCD6WCJGoV2d7cBdexpzQ9k3cATE9OYt4omCChch1PEYxY1GoN+QtXg==
-
-"@fontsource/m-plus-1p@^4.4.5":
-  version "4.4.5"
-  resolved "https://registry.yarnpkg.com/@fontsource/m-plus-1p/-/m-plus-1p-4.4.5.tgz#b41fd9703e859c0e8eeda186cf39b97b9d3ab73e"
-  integrity sha512-W19HNs97UVXucLr0f+TcX5Sh7S4QQzOYLn4BANtn4eqKbtvlMfRdttXMruaIQopkYWYxOVen/pJ3u5ysmglrQA==
-
-"@fontsource/noto-sans-jp@^4.4.5":
-  version "4.4.5"
-  resolved "https://registry.yarnpkg.com/@fontsource/noto-sans-jp/-/noto-sans-jp-4.4.5.tgz#5ffab503a66e1c935d25083dded1addb75c1fc34"
-  integrity sha512-yQB+WXHP3XLccKulWdHSxmzPE3oCHxa9vdQHoe7t28F08LGf3ADt9/zN44X0DQL5eWhvyoKcPGVvYb4y9gVAwQ==
-
-"@fontsource/noto-serif-jp@^4.4.5":
-  version "4.4.5"
-  resolved "https://registry.yarnpkg.com/@fontsource/noto-serif-jp/-/noto-serif-jp-4.4.5.tgz#08eb924daa4fba419d19da322d91d09250ab93bf"
-  integrity sha512-3pK4DnJKTBLi+8yjZhHcXWt2o8+F4n/l9m6q0ue9yEIMxT1yxc8vLyG4LepOKjvE/AMOEEsG5/oS1yozK7mmSQ==
-
-"@fontsource/shippori-mincho@^4.4.5":
-  version "4.4.5"
-  resolved "https://registry.yarnpkg.com/@fontsource/shippori-mincho/-/shippori-mincho-4.4.5.tgz#7fd663a834e317ae3d71be4d27c234961f105029"
-  integrity sha512-27VGPMYSX7WXCMr3JADe9r2xfLFOLqpnUkqcm0q3M2y9y5pK7a1R5rWbMqn5YP0IyRsgjrltf7Ys+wUp8Yr/gA==
-
 "@hapi/accept@5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@hapi/accept/-/accept-5.0.2.tgz#ab7043b037e68b722f93f376afb05e85c0699523"
@@ -4253,6 +4223,11 @@
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.4.0.tgz#14f854c0f93d326e39da6e3b6f34f7d37513d108"
   integrity sha512-y7mImlc/rNkvCRmg8gC3/lj87S7pTUIJ6QGjwHR9WQJcFs+ZMTOaoPrkdFA/YdbuqVEmEbb5RdhVxMkAcgOnpg==
+
+"@types/css-font-loading-module@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@types/css-font-loading-module/-/css-font-loading-module-0.0.5.tgz#17c37be8df0c414608015026f2a241c482d45b49"
+  integrity sha512-yMt5ISeRT8nJkuR4Nayp63LOa0qFlJTkbizIED4e9VRIfzKigQ1Q0v/nKkKo/Agq1znTW/bfF/5RcoAPtv3MGg==
 
 "@types/estree@0.0.39":
   version "0.0.39"

@@ -47,7 +47,7 @@ const Form = ({ children }: FormProps) => {
     setting: {
       font: {
         family: "Noto Serif JP",
-        weight: "400",
+        weight: "normal",
       },
       icon: "none",
       isHidden: false,
@@ -58,7 +58,7 @@ const Form = ({ children }: FormProps) => {
     setting: {
       font: {
         family: "Noto Serif JP",
-        weight: "400",
+        weight: "normal",
       },
       icon: "none",
       isHidden: false,
