@@ -36,9 +36,9 @@ export const generate = async (
       : hideBio
       ? 78
       : 72;
-  const NAME_SIZE = hideBio ? 144 : 140;
+  let NAME_SIZE = hideBio ? 144 : 140;
   const NAME_Y = hideBio ? 780 : 725;
-  const BIO_SIZE = 50;
+  let BIO_SIZE = 50;
   const BIO_Y = 900;
   const ICON_SIZE = BIO_SIZE + 4;
   const ICON_MARGIN = 15;
@@ -90,27 +90,37 @@ export const generate = async (
   ctx.textAlign = "center";
 
   // name
+  let nameFont: string;
   try {
-    const nameFont = `${name.setting.font.weight} ${NAME_SIZE}px '${name.setting.font.family}'`;
+    nameFont = `${name.setting.font.weight} ${NAME_SIZE}px ${name.setting.font.family}`;
     await document.fonts.load(nameFont, name.text);
-    ctx.font = nameFont;
   } catch (error) {
-    const nameFont = `${NAME_SIZE}px '${name.setting.font.family}'`;
+    nameFont = `${NAME_SIZE}px ${name.setting.font.family}`;
     await document.fonts.load(nameFont, name.text);
+  }
+  ctx.font = nameFont;
+  while (ctx.measureText(name.text).width + 50 > CANVAS_SIZE) {
+    nameFont = nameFont.replace(`${NAME_SIZE}px`, `${NAME_SIZE - 10}px`);
     ctx.font = nameFont;
+    NAME_SIZE -= 10;
   }
   ctx.fillText(name.text, CANVAS_SIZE / 2, NAME_Y);
 
   // bio
   if (!hideBio) {
+    let bioFont: string;
     try {
-      const bioFont = `${bio.setting.font.weight} ${BIO_SIZE}px '${bio.setting.font.family}'`;
+      bioFont = `${bio.setting.font.weight} ${BIO_SIZE}px '${bio.setting.font.family}'`;
       await document.fonts.load(bioFont, bio.text);
-      ctx.font = bioFont;
     } catch (error) {
-      const bioFont = `${BIO_SIZE}px '${bio.setting.font.family}'`;
+      bioFont = `${BIO_SIZE}px '${bio.setting.font.family}'`;
       await document.fonts.load(bioFont, bio.text);
+    }
+    ctx.font = bioFont;
+    while (ctx.measureText(bio.text).width + 200 > CANVAS_SIZE) {
+      bioFont = bioFont.replace(`${BIO_SIZE}px`, `${BIO_SIZE - 10}px`);
       ctx.font = bioFont;
+      BIO_SIZE -= 10;
     }
     if (bio.setting.icon != "none") {
       ctx.save();
