@@ -315,7 +315,7 @@ export const Unsplash = ({ onChange }: UnsplashProps) => {
             data?.pages
               ?.flatMap((page) => page.images)
               .map(({ src, alt, width, height }) => ({
-                src: src.thumb,
+                src: src.regular,
                 alt,
                 width,
                 height,
