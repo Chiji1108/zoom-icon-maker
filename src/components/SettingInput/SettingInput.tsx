@@ -208,7 +208,7 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                               value={fontFamily}
                               type="radio"
                               onChange={(e) => {
-                                setFontFamily(e.toString());
+                                setFontFamily(Array.isArray(e) ? e[0] : e);
                                 setFontWeight(
                                   fonts.find((f) => f.family === e)
                                     ?.variants[0] || "regular"
@@ -246,7 +246,9 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                             <MenuOptionGroup
                               value={fontWeight}
                               type="radio"
-                              onChange={(v) => setFontWeight(v.toString())}
+                              onChange={(v) =>
+                                setFontWeight(Array.isArray(v) ? v[0] : v)
+                              }
                             >
                               {fonts
                                 .find((f) => f.family === fontFamily)
