@@ -46,7 +46,7 @@ const Form = ({ children }: FormProps) => {
     text: "",
     setting: {
       font: {
-        family: "Noto Serif JP",
+        family: "serif",
         weight: "normal",
       },
       icon: "none",
@@ -57,7 +57,7 @@ const Form = ({ children }: FormProps) => {
     text: "",
     setting: {
       font: {
-        family: "Noto Serif JP",
+        family: "serif",
         weight: "normal",
       },
       icon: "none",
