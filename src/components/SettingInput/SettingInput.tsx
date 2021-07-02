@@ -191,8 +191,8 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
 
                 <TabPanels>
                   <TabPanel>
-                    <Stack direction="row" spacing={6} wrap="wrap">
-                      <FormControl flex="5">
+                    <Stack>
+                      <FormControl>
                         <FormLabel>フォント</FormLabel>
                         <Menu isLazy>
                           <MenuButton
@@ -230,7 +230,7 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                         </Menu>
                       </FormControl>
 
-                      <FormControl flex="3">
+                      <FormControl>
                         <FormLabel>太さ</FormLabel>
                         <Menu isLazy>
                           <MenuButton
