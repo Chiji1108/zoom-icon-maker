@@ -131,12 +131,13 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
   return (
     <>
       <IconButton
-        borderRadius="full"
+        isRound
         aria-label="open setting"
         icon={<SettingsIcon />}
         onClick={onOpen}
         variant="ghost"
         colorScheme="whiteAlpha"
+        fontSize="20"
       />
 
       <Modal

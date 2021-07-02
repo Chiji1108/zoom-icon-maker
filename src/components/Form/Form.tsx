@@ -23,7 +23,7 @@ import immer from "immer";
 import { useImmer } from "use-immer";
 import { Setting, SettingInput } from "../SettingInput";
 import icons from "../../lib/icons";
-import { DataInput, Data } from "../DataInput";
+import { UnsplashInput, Data, TwitterInput } from "../DataInput";
 // import { Data } from "../../pages/api/twitter/[id]"
 import { generate } from "../../lib/formUtils";
 
@@ -92,10 +92,11 @@ const Form = ({ children }: FormProps) => {
       <Box p="4" bg="rgb(36,36,36)" maxW="sm" pos="relative" minW="sm">
         <Box pos="absolute" top="0" right="0">
           <Stack p={2} spacing={0}>
-            <DataInput onChange={handleDataInput} />
+            <TwitterInput onChange={handleDataInput} />
+            <UnsplashInput onChange={handleDataInput} />
             <Fade in={bio.setting.isHidden} unmountOnExit>
               <IconButton
-                borderRadius="full"
+                isRound
                 aria-label="add bio"
                 icon={<AddIcon />}
                 onClick={() =>
@@ -105,6 +106,7 @@ const Form = ({ children }: FormProps) => {
                 }
                 variant="ghost"
                 colorScheme="whiteAlpha"
+                fontSize="20"
               />
             </Fade>
           </Stack>
@@ -191,7 +193,7 @@ const Form = ({ children }: FormProps) => {
                 </Center>
                 <Center pos="absolute" right="-80px" top={0} bottom={0}>
                   <IconButton
-                    borderRadius="full"
+                    isRound
                     aria-label="remove bio"
                     icon={<DeleteIcon />}
                     onClick={() =>
@@ -201,6 +203,7 @@ const Form = ({ children }: FormProps) => {
                     }
                     variant="ghost"
                     colorScheme="whiteAlpha"
+                    fontSize="20"
                   />
                 </Center>
               </Box>
