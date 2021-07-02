@@ -8,8 +8,6 @@ import { ReactQueryDevtools } from "react-query/devtools";
 
 import Head from "next/head";
 
-import "@fontsource/noto-serif-jp";
-
 const BRAND_COLOR = "#0b93f6";
 
 const theme = extendTheme({
