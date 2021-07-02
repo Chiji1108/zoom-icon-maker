@@ -42,9 +42,6 @@ import { Form } from "../components/Form";
 import NextImage from "next/image";
 // import { ImageSelector } from "../components/ImageSelector";
 
-// import anime from "animejs/lib/anime.es.js";
-import anime from "animejs";
-
 import { ChatBubble } from "../components/ChatBubble";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 
@@ -59,20 +56,25 @@ import { useEffect } from "react";
 
 const SHARE_URL = "https://zoom-icon-maker.vercel.app";
 
-const addFonts = (fonts: TransformedResponse) => {
-  fonts.forEach(({ family, files }) => {
-    Object.entries(files).forEach(async ([key, value]) => {
-      let font: FontFace;
-      if (key === "normal") {
-        font = new FontFace(family, `url(${value})`);
-      } else {
-        font = new FontFace(family, `url(${value})`, { weight: key });
-      }
-
-      await font.load();
-      document.fonts.add(font);
-    });
-  });
+const addFonts = async (fonts: TransformedResponse) => {
+  await Promise.all(
+    fonts.map(({ family, files }) => {
+      return Promise.all(
+        Object.entries(files).map(([key, value]) => {
+          let font: FontFace;
+          if (key === "normal") {
+            font = new FontFace(family, `url(${value})`);
+          } else {
+            font = new FontFace(family, `url(${value})`, { weight: key });
+          }
+          return (async () => {
+            await font.load();
+            document.fonts.add(font);
+          })();
+        })
+      );
+    })
+  );
 };
 
 export const FontContext = createContext<TransformedResponse>([
@@ -302,16 +304,7 @@ const About = () => (
       alignSelf="center"
       colorScheme="brand"
       onClick={() => {
-        const scrollElement =
-          window.document.scrollingElement ||
-          window.document.body ||
-          window.document.documentElement;
-        anime({
-          targets: scrollElement,
-          scrollTop: 0,
-          duration: 500,
-          easing: "easeInOutQuad",
-        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }}
     >
       トップに戻る

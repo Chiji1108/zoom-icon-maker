@@ -43,8 +43,18 @@ import {
   Center,
   Collapse,
   Fade,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuIcon,
+  MenuCommand,
+  MenuDivider,
 } from "@chakra-ui/react";
-import { SettingsIcon } from "@chakra-ui/icons";
+import { SettingsIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import {
   ChangeEvent,
   ReactElement,
@@ -138,6 +148,7 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
         initialFocusRef={initialFocusRef}
         isOpen={isOpen}
         onClose={onClose}
+        // scrollBehavior="inside"
       >
         <ModalOverlay />
         <ModalContent>
@@ -184,62 +195,61 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
 
                 <TabPanels>
                   <TabPanel>
-                    <Stack direction="row" spacing="4">
+                    <Stack direction="row" spacing={6} wrap="wrap">
                       <FormControl flex="5">
                         <FormLabel>フォント</FormLabel>
-                        <RadioGroup
-                          value={fontFamily}
-                          onChange={handleSelectFontFamily}
-                          colorScheme="brand"
-                        >
-                          <Stack
-                            h="3xs"
-                            overflow="scroll"
-                            border="1px solid #eeeeee"
-                            rounded="md"
-                            p="3"
+                        <Menu>
+                          <MenuButton
+                            as={Button}
+                            rightIcon={<ChevronDownIcon />}
+                            fontFamily={fontFamily}
+                            w="100%"
+                            textAlign="start"
                           >
+                            {fontFamily}
+                          </MenuButton>
+                          <MenuList>
                             {fonts.map(({ family }) => (
-                              <Radio key={family} value={family}>
-                                <Text fontFamily={family}>{family}</Text>
-                              </Radio>
+                              <MenuItem
+                                fontFamily={family}
+                                onClick={() => setFontFamily(family)}
+                              >
+                                {family}
+                              </MenuItem>
                             ))}
-                          </Stack>
-                        </RadioGroup>
+                          </MenuList>
+                        </Menu>
                       </FormControl>
 
-                      {fontFamily && (
-                        <FormControl flex="3">
-                          <FormLabel>太さ</FormLabel>
-                          <RadioGroup
-                            value={fontWeight}
-                            onChange={setFontWeight}
-                            colorScheme="brand"
+                      <FormControl flex="3">
+                        <FormLabel>太さ</FormLabel>
+                        <Menu>
+                          <MenuButton
+                            as={Button}
+                            rightIcon={<ChevronDownIcon />}
+                            fontFamily={fontFamily}
+                            fontWeight={fontWeight}
+                            w="100%"
+                            textAlign="start"
                           >
-                            <Stack
-                              h="3xs"
-                              overflow="scroll"
-                              border="1px solid #eeeeee"
-                              rounded="md"
-                              p="3"
-                            >
-                              {Object.keys(
-                                fonts.filter((f) => f.family === fontFamily)[0]
-                                  .files
-                              ).map((weight) => (
-                                <Radio key={weight} value={weight}>
-                                  <Text
-                                    fontFamily={fontFamily}
-                                    fontWeight={weight}
-                                  >
-                                    {weight}
-                                  </Text>
-                                </Radio>
-                              ))}
-                            </Stack>
-                          </RadioGroup>
-                        </FormControl>
-                      )}
+                            {fontWeight}
+                          </MenuButton>
+                          <MenuList>
+                            {Object.keys(
+                              fonts.filter((f) => f.family === fontFamily)[0]
+                                .files
+                            ).map((weight) => (
+                              <MenuItem
+                                fontFamily={fontFamily}
+                                fontWeight={weight}
+                                onClick={() => setFontWeight(weight)}
+                              >
+                                {weight}
+                              </MenuItem>
+                            ))}
+                          </MenuList>
+                        </Menu>
+                      </FormControl>
                     </Stack>
                   </TabPanel>
                   <TabPanel>

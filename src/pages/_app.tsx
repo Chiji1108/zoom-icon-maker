@@ -8,6 +8,8 @@ import { ReactQueryDevtools } from "react-query/devtools";
 
 import Head from "next/head";
 
+import "@fontsource/noto-serif-jp";
+
 const BRAND_COLOR = "#0b93f6";
 
 const theme = extendTheme({
@@ -28,12 +30,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Zoomアイコンメーカー</title>
-        <meta charSet="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
-        />
         <meta
           name="description"
           content="Zoom用のプロフィール画像を生成します"
@@ -182,7 +178,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <ChakraProvider theme={theme}>
           <Component {...pageProps} />
-          <ReactQueryDevtools />
+          {/* <ReactQueryDevtools /> */}
         </ChakraProvider>
       </QueryClientProvider>
     </>
