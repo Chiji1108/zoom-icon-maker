@@ -283,7 +283,7 @@ export const Unsplash = ({ onChange }: UnsplashProps) => {
       </Modal>
       <Stack>
         <FormControl isInvalid={!!errors.query || !!error}>
-          <FormLabel>画像を選択</FormLabel>
+          <FormLabel>画像を検索(英語)</FormLabel>
           <Input
             placeholder="検索ワードを入力"
             defaultValue="cat"
