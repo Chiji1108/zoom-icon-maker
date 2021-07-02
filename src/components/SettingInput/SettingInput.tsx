@@ -26,11 +26,6 @@ import {
   useBoolean,
   useRadio,
   Box,
-  Tabs,
-  Tab,
-  TabList,
-  TabPanels,
-  TabPanel,
   Input,
   Editable,
   EditableInput,
@@ -53,6 +48,8 @@ import {
   MenuIcon,
   MenuCommand,
   MenuDivider,
+  Heading,
+  Portal,
 } from "@chakra-ui/react";
 import { SettingsIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import {
@@ -151,151 +148,146 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
           <ModalHeader>設定</ModalHeader>
           <ModalCloseButton ref={initialFocusRef} />
           <ModalBody pb={6}>
-            <Stack>
-              <Collapse in={!isHidden} animateOpacity>
-                <Box p={4} bg="rgb(36,36,36)">
-                  <HStack>
-                    {icon !== "none" && (
-                      <Center width="24px" height="24px" m="1">
-                        {icons[icon as keyof typeof icons].component}
-                      </Center>
-                    )}
-
-                    <Editable
-                      color="white"
-                      fontFamily={fontFamily}
-                      fontWeight={fontWeight}
-                      fontSize="2xl"
-                      verticalAlign="text-bottom"
-                      placeholder="Zoomあいこんメーカー"
-                      value={text}
-                      onChange={setText}
-                      isDisabled={isHidden}
-                    >
-                      <EditablePreview />
-                      <EditableInput />
-                    </Editable>
-                  </HStack>
-                </Box>
-              </Collapse>
-
-              <Tabs>
-                <TabList>
-                  <Tab isDisabled={isHidden}>テキスト</Tab>
-                  {advanced && (
-                    <>
-                      <Tab isDisabled={isHidden}>アイコン</Tab>
-                    </>
+            <Stack spacing={6}>
+              <Box p={4} bg="rgb(36,36,36)">
+                <HStack>
+                  {icon !== "none" && (
+                    <Center width="24px" height="24px" m="1">
+                      {icons[icon as keyof typeof icons].component}
+                    </Center>
                   )}
-                </TabList>
 
-                <TabPanels>
-                  <TabPanel>
-                    <Stack>
-                      <FormControl>
-                        <FormLabel>フォント</FormLabel>
-                        <Menu isLazy>
-                          <MenuButton
-                            as={Button}
-                            rightIcon={<ChevronDownIcon />}
-                            fontFamily={fontFamily}
-                            w="100%"
-                            textAlign="start"
-                          >
-                            {fontFamily}
-                          </MenuButton>
-                          <MenuList mb="32">
-                            <MenuOptionGroup
-                              value={fontFamily}
-                              type="radio"
-                              onChange={(e) => {
-                                setFontFamily(Array.isArray(e) ? e[0] : e);
-                                setFontWeight(
-                                  fonts.find((f) => f.family === e)
-                                    ?.variants[0] || "regular"
-                                );
-                              }}
-                            >
-                              {fonts.map(({ family }) => (
-                                <MenuItemOption
-                                  fontFamily={family}
-                                  value={family}
-                                  key={family}
-                                >
-                                  {family}
-                                </MenuItemOption>
-                              ))}
-                            </MenuOptionGroup>
-                          </MenuList>
-                        </Menu>
-                      </FormControl>
+                  <Editable
+                    color="white"
+                    fontFamily={fontFamily}
+                    fontWeight={fontWeight}
+                    fontSize="2xl"
+                    verticalAlign="text-bottom"
+                    placeholder="Zoomあいこんメーカー"
+                    value={text}
+                    onChange={setText}
+                    isDisabled={isHidden}
+                  >
+                    <EditablePreview />
+                    <EditableInput />
+                  </Editable>
+                </HStack>
+              </Box>
 
-                      <FormControl>
-                        <FormLabel>太さ</FormLabel>
-                        <Menu isLazy>
-                          <MenuButton
-                            as={Button}
-                            rightIcon={<ChevronDownIcon />}
-                            fontFamily={fontFamily}
-                            fontWeight={fontWeight}
-                            w="100%"
-                            textAlign="start"
-                          >
-                            {fontWeight}
-                          </MenuButton>
-                          <MenuList mb="32">
-                            <MenuOptionGroup
-                              value={fontWeight}
-                              type="radio"
-                              onChange={(v) =>
-                                setFontWeight(Array.isArray(v) ? v[0] : v)
-                              }
-                            >
-                              {fonts
-                                .find((f) => f.family === fontFamily)
-                                ?.variants.map((weight) => (
-                                  <MenuItemOption
-                                    key={weight}
-                                    fontFamily={fontFamily}
-                                    fontWeight={weight}
-                                    value={weight}
-                                  >
-                                    {weight}
-                                  </MenuItemOption>
-                                ))}
-                            </MenuOptionGroup>
-                          </MenuList>
-                        </Menu>
-                      </FormControl>
-                    </Stack>
-                  </TabPanel>
-                  <TabPanel>
-                    <Stack {...group}>
-                      <Radio
-                        {...getRadioProps({ value: "none" })}
-                        colorScheme="brand"
+              <Stack>
+                <FormControl>
+                  <FormLabel fontWeight="bold">フォント</FormLabel>
+                  <Box p={1}>
+                    <Menu isLazy>
+                      <MenuButton
+                        as={Button}
+                        rightIcon={<ChevronDownIcon />}
+                        fontFamily={fontFamily}
+                        w="100%"
+                        textAlign="start"
                       >
-                        使用しない
-                      </Radio>
+                        {fontFamily}
+                      </MenuButton>
 
-                      <Wrap>
-                        {Object.entries(icons).map(([k, v]) => {
-                          const radio = getRadioProps({ value: k });
-                          return (
-                            <WrapItem key={k}>
-                              <RadioCircle {...radio}>
-                                <Center width="20px" height="20px">
-                                  {v.component}
-                                </Center>
-                              </RadioCircle>
-                            </WrapItem>
-                          );
-                        })}
-                      </Wrap>
-                    </Stack>
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
+                      <MenuList mb="32" maxH="xs" overflowY="auto">
+                        <MenuOptionGroup
+                          value={fontFamily}
+                          type="radio"
+                          onChange={(e) => {
+                            setFontFamily(Array.isArray(e) ? e[0] : e);
+                            setFontWeight(
+                              fonts.find((f) => f.family === e)?.variants[0] ||
+                                "regular"
+                            );
+                          }}
+                        >
+                          {fonts.map(({ family }) => (
+                            <MenuItemOption
+                              fontFamily={family}
+                              value={family}
+                              key={family}
+                            >
+                              {family}
+                            </MenuItemOption>
+                          ))}
+                        </MenuOptionGroup>
+                      </MenuList>
+                    </Menu>
+                  </Box>
+                </FormControl>
+
+                <FormControl>
+                  <FormLabel fontWeight="bold">太さ</FormLabel>
+                  <Box p={1}>
+                    <Menu isLazy>
+                      <MenuButton
+                        as={Button}
+                        rightIcon={<ChevronDownIcon />}
+                        fontFamily={fontFamily}
+                        fontWeight={fontWeight}
+                        w="100%"
+                        textAlign="start"
+                      >
+                        {fontWeight}
+                      </MenuButton>
+
+                      <MenuList mb="32" maxH="xs" overflowY="auto">
+                        <MenuOptionGroup
+                          value={fontWeight}
+                          type="radio"
+                          onChange={(v) =>
+                            setFontWeight(Array.isArray(v) ? v[0] : v)
+                          }
+                        >
+                          {fonts
+                            .find((f) => f.family === fontFamily)
+                            ?.variants.map((weight) => (
+                              <MenuItemOption
+                                key={weight}
+                                fontFamily={fontFamily}
+                                fontWeight={weight}
+                                value={weight}
+                              >
+                                {weight}
+                              </MenuItemOption>
+                            ))}
+                        </MenuOptionGroup>
+                      </MenuList>
+                    </Menu>
+                  </Box>
+                </FormControl>
+
+                {advanced && (
+                  <FormControl>
+                    <FormLabel fontWeight="bold">アイコン</FormLabel>
+                    <Box p={1}>
+                      <Stack {...group}>
+                        <Radio
+                          {...getRadioProps({ value: "none" })}
+                          colorScheme="brand"
+                        >
+                          使用しない
+                        </Radio>
+
+                        <Wrap>
+                          {Object.entries(icons).map(([k, v]) => {
+                            const radio = getRadioProps({ value: k });
+                            return (
+                              <WrapItem key={k}>
+                                <RadioCircle {...radio}>
+                                  <Center width="20px" height="20px">
+                                    {v.component}
+                                  </Center>
+                                </RadioCircle>
+                              </WrapItem>
+                            );
+                          })}
+                        </Wrap>
+                      </Stack>
+                    </Box>
+                  </FormControl>
+                )}
+              </Stack>
             </Stack>
           </ModalBody>
 
