@@ -128,11 +128,6 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialFocusRef = useRef<HTMLButtonElement>(null);
 
-  const handleSelectFontFamily = (nextValue: string) => {
-    setFontFamily(nextValue);
-    setFontWeight("normal");
-  };
-
   return (
     <>
       <IconButton
@@ -198,7 +193,7 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                     <Stack direction="row" spacing={6} wrap="wrap">
                       <FormControl flex="5">
                         <FormLabel>フォント</FormLabel>
-                        <Menu>
+                        <Menu isLazy>
                           <MenuButton
                             as={Button}
                             rightIcon={<ChevronDownIcon />}
@@ -208,22 +203,35 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                           >
                             {fontFamily}
                           </MenuButton>
-                          <MenuList>
-                            {fonts.map(({ family }) => (
-                              <MenuItem
-                                fontFamily={family}
-                                onClick={() => setFontFamily(family)}
-                              >
-                                {family}
-                              </MenuItem>
-                            ))}
+                          <MenuList mb="32">
+                            <MenuOptionGroup
+                              value={fontFamily}
+                              type="radio"
+                              onChange={(e) => {
+                                setFontFamily(e.toString());
+                                setFontWeight(
+                                  fonts.find((f) => f.family === e)
+                                    ?.variants[0] || "regular"
+                                );
+                              }}
+                            >
+                              {fonts.map(({ family }) => (
+                                <MenuItemOption
+                                  fontFamily={family}
+                                  value={family}
+                                  key={family}
+                                >
+                                  {family}
+                                </MenuItemOption>
+                              ))}
+                            </MenuOptionGroup>
                           </MenuList>
                         </Menu>
                       </FormControl>
 
                       <FormControl flex="3">
                         <FormLabel>太さ</FormLabel>
-                        <Menu>
+                        <Menu isLazy>
                           <MenuButton
                             as={Button}
                             rightIcon={<ChevronDownIcon />}
@@ -234,19 +242,25 @@ const SettingInput = ({ value, onChange, advanced }: SettingInputProps) => {
                           >
                             {fontWeight}
                           </MenuButton>
-                          <MenuList>
-                            {Object.keys(
-                              fonts.filter((f) => f.family === fontFamily)[0]
-                                .files
-                            ).map((weight) => (
-                              <MenuItem
-                                fontFamily={fontFamily}
-                                fontWeight={weight}
-                                onClick={() => setFontWeight(weight)}
-                              >
-                                {weight}
-                              </MenuItem>
-                            ))}
+                          <MenuList mb="32">
+                            <MenuOptionGroup
+                              value={fontWeight}
+                              type="radio"
+                              onChange={(v) => setFontWeight(v.toString())}
+                            >
+                              {fonts
+                                .find((f) => f.family === fontFamily)
+                                ?.variants.map((weight) => (
+                                  <MenuItemOption
+                                    key={weight}
+                                    fontFamily={fontFamily}
+                                    fontWeight={weight}
+                                    value={weight}
+                                  >
+                                    {weight}
+                                  </MenuItemOption>
+                                ))}
+                            </MenuOptionGroup>
                           </MenuList>
                         </Menu>
                       </FormControl>

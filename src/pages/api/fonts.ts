@@ -36,24 +36,30 @@ export type OriginalResponse =
 
 export type TransformedResponse = {
   family: string;
-  files: {
-    [key: string]: string;
-  };
+  variants: string[];
 }[];
+
+export const DEFAULT_FONTS = [
+  {
+    family: "sans-serif",
+    variants: ["normal", "bold"],
+  },
+  {
+    family: "serif",
+    variants: ["normal", "bold"],
+  },
+];
 
 export const transform = (data: OriginalResponse): TransformedResponse => {
   if ("error" in data) {
     throw new Error(data.error.message);
   } else {
-    return data.items
-      .filter((i) => i.subsets.includes("japanese"))
-      .map(({ family, files }) => {
-        delete Object.assign(files, { normal: files["regular"] })["regular"];
-        return {
-          family,
-          files,
-        };
-      });
+    return [
+      ...DEFAULT_FONTS,
+      ...data.items
+        .filter((i) => i.subsets.includes("japanese"))
+        .map(({ family, variants }) => ({ family, variants })),
+    ];
   }
 };
 

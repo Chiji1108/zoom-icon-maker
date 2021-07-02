@@ -51,70 +51,13 @@ import {
   OriginalResponse,
   transform,
   GOOGLE_FONTS_URL,
+  DEFAULT_FONTS,
 } from "./api/fonts";
 import { useEffect } from "react";
 
 const SHARE_URL = "https://zoom-icon-maker.vercel.app";
 
-const addFonts = async (fonts: TransformedResponse) => {
-  await Promise.all(
-    fonts.map(({ family, files }) => {
-      return Promise.all(
-        Object.entries(files).map(([key, value]) => {
-          let font: FontFace;
-          if (key === "normal") {
-            font = new FontFace(family, `url(${value})`);
-          } else {
-            font = new FontFace(family, `url(${value})`, { weight: key });
-          }
-          return (async () => {
-            await font.load();
-            document.fonts.add(font);
-          })();
-        })
-      );
-    })
-  );
-};
-
-export const FontContext = createContext<TransformedResponse>([
-  {
-    family: "Noto Sans JP",
-    files: {
-      "100":
-        "http://fonts.gstatic.com/s/notosansjp/v28/-F6ofjtqLzI2JPCgQBnw7HFQoggM-FNthvIU.otf",
-      "300":
-        "http://fonts.gstatic.com/s/notosansjp/v28/-F6pfjtqLzI2JPCgQBnw7HFQaioq1H1hj-sNFQ.otf",
-      normal:
-        "http://fonts.gstatic.com/s/notosansjp/v28/-F62fjtqLzI2JPCgQBnw7HFowAIO2lZ9hg.otf",
-      "500":
-        "http://fonts.gstatic.com/s/notosansjp/v28/-F6pfjtqLzI2JPCgQBnw7HFQMisq1H1hj-sNFQ.otf",
-      "700":
-        "http://fonts.gstatic.com/s/notosansjp/v28/-F6pfjtqLzI2JPCgQBnw7HFQei0q1H1hj-sNFQ.otf",
-      "900":
-        "http://fonts.gstatic.com/s/notosansjp/v28/-F6pfjtqLzI2JPCgQBnw7HFQQi8q1H1hj-sNFQ.otf",
-    },
-  },
-  {
-    family: "Noto Serif JP",
-    files: {
-      "200":
-        "http://fonts.gstatic.com/s/notoserifjp/v8/xn77YHs72GKoTvER4Gn3b5eMZBaPRkgfU8fEwb0.otf",
-      "300":
-        "http://fonts.gstatic.com/s/notoserifjp/v8/xn77YHs72GKoTvER4Gn3b5eMZHKMRkgfU8fEwb0.otf",
-      normal:
-        "http://fonts.gstatic.com/s/notoserifjp/v8/xn7mYHs72GKoTvER4Gn3b5eMXNikYkY0T84.otf",
-      "500":
-        "http://fonts.gstatic.com/s/notoserifjp/v8/xn77YHs72GKoTvER4Gn3b5eMZCqNRkgfU8fEwb0.otf",
-      "600":
-        "http://fonts.gstatic.com/s/notoserifjp/v8/xn77YHs72GKoTvER4Gn3b5eMZAaKRkgfU8fEwb0.otf",
-      "700":
-        "http://fonts.gstatic.com/s/notoserifjp/v8/xn77YHs72GKoTvER4Gn3b5eMZGKLRkgfU8fEwb0.otf",
-      "900":
-        "http://fonts.gstatic.com/s/notoserifjp/v8/xn77YHs72GKoTvER4Gn3b5eMZFqJRkgfU8fEwb0.otf",
-    },
-  },
-]);
+export const FontContext = createContext<TransformedResponse>(DEFAULT_FONTS);
 
 export const getStaticProps = async () => {
   const { data } = await axios.get<OriginalResponse>(GOOGLE_FONTS_URL, {
@@ -136,7 +79,14 @@ export default function Home({
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
-    addFonts(fonts);
+    const WebFont = require("webfontloader");
+    WebFont.load({
+      google: {
+        families: fonts.map(
+          (font) => `${font.family}:100,200,300,400,500,600,700,800,900`
+        ),
+      },
+    });
   }, []);
 
   return (
