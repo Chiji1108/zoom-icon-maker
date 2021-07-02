@@ -4,6 +4,9 @@ import { createImage } from "./canvasUtils";
 
 import icons from "./icons";
 
+// if (typeof window === "undefined") return;
+// import WebFont from "webfontloader";
+
 export const generate = async (
   src: string | undefined,
   name: Setting,
@@ -11,7 +14,7 @@ export const generate = async (
 ) => {
   if (!src) throw new Error("画像が選択されていません");
 
-  //TODO: windows
+  //TODO: windows linux
   const type = "macOS";
 
   const hideBio = bio.setting.isHidden || bio.text === "";
@@ -61,18 +64,54 @@ export const generate = async (
   ctx.drawImage(img, 0, 0, IMAGE_SIZE, IMAGE_SIZE);
   ctx.restore();
 
+  // const fonts = [
+  //   {
+  //     family: name.setting.font.family,
+  //     weight: name.setting.font.weight,
+  //   },
+  //   {
+  //     family: bio.setting.font.family,
+  //     weight: bio.setting.font.weight,
+  //   },
+  // ];
+  // const WebFont = require("webfontloader");
+
+  // WebFont.load({
+  //   google: {
+  //     families: fonts
+  //       .filter(({ family }) => family !== "serif" && family !== "sans-serif")
+  //       .map(({ family, weight }) => `${family}:${weight}`),
+  //   },
+  // });
+
   // text
   ctx.textBaseline = "top";
   ctx.fillStyle = "white";
   ctx.textAlign = "center";
 
   // name
-  ctx.font = `${name.setting.font.weight} ${NAME_SIZE}px ${name.setting.font.family}`;
+  try {
+    const nameFont = `${name.setting.font.weight} ${NAME_SIZE}px '${name.setting.font.family}'`;
+    await document.fonts.load(nameFont, name.text);
+    ctx.font = nameFont;
+  } catch (error) {
+    const nameFont = `${NAME_SIZE}px '${name.setting.font.family}'`;
+    await document.fonts.load(nameFont, name.text);
+    ctx.font = nameFont;
+  }
   ctx.fillText(name.text, CANVAS_SIZE / 2, NAME_Y);
 
   // bio
   if (!hideBio) {
-    ctx.font = `${bio.setting.font.weight} ${BIO_SIZE}px ${bio.setting.font.family}`;
+    try {
+      const bioFont = `${bio.setting.font.weight} ${BIO_SIZE}px '${bio.setting.font.family}'`;
+      await document.fonts.load(bioFont, bio.text);
+      ctx.font = bioFont;
+    } catch (error) {
+      const bioFont = `${BIO_SIZE}px '${bio.setting.font.family}'`;
+      await document.fonts.load(bioFont, bio.text);
+      ctx.font = bioFont;
+    }
     if (bio.setting.icon != "none") {
       ctx.save();
       ctx.translate(
