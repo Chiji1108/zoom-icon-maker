@@ -82,6 +82,7 @@ const AvatarInput = ({ boxSize = 120, value, onChange }: AvatarInputProps) => {
         previewSrc={croppedImage}
       />
 
+      {/* TODO: 切り抜きModalがUnsplashと被ってる*/}
       <Modal
         isOpen={isOpen}
         onClose={onClose}
@@ -89,7 +90,7 @@ const AvatarInput = ({ boxSize = 120, value, onChange }: AvatarInputProps) => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>メディアを編集</ModalHeader>
+          <ModalHeader>切り抜き編集</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <ImageEditor src={originalImage!} onComplete={setCropInfo} />

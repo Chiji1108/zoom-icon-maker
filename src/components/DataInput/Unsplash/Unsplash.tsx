@@ -258,7 +258,7 @@ export const Unsplash = ({ onChange }: UnsplashProps) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>メディアを編集</ModalHeader>
+          <ModalHeader>切り抜き編集</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <ImageEditor src={originalSrc!} onComplete={setCropInfo} />
