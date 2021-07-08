@@ -55,7 +55,8 @@ import {
 } from "./api/fonts";
 import { useEffect } from "react";
 
-const SHARE_URL = "https://zoom-icon-maker.vercel.app";
+const SHARE_URL =
+  process.env.NEXT_PUBLIC_VERCEL_URL || "https://zoom-icon-maker.vercel.app";
 
 export const FontContext = createContext<TransformedResponse>(DEFAULT_FONTS);
 

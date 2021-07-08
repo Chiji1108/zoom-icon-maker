@@ -1,4 +1,4 @@
-import type { AppProps } from "next/app";
+import type { AppProps, NextWebVitalsMetric } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import { darken, lighten } from "polished";
@@ -9,6 +9,10 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import Head from "next/head";
 
 import "@fontsource/noto-sans-jp/100.css";
+
+import { useRouter } from "next/router";
+import * as gtag from "../lib/gtag";
+import { useEffect } from "react";
 
 const BRAND_COLOR = "#0b93f6";
 
@@ -25,7 +29,35 @@ const theme = extendTheme({
 
 const queryClient = new QueryClient();
 
+export function reportWebVitals({
+  id,
+  name,
+  label,
+  value,
+}: NextWebVitalsMetric) {
+  // Use `window.gtag` if you initialized Google Analytics as this example:
+  // https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/pages/_document.js
+  window.gtag("event", name, {
+    event_category:
+      label === "web-vital" ? "Web Vitals" : "Next.js custom metric",
+    value: Math.round(name === "CLS" ? value * 1000 : value), // values must be integers
+    event_label: id, // id unique to current page load
+    non_interaction: true, // avoids affecting bounce rate.
+  });
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      gtag.pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
+
   return (
     <>
       <Head>
