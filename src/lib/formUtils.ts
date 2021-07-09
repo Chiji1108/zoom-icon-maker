@@ -29,7 +29,7 @@ export const generate = async (
 
   const CANVAS_SIZE = 1024;
   const BG_COLOR = type === "macOS" ? "rgb(36,36,36)" : "rgb(24,24,24)";
-  const IMAGE_SIZE = name.text === "" && hideBio ? 800 : hideBio ? 630 : 600;
+  const IMAGE_SIZE = name.text === "" && hideBio ? 800 : hideBio ? 620 : 590;
   const IMAGE_Y =
     name.text === "" && hideBio
       ? (CANVAS_SIZE - IMAGE_SIZE) / 2
