@@ -8,6 +8,7 @@ const config = {
     dest: "public",
     runtimeCaching,
   },
+  reactStrictMode: true,
 };
 
 module.exports = withPWA(config);
