@@ -45,8 +45,6 @@ export type DataInputProps = {
   onChange: (data: Data) => void;
 };
 
-import NextImage from "next/image";
-
 const TwitterIcon = (props: any) => (
   <Icon viewBox="0 0 248 204" {...props}>
     <path

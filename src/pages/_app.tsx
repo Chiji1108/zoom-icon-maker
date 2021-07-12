@@ -13,8 +13,7 @@ import "@fontsource/noto-sans-jp/100.css";
 import { useRouter } from "next/router";
 import * as gtag from "../lib/gtag";
 import { useEffect } from "react";
-
-const BRAND_COLOR = "#0b93f6";
+import { BRAND_COLOR, DESCRIPTION, TITLE } from "src/meta.config";
 
 const theme = extendTheme({
   colors: {
@@ -61,11 +60,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Zoomアイコンメーカー</title>
-        <meta
-          name="description"
-          content="Zoom用のプロフィール画像を生成します"
-        />
+        <title>{TITLE}</title>
+        <meta name="description" content={DESCRIPTION} />
         <meta name="keywords" content="Zoom,profile,generator" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="theme-color" content={BRAND_COLOR} />

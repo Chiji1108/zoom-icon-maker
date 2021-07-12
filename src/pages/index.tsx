@@ -45,6 +45,8 @@ import NextImage from "next/image";
 import { ChatBubble } from "../components/ChatBubble";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 
+import example from "public/akasa.jpeg";
+
 import axios from "axios";
 import {
   TransformedResponse,
@@ -54,8 +56,7 @@ import {
   DEFAULT_FONTS,
 } from "./api/fonts";
 import { useEffect } from "react";
-
-const SHARE_URL = "https://zoom-icon-maker.vercel.app";
+import { BASE_URL, DESCRIPTION } from "src/meta.config";
 
 export const FontContext = createContext<TransformedResponse>(DEFAULT_FONTS);
 
@@ -92,19 +93,38 @@ export default function Home({
   return (
     <FontContext.Provider value={fonts}>
       <Container maxW="xl" centerContent>
-        <Heading as="h1" mt={12} mb={6} textAlign="center" lineHeight="none">
-          <Text
-            as="span"
-            color="brand.500"
-            fontSize="7xl"
-            fontWeight="extrabold"
-          >
-            Zoom
-          </Text>
-          <br />
-          アイコンメーカー
-        </Heading>
-        <VStack as="main" mt={6}>
+        <Stack
+          mt={24}
+          mb={24}
+          alignSelf={["center", "flex-start"]}
+          direction={["column", "row"]}
+          spacing={10}
+        >
+          <Stack alignSelf="center" spacing="6">
+            <Heading
+              as="h1"
+              lineHeight={1}
+              fontWeight="extrabold"
+              fontFamily="Noto Sans JP"
+            >
+              <Text color="brand.500" fontSize={["7xl", "6xl"]}>
+                Zoom
+              </Text>
+              <Text fontSize={["4xl", "2xl"]} whiteSpace="nowrap">
+                アイコンメーカー
+              </Text>
+            </Heading>
+            <Heading as="h2" color="gray.500" fontSize="sm">
+              {DESCRIPTION}
+            </Heading>
+          </Stack>
+
+          <Box>
+            <NextImage src={example} alt="example" />
+          </Box>
+        </Stack>
+
+        <VStack as="main" mt={20} mb={16}>
           <Form>
             {({ handleGenerate, isLoading, error }) => (
               <VStack>
@@ -271,13 +291,13 @@ const Share = () => (
       </Text>
 
       <HStack>
-        <TwitterShareButton url={SHARE_URL}>
+        <TwitterShareButton url={BASE_URL}>
           <TwitterIcon size={40} round />
         </TwitterShareButton>
-        <LineShareButton url={SHARE_URL}>
+        <LineShareButton url={BASE_URL}>
           <LineIcon size={40} round />
         </LineShareButton>
-        <FacebookShareButton url={SHARE_URL}>
+        <FacebookShareButton url={BASE_URL}>
           <FacebookIcon size={40} round />
         </FacebookShareButton>
       </HStack>
