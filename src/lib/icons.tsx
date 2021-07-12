@@ -92,19 +92,6 @@ const icons = {
     type: "svg",
     url: "/icons/discord.svg",
   },
-  youtube: {
-    component: (
-      <Image
-        src="/icons/youtube.png"
-        alt="youtube"
-        width="100%"
-        height="100%"
-        objectFit="contain"
-      />
-    ),
-    type: "png",
-    url: "/icons/youtube.png",
-  },
   twitch: {
     component: (
       <Image
