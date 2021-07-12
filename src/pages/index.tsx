@@ -98,30 +98,32 @@ export default function Home({
           mb={24}
           alignSelf={["center", "flex-start"]}
           direction={["column", "row"]}
-          spacing={10}
+          spacing={[8, 16]}
         >
-          <Stack alignSelf="center" spacing="6">
+          <Stack alignSelf="center" spacing={6}>
             <Heading
               as="h1"
               lineHeight={1}
               fontWeight="extrabold"
               fontFamily="Noto Sans JP"
             >
-              <Text color="brand.500" fontSize={["8xl", "7xl"]}>
+              <Text color="brand.500" fontSize={["7xl", "6xl"]}>
                 Zoom
               </Text>
-              <Text fontSize={["4xl", "3xl"]} whiteSpace="nowrap">
+              <Text fontSize={["4xl", "2xl"]} whiteSpace="nowrap">
                 アイコンメーカー
               </Text>
             </Heading>
-            <Heading as="h2" color="gray.500" fontSize={["md", "sm"]}>
+            <Heading as="h2" color="gray.500" fontSize={"sm"}>
               {DESCRIPTION}
             </Heading>
           </Stack>
 
-          <Box>
-            <NextImage src={example} alt="example" />
-          </Box>
+          <Center>
+            <Box maxW={"280px"}>
+              <NextImage src={example} alt="example" />
+            </Box>
+          </Center>
         </Stack>
 
         <VStack as="main" mt={18} mb={16}>
