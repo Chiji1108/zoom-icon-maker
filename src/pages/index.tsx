@@ -107,14 +107,14 @@ export default function Home({
               fontWeight="extrabold"
               fontFamily="Noto Sans JP"
             >
-              <Text color="brand.500" fontSize={["7xl", "6xl"]}>
+              <Text color="brand.500" fontSize={["8xl", "7xl"]}>
                 Zoom
               </Text>
-              <Text fontSize={["4xl", "2xl"]} whiteSpace="nowrap">
+              <Text fontSize={["4xl", "3xl"]} whiteSpace="nowrap">
                 アイコンメーカー
               </Text>
             </Heading>
-            <Heading as="h2" color="gray.500" fontSize="sm">
+            <Heading as="h2" color="gray.500" fontSize={["md", "sm"]}>
               {DESCRIPTION}
             </Heading>
           </Stack>
@@ -124,7 +124,7 @@ export default function Home({
           </Box>
         </Stack>
 
-        <VStack as="main" mt={20} mb={16}>
+        <VStack as="main" mt={18} mb={16}>
           <Form>
             {({ handleGenerate, isLoading, error }) => (
               <VStack>
